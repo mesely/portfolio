@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mehmet Selman Yılmaz - Portfolio</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root{
+      --g1:#667eea;
+      --g2:#764ba2;
+      --g3:#f093fb;
+
+      --text:#1a1a1a;
+      --muted:#666;
+      --bg:#ffffff;
+      --bg-soft:#f8f9fa;
+
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 20px 40px rgba(102, 126, 234, 0.2);
+      --radius: 20px;
+      --radius-sm: 12px;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ===== Language Switch (Top Right) ===== */
+    .lang-switch{
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 1000;
+      display: inline-flex;
+      gap: .5rem;
+      padding: .45rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 10px 22px rgba(0,0,0,.08);
+    }
+    .lang-btn{
+      border: none;
+      cursor: pointer;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: .9rem;
+      color: var(--muted);
+      background: transparent;
+      transition: all .2s ease;
+    }
+    .lang-btn:hover{
+      background: rgba(102,126,234,.10);
+      color: var(--g2);
+    }
+    .lang-btn.active{
+      background: linear-gradient(135deg, var(--g1), var(--g2));
+      color: #fff;
+      box-shadow: 0 10px 18px rgba(102,126,234,.18);
+    }
+
+    /* Hamburger Menu Button */
+    .menu-btn {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      z-index: 1000;
+      background: linear-gradient(135deg, var(--g1), var(--g2));
+      border: none;
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      transition: all 0.3s;
+    }
+    .menu-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+    .menu-btn span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      margin: 5px 0;
+      border-radius: 3px;
+      transition: all 0.3s;
+    }
+    .menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .menu-btn.active span:nth-child(2) { opacity: 0; }
+    .menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: -350px;
+      top: 0;
+      width: 350px;
+      height: 100vh;
+      background: linear-gradient(180deg, var(--g1) 0%, var(--g2) 50%, var(--g3) 100%);
+      z-index: 999;
+      transition: left 0.4s ease;
+      box-shadow: 5px 0 30px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+    .sidebar.active { left: 0; }
+    .sidebar-content { padding: 6rem 2rem 2rem; }
+    .sidebar h2 {
+      color: #fff;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .nav-links { list-style: none; margin-bottom: 3rem; }
+    .nav-links li { margin-bottom: 1rem; }
+    .nav-links a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      transition: all 0.3s;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(10px);
+    }
+
+    .sidebar-contact {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 2rem;
+    }
+    .sidebar-contact h3 {
+      color: #fff;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem;
+      margin-bottom: 0.8rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+    .contact-item:hover { background: rgba(255, 255, 255, 0.2); }
+    .contact-item svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+      flex-shrink: 0;
+    }
+    .contact-item a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      word-break: break-word;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+    .overlay.active { opacity: 1; visibility: visible; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 5%;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      width: 900px;
+      height: 900px;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle at center, rgba(102,126,234,.18), rgba(118,75,162,.12), rgba(240,147,251,.06), transparent 70%);
+      filter: blur(10px);
+      pointer-events:none;
+    }
+    .hero h1 {
+      font-size: 4.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--g1), var(--g2), var(--g3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: gradient 4s ease infinite;
+      z-index: 1;
+    }
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .hero .subtitle {
+      font-size: 1.8rem;
+      color: var(--g1);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      z-index: 1;
+    }
+    .hero .description {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 780px;
+      line-height: 1.7;
+      z-index: 1;
+    }
+
+    /* Projects */
+    .projects {
+      padding: 6rem 5%;
+      background: var(--bg-soft);
+    }
+    .projects h2 {
+      text-align: center;
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--g1), var(--g2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .projects .lead {
+      text-align: center;
+      color: var(--muted);
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 2.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .project-card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+      box-shadow: var(--shadow);
+      outline: none;
+    }
+    .project-card:hover {
+      transform: translateY(-15px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--g2);
+    }
+    .project-card:focus-visible{
+      box-shadow: 0 0 0 4px rgba(102,126,234,.25), var(--shadow);
+      border-color: var(--g1);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 280px;
+      position: relative;
+      background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 50%, var(--g3) 100%);
+      overflow: hidden;
+    }
+    .project-image img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .project-image .overlay-layer{
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.35));
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-end;
+      padding: 1.2rem 1.2rem;
+      gap: 1rem;
+    }
+
+    /* Badge KALDIRILDI (id görünmesin diye) */
+
+    .project-icon{
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 1.6rem;
+      color:#fff;
+      background: rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.22);
+      box-shadow: 0 8px 18px rgba(0,0,0,.12);
+      flex-shrink: 0;
+    }
+
+    .project-content { padding: 2rem; }
+    .project-content h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.55rem;
+      color: var(--text);
+      letter-spacing: .2px;
+    }
+    .project-content .company {
+      color: var(--g2);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+    .project-content p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      min-height: 3.4em;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .tag {
+      background: linear-gradient(135deg, var(--g1), var(--g2));
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 5%;
+      background: #1a1a1a;
+      color: #fff;
+    }
+    footer p { margin-bottom: 0.5rem; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.8rem; }
+      .hero .subtitle { font-size: 1.3rem; }
+      .hero .description { font-size: 1rem; }
+
+      .projects h2 { font-size: 2.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+
+      .sidebar { width: 280px; left: -280px; }
+      .menu-btn { top: 1.5rem; left: 1.5rem; }
+      .lang-switch{ top: 1.5rem; right: 1.5rem; }
+    }
+
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+
+<body>
+  <!-- Language Switch -->
+  <div class="lang-switch" role="group" aria-label="Language switch">
+    <button class="lang-btn" id="btnTR" type="button">TR</button>
+    <button class="lang-btn" id="btnEN" type="button">EN</button>
+  </div>
+
+  <!-- Hamburger Menu Button -->
+  <button class="menu-btn" id="menuBtn" aria-label="Menüyü Aç/Kapat">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sidebar-content">
+      <h2 id="menuTitle">Menü</h2>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link" id="navHome">Ana Sayfa</a></li>
+        <li><a href="#projects" class="nav-link" id="navProjects">Projeler</a></li>
+      </ul>
+
+      <div class="sidebar-contact">
+        <h3 id="contactTitle">İletişim</h3>
+
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+          <a href="mailto:selman.yilmaz@sabanciuniv.edu">selman.yilmaz@sabanciuniv.edu</a>
+        </div>
+
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <a href="https://github.com/mesely" target="_blank" rel="noopener">github.com/mesely</a>
+        </div>
+
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+          <a href="https://linkedin.com/in/mehmet-selman-yılmaz" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+
+        <div class="contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M20 10.999h-2v-2h2v2zm-4-2h-2v2h2v-2zm-4 0h-2v2h2v-2zm-4 0h-2v2h2v-2zm-4 0h-2v2h2v-2zm18-4.999v16c0 1.103-.897 2-2 2h-16c-1.103 0-2-.897-2-2v-16c0-1.103.897-2 2-2h16c1.103 0 2 .897 2 2zm-2 0h-16v16h16v-16zm-9 5.999h2v2h-2v-2zm10 2h-2v-2h2v2zm-12 4h2v2h-2v-2zm12 0h-2v2h2v2h-2v-2h-2v2h-2v-2h-2v2h-2v-2h-2v-2h2v-2h-2v-2h2v-2h2v2h2v-2h2v2h2v-2h2v2h2v2h-2v2h2v2z"/>
+          </svg>
+          <div>+90 537 408 10 74</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <h1>Mehmet Selman Yılmaz</h1>
+    <div class="subtitle">AI • NLP • Data Science</div>
+    <p class="description" id="heroDesc">
+      YZ Yazılım Mühendisi Adayı & Bilgisayar Bilimleri Öğrencisi<br />
+      Deep Learning | Natural Language Processing | RAG Sistemleri | Öneri Sistemleri
+    </p>
+  </section>
+
+  <!-- Projects -->
+  <section class="projects" id="projects">
+    <h2 id="projectsTitle">Projeler</h2>
+    <p class="lead" id="projectsLead">
+      CV’me uygun şekilde; öneri sistemleri, RAG tabanlı kurumsal asistanlar, NLP araştırmaları ve uçtan uca modern
+      ürün geliştirme deneyimlerimi bir araya getiren proje seçkisi.
+    </p>
+
+    <div class="projects-grid" id="projectsGrid"></div>
+  </section>
+
+  <footer>
+    <p id="footerLine1">&copy; 2026 Mehmet Selman Yılmaz. Tüm hakları saklıdır.</p>
+    <p id="footerLine2" style="margin-top: 1rem; opacity: 0.7;">Sabancı Üniversitesi | Bilgisayar Bilimleri</p>
+  </footer>
+
+  <script>
+    // ===== Menü Kontrolleri =====
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    function closeMenu(){
+      menuBtn.classList.remove('active');
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      sidebar.setAttribute('aria-hidden', 'true');
+    }
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = sidebar.classList.toggle('active');
+      menuBtn.classList.toggle('active');
+      overlay.classList.toggle('active');
+      sidebar.setAttribute('aria-hidden', String(!isOpen));
+    });
+
+    overlay.addEventListener('click', closeMenu);
+    navLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // ===== Dil Sistemi =====
+    const btnTR = document.getElementById("btnTR");
+    const btnEN = document.getElementById("btnEN");
+
+    const UI = {
+      menuTitle: document.getElementById("menuTitle"),
+      navHome: document.getElementById("navHome"),
+      navProjects: document.getElementById("navProjects"),
+      contactTitle: document.getElementById("contactTitle"),
+      heroDesc: document.getElementById("heroDesc"),
+      projectsTitle: document.getElementById("projectsTitle"),
+      projectsLead: document.getElementById("projectsLead"),
+      footerLine1: document.getElementById("footerLine1"),
+      footerLine2: document.getElementById("footerLine2"),
+    };
+
+    const TEXT = {
+      tr: {
+        menuTitle: "Menü",
+        navHome: "Ana Sayfa",
+        navProjects: "Projeler",
+        contactTitle: "İletişim",
+        heroDesc: "YZ Yazılım Mühendisi Adayı & Bilgisayar Bilimleri Öğrencisi<br />Deep Learning | Natural Language Processing | RAG Sistemleri | Öneri Sistemleri",
+        projectsTitle: "Projeler",
+        projectsLead: "CV’me uygun şekilde; öneri sistemleri, RAG tabanlı kurumsal asistanlar, NLP araştırmaları ve uçtan uca modern ürün geliştirme deneyimlerimi bir araya getiren proje seçkisi.",
+        footerLine1: "© 2026 Mehmet Selman Yılmaz. Tüm hakları saklıdır.",
+        footerLine2: "Sabancı Üniversitesi | Bilgisayar Bilimleri",
+        openProjectAria: (title) => `${title} projesini aç`
+      },
+      en: {
+        menuTitle: "Menu",
+        navHome: "Home",
+        navProjects: "Projects",
+        contactTitle: "Contact",
+        heroDesc: "AI Software Engineer Candidate & Computer Science Student<br />Deep Learning | Natural Language Processing | RAG Systems | Recommender Systems",
+        projectsTitle: "Projects",
+        projectsLead: "A curated set of projects aligned with my CV—recommender systems, RAG-based enterprise assistants, NLP research, and end-to-end modern product development.",
+        footerLine1: "© 2026 Mehmet Selman Yılmaz. All rights reserved.",
+        footerLine2: "Sabancı University | Computer Science",
+        openProjectAria: (title) => `Open project: ${title}`
+      }
+    };
+
+    function getLang(){
+      const saved = localStorage.getItem("lang");
+      return (saved === "en" || saved === "tr") ? saved : "tr";
+    }
+
+    function setLang(lang){
+      localStorage.setItem("lang", lang);
+      applyLang(lang);
+      renderProjects(); // kart metinleri değişsin
+    }
+
+    function applyLang(lang){
+      document.documentElement.lang = lang;
+      btnTR.classList.toggle("active", lang === "tr");
+      btnEN.classList.toggle("active", lang === "en");
+
+      UI.menuTitle.textContent = TEXT[lang].menuTitle;
+      UI.navHome.textContent = TEXT[lang].navHome;
+      UI.navProjects.textContent = TEXT[lang].navProjects;
+      UI.contactTitle.textContent = TEXT[lang].contactTitle;
+      UI.heroDesc.innerHTML = TEXT[lang].heroDesc;
+      UI.projectsTitle.textContent = TEXT[lang].projectsTitle;
+      UI.projectsLead.textContent = TEXT[lang].projectsLead;
+      UI.footerLine1.textContent = TEXT[lang].footerLine1;
+      UI.footerLine2.textContent = TEXT[lang].footerLine2;
+      menuBtn.setAttribute("aria-label", lang === "tr" ? "Menüyü Aç/Kapat" : "Open/Close Menu");
+    }
+
+    btnTR.addEventListener("click", () => setLang("tr"));
+    btnEN.addEventListener("click", () => setLang("en"));
+
+    // ===== Projeler (kapaklar: her projenin kendi ...1.png görseli) =====
+    const PROJECTS = [
+      {
+        id: "baykar",
+        title_tr: "Sosyal Medya Öneri Sistemi",
+        title_en: "Social Media Recommender System",
+        company: "Baykar Technology",
+        summary_tr: "Two-Tower (retrieval) + Wide & Deep (re-ranking) mimarisiyle çok platformlu kişiselleştirme.",
+        summary_en: "Multi-platform personalization with a Two-Tower retrieval model and Wide & Deep re-ranking.",
+        tags: ["Deep Learning", "Two-Tower", "PyTorch"],
+        icon: "🎯",
+        cover: "images/baykar1.png"
+      },
+      {
+        id: "influencer",
+        title_tr: "Instagram Influencer Analizi",
+        title_en: "Instagram Influencer Analytics",
+        company: "Kişisel Proje / Personal Project",
+        summary_tr: "Sınıflandırma ve engagement tahmini: stacking + RF regressor, dengesiz veri için SMOTE.",
+        summary_en: "Classification + engagement prediction using stacking, RF regressor, and SMOTE for imbalance.",
+        tags: ["Machine Learning", "SMOTE", "Stacking"],
+        icon: "📊",
+        cover: "images/influencer1.png"
+      },
+      {
+        id: "arastirma",
+        title_tr: "Intent Detection & Slot Filling",
+        title_en: "Intent Detection & Slot Filling",
+        company: "Araştırma Projesi / Research Project",
+        summary_tr: "Slot-Gated BiLSTM ile intent + slot görevlerini birlikte optimize eden NLP pipeline.",
+        summary_en: "An NLP pipeline that jointly optimizes intent and slot tasks using Slot-Gated BiLSTM.",
+        tags: ["NLP", "BiLSTM", "FastText"],
+        icon: "🗣️",
+        cover: "images/arastirma1.png"
+      },
+      {
+        id: "bmc",
+        title_tr: "SAP Envanter AI Asistanı",
+        title_en: "SAP Inventory AI Assistant",
+        company: "BMC",
+        summary_tr: "Kurumsal RAG chatbot: SAP dokümanları + vektör arama + LLM yanıt üretimi.",
+        summary_en: "Enterprise RAG chatbot: SAP docs + vector retrieval + LLM answer generation.",
+        tags: ["RAG", "NestJS", "OpenAI API"],
+        icon: "💬",
+        cover: "images/bmc1.png"
+      },
+      {
+        id: "intertech",
+        title_tr: "Finansal İçgörüler AI Chatbot",
+        title_en: "Financial Insights AI Chatbot",
+        company: "Intertech",
+        summary_tr: "RAG tabanlı finansal içgörü chatbotu: Next.js + Node.js + SQL + Azure veri pipeline.",
+        summary_en: "RAG-based financial insights chatbot: Next.js + Node.js + SQL + Azure data pipeline.",
+        tags: ["Azure", "Python", "Node.js"],
+        icon: "💰",
+        cover: "images/intertech1.png"
+      },
+      {
+        id: "sneakpeek",
+        title_tr: "SneakPeek E-Ticaret Projesi",
+        title_en: "SneakPeek E-commerce Project",
+        company: "Kişisel Proje / Personal Project",
+        summary_tr: "Mikroservis e-ticaret: NestJS + Next.js, GPT önerici, JWT auth, Kafka ve Docker.",
+        summary_en: "Microservices e-commerce: NestJS + Next.js, GPT recommender, JWT auth, Kafka, Docker.",
+        tags: ["NestJS", "Next.js", "Kafka"],
+        icon: "🛍️",
+        cover: "images/sneakpeek1.png"
+      },
+      {
+        id: "echospace",
+        title_tr: "EchoSpaceAR – AR Tabanlı Ses Farkındalığı",
+        title_en: "EchoSpaceAR — AR-based Sound Awareness",
+        company: "HCI Project",
+        summary_tr: "Unity AR arayüz + YamNet çevresel ses sınıflandırma + Whisper speech-to-text pipeline.",
+        summary_en: "Unity AR UI + YAMNet environmental sound classification + Whisper STT pipeline.",
+        tags: ["AR", "Unity", "HCI"],
+        icon: "🥽",
+        cover: "images/echo1.png"
+      },
+      {
+        id: "music",
+        title_tr: "Music Emotion Recognition on DEAM",
+        title_en: "Music Emotion Recognition on DEAM",
+        company: "Deep Learning Project",
+        summary_tr: "Log-mel + 5sn segment CNN + attention pooling; testte MSE=0.0114, Pearson=0.721, CCC=0.689.",
+        summary_en: "Log-mel + 5s segment CNN + attention pooling; test MSE=0.0114, Pearson=0.721, CCC=0.689.",
+        tags: ["CNN", "Attention", "PyTorch"],
+        icon: "🎵",
+        cover: "images/music1.png"
+      }
+    ];
+
+    // ===== Kartları Render Et =====
+    const grid = document.getElementById("projectsGrid");
+
+    function createTag(t){
+      const span = document.createElement("span");
+      span.className = "tag";
+      span.textContent = t;
+      return span;
+    }
+
+    function renderProjects(){
+      const lang = getLang();
+      grid.innerHTML = "";
+
+      PROJECTS.forEach(p => {
+        const title = (lang === "en" ? p.title_en : p.title_tr) || p.title_tr || p.title_en || "Project";
+        const summary = (lang === "en" ? p.summary_en : p.summary_tr) || p.summary_tr || p.summary_en || "";
+        const ariaLabel = TEXT[lang].openProjectAria(title);
+
+        const card = document.createElement("div");
+        card.className = "project-card";
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", ariaLabel);
+
+        card.addEventListener("click", () => openProject(p.id));
+        card.addEventListener("keydown", (e) => {
+          if(e.key === "Enter" || e.key === " "){
+            e.preventDefault();
+            openProject(p.id);
+          }
+        });
+
+        const image = document.createElement("div");
+        image.className = "project-image";
+
+        const img = document.createElement("img");
+        img.src = p.cover;
+        img.alt = title + " cover image";
+        img.loading = "lazy";
+        img.onerror = () => {
+          img.remove(); // Görsel yoksa gradient kalsın
+        };
+
+        const overlayLayer = document.createElement("div");
+        overlayLayer.className = "overlay-layer";
+
+        // Badge kaldırıldı: sadece ikon var
+        const icon = document.createElement("div");
+        icon.className = "project-icon";
+        icon.textContent = p.icon;
+
+        image.appendChild(img);
+        overlayLayer.appendChild(icon);
+        image.appendChild(overlayLayer);
+
+        const content = document.createElement("div");
+        content.className = "project-content";
+
+        const h3 = document.createElement("h3");
+        h3.textContent = title;
+
+        const company = document.createElement("div");
+        company.className = "company";
+        company.textContent = p.company;
+
+        const desc = document.createElement("p");
+        desc.textContent = summary;
+
+        const tags = document.createElement("div");
+        tags.className = "project-tags";
+        p.tags.forEach(t => tags.appendChild(createTag(t)));
+
+        content.appendChild(h3);
+        content.appendChild(company);
+        content.appendChild(desc);
+        content.appendChild(tags);
+
+        card.appendChild(image);
+        card.appendChild(content);
+
+        grid.appendChild(card);
+      });
+    }
+
+    // ===== Proje Açma (Aynı Sekme) =====
+    function openProject(projectId) {
+      // Eski sistemden kalan kayıt hep Baykar'a kilitlemesin diye temizliyoruz
+      localStorage.removeItem("currentProject");
+
+      // Yeni sistem: ID ile aç
+      localStorage.setItem("currentProjectId", projectId);
+
+      // Aynı sekmede aç
+      window.location.href = "project.html";
+    }
+
+    // İlk yükleme
+    applyLang(getLang());
+    renderProjects();
+  </script>
+</body>
+</html>

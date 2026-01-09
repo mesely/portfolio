@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proje Detayı</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root{
+      --g1:#667eea;
+      --g2:#764ba2;
+      --g3:#f093fb;
+
+      --text:#1a1a1a;
+      --muted:#666;
+      --bg:#ffffff;
+      --bg-soft:#f8f9fa;
+      --border:#e9ecef;
+
+      --radius: 20px;
+      --radius-sm: 12px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --shadow-2: 0 8px 25px rgba(0, 0, 0, 0.10);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 5%;
+      background: rgba(248, 249, 250, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--border);
+      gap: 1rem;
+    }
+
+    .nav-left{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 0;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(135deg, var(--g1), var(--g2));
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-weight: 800;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.22);
+      white-space: nowrap;
+    }
+    .back-btn:hover {
+      transform: translateX(-5px);
+      box-shadow: 0 6px 22px rgba(102, 126, 234, 0.30);
+    }
+
+    .crumb{
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 52vw;
+    }
+    @media (min-width: 900px){
+      .crumb{ display: block; }
+    }
+
+    .nav-actions{
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: flex-end;
+      flex-shrink: 0;
+    }
+
+    /* ===== Language Switch (Top Right inside nav) ===== */
+    .lang-switch{
+      display: inline-flex;
+      gap: .45rem;
+      padding: .35rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 10px 22px rgba(0,0,0,.08);
+    }
+    .lang-btn{
+      border: none;
+      cursor: pointer;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: .9rem;
+      color: var(--muted);
+      background: transparent;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
+    .lang-btn:hover{
+      background: rgba(102,126,234,.10);
+      color: var(--g2);
+    }
+    .lang-btn.active{
+      background: linear-gradient(135deg, var(--g1), var(--g2));
+      color: #fff;
+      box-shadow: 0 10px 18px rgba(102,126,234,.18);
+    }
+
+    /* Project Header */
+    .project-header {
+      text-align: center;
+      padding: 4rem 5% 2rem;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-header::before{
+      content:"";
+      position:absolute;
+      width: 900px;
+      height: 900px;
+      left: 50%;
+      top: 20%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle at center,
+        rgba(102,126,234,.18),
+        rgba(118,75,162,.12),
+        rgba(240,147,251,.06),
+        transparent 70%);
+      filter: blur(10px);
+      pointer-events:none;
+    }
+
+    .project-header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, var(--g1), var(--g2), var(--g3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meta-row{
+      display:flex;
+      gap: 0.75rem;
+      justify-content:center;
+      align-items:center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .company-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--g1), var(--g2));
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      font-size: 1.05rem;
+      font-weight: 950;
+      box-shadow: 0 8px 18px rgba(0,0,0,.10);
+    }
+
+    .meta-chip{
+      display:inline-flex;
+      align-items:center;
+      gap: .5rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.70);
+      color: var(--muted);
+      font-weight: 850;
+      box-shadow: 0 8px 18px rgba(0,0,0,.06);
+    }
+
+    .description {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Tech Stack */
+    .tech-stack {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      padding: 1.6rem 5%;
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tech-tag {
+      background: linear-gradient(135deg, var(--g1), var(--g2));
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 950;
+      font-size: 0.92rem;
+      box-shadow: 0 10px 18px rgba(102,126,234,.18);
+    }
+
+    /* Content Layout */
+    .project-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.25rem 5% 4.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.4rem;
+    }
+
+    /* Daha dengeli: 1fr / 1fr */
+    .cards-row{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 980px){
+      .cards-row{ grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 2.1rem;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+      animation: fadeInUp .6s ease-out;
+      height: 100%;
+    }
+
+    /* ÖZET kartını daha "ortada" hissettirmek için */
+    .card.overview-card{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;   /* dikeyde ortalar */
+      text-align:left;          /* okunabilirlik için solda */
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(26px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card h2{
+      font-size: 1.55rem;
+      margin-bottom: .7rem;
+      color: var(--g2);
+      letter-spacing: .2px;
+    }
+
+    .card .sublead{
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-size: 1.02rem;
+    }
+
+    .card p{
+      font-size: 1.08rem;
+      line-height: 1.85;
+      color: #444;
+    }
+
+    .bullets{
+      margin-top: .75rem;
+      display: grid;
+      gap: .65rem;
+    }
+
+    .bullet{
+      display:flex;
+      gap: .8rem;
+      align-items:flex-start;
+      padding: .9rem 1rem;
+      border-radius: 14px;
+      background: rgba(102,126,234,.06);
+      border: 1px solid rgba(102,126,234,.18);
+    }
+
+    .bullet .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--g1), var(--g2));
+      margin-top: .38rem;
+      flex-shrink: 0;
+      box-shadow: 0 6px 14px rgba(102,126,234,.25);
+    }
+
+    .bullet div{
+      color:#333;
+      line-height: 1.7;
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .kpi-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: .9rem;
+      margin-top: .95rem;
+    }
+
+    .kpi{
+      padding: 1rem 1rem;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,.06);
+      background: #fff;
+      box-shadow: 0 10px 18px rgba(0,0,0,.06);
+    }
+    .kpi .label{
+      color: var(--muted);
+      font-weight: 950;
+      font-size: .9rem;
+      margin-bottom: .25rem;
+    }
+    .kpi .value{
+      font-weight: 950;
+      font-size: 1.15rem;
+      background: linear-gradient(135deg, var(--g1), var(--g2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @media (max-width: 520px){
+      .kpi-grid{ grid-template-columns: 1fr; }
+    }
+
+    /* Image sections */
+    .image-section {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 2.2rem;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .image-section:nth-child(2) { animation-delay: 0.12s; }
+    .image-section:nth-child(3) { animation-delay: 0.24s; }
+    .image-section:nth-child(4) { animation-delay: 0.36s; }
+
+    /* Görsel crop yok: contain + oran korunur */
+    .project-image {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      margin-bottom: 1.2rem;
+      box-shadow: var(--shadow-2);
+      object-fit: contain;
+      max-height: 85vh;
+      background: #fff;
+      cursor: zoom-in;
+      display: block;
+    }
+
+    .image-placeholder {
+      width: 100%;
+      min-height: 420px;
+      background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 50%, var(--g3) 100%);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.6rem;
+      margin-bottom: 1.2rem;
+      box-shadow: var(--shadow-2);
+      color: #fff;
+      text-align:center;
+      padding: 1rem;
+    }
+
+    .placeholder-sub{
+      font-size: 1rem;
+      opacity: .95;
+      font-weight: 950;
+      letter-spacing: .2px;
+    }
+
+    .image-section h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.6rem;
+      color: var(--g2);
+    }
+
+    .image-section p {
+      font-size: 1.06rem;
+      line-height: 1.85;
+      color: #444;
+    }
+
+    /* Lightbox */
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 1.2rem;
+    }
+    .lightbox.active{ display:flex; }
+
+    .lightbox-inner{
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      animation: fadeInUp .25s ease-out;
+    }
+
+    .lightbox-img{
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+      max-height: 85vh;
+      object-fit: contain;
+      background: #111;
+    }
+
+    .lightbox-close{
+      position:absolute;
+      top: -14px;
+      right: -14px;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, var(--g1), var(--g2));
+      box-shadow: 0 10px 20px rgba(0,0,0,.25);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .project-header h1 { font-size: 2rem; }
+      .image-section, .card { padding: 1.4rem; }
+      nav { padding: 1.05rem 5%; }
+      .project-image { max-height: 65vh; }
+      .image-placeholder { min-height: 300px; font-size: 3.8rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-left">
+      <a href="index.html" class="back-btn" id="backBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span id="backBtnText">Geri Dön</span>
+      </a>
+      <div class="crumb" id="crumb">
+        <span id="crumbPrefix">Projeler / </span><span style="color:#1a1a1a" id="crumbTitle">—</span>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <div class="lang-switch" role="group" aria-label="Language switch">
+        <button class="lang-btn" id="btnTR" type="button">TR</button>
+        <button class="lang-btn" id="btnEN" type="button">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="project-header">
+    <h1 id="project-title"></h1>
+
+    <div class="meta-row">
+      <div class="company-badge" id="company"></div>
+      <div class="meta-chip" id="periodChip">📅 —</div>
+      <div class="meta-chip" id="locChip">📍 —</div>
+    </div>
+
+    <p class="description" id="description"></p>
+  </div>
+
+  <div class="tech-stack" id="tech-stack"></div>
+
+  <div class="project-content" id="project-content"></div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Kapat">✕</button>
+      <img class="lightbox-img" id="lightboxImg" alt="Proje görseli" />
+    </div>
+  </div>
+
+  <script>
+    // ===== Dil (index ile aynı key) =====
+    const btnTR = document.getElementById("btnTR");
+    const btnEN = document.getElementById("btnEN");
+
+    function getLang(){
+      const saved = localStorage.getItem("lang");
+      return (saved === "en" || saved === "tr") ? saved : "tr";
+    }
+    function setLang(lang){
+      localStorage.setItem("lang", lang);
+      applyLang(lang);
+      render(); // içerikler dil değiştirsin
+    }
+
+    const UI_TEXT = {
+      tr: {
+        back: "Geri Dön",
+        crumbPrefix: "Projeler / ",
+        notFoundTitle: "Proje bulunamadı",
+        notFoundDesc: "Proje bilgisi bulunamadı. Lütfen ana sayfadan bir projeyi tekrar aç.",
+        goHome: "Ana Sayfaya Dön",
+        overviewTitle: "Özet",
+        overviewSub: "Bu projenin amacı ve genel yaklaşımı.",
+        highlightsTitle: "Öne Çıkanlar",
+        highlightsSub: "Projede doğrudan üstlendiğim katkılar ve çıktılar.",
+        imgMissing: "Görsel bulunamadı",
+        close: "Kapat",
+        pageTitleSuffix: "— Proje Detayı",
+      },
+      en: {
+        back: "Back",
+        crumbPrefix: "Projects / ",
+        notFoundTitle: "Project not found",
+        notFoundDesc: "Project details could not be loaded. Please open a project again from the home page.",
+        goHome: "Go to Home",
+        overviewTitle: "Summary",
+        overviewSub: "Goal, scope, and overall approach of the project.",
+        highlightsTitle: "Highlights",
+        highlightsSub: "Direct contributions, responsibilities, and concrete outputs.",
+        imgMissing: "Image not found",
+        close: "Close",
+        pageTitleSuffix: "— Project Details",
+      }
+    };
+
+    function applyLang(lang){
+      document.documentElement.lang = lang;
+      btnTR.classList.toggle("active", lang === "tr");
+      btnEN.classList.toggle("active", lang === "en");
+
+      document.getElementById("backBtnText").textContent = UI_TEXT[lang].back;
+      document.getElementById("crumbPrefix").textContent = UI_TEXT[lang].crumbPrefix;
+
+      document.getElementById("lightboxClose").setAttribute("aria-label", UI_TEXT[lang].close);
+      document.getElementById("lightboxImg").alt = (lang === "tr" ? "Proje görseli" : "Project image");
+    }
+
+    btnTR.addEventListener("click", () => setLang("tr"));
+    btnEN.addEventListener("click", () => setLang("en"));
+
+    // ============ PROJE VERİLERİ ============
+    // Görseller: images/<prefix><n>.png
+    const PROJECTS = {
+      baykar: {
+        id: "baykar",
+        icon: "🎯",
+        title: { tr: "Sosyal Medya Öneri Sistemi", en: "Social Media Recommender System" },
+        company: { tr: "Baykar", en: "Baykar" },
+        period: "Ağu – Eyl 2025",
+        location: "İstanbul, Türkiye",
+        description: {
+          tr: "Instagram, Twitter ve Next Sosyal verileri üzerinde gerçek + sentetik etkileşimleri kullanarak; retrieval için Two-Tower ve re-ranking için Wide & Deep modelleriyle kişiselleştirilmiş öneri sistemi geliştirdim.",
+          en: "Built a personalized recommender using real + synthetic interactions across Instagram, Twitter, and Next Sosyal; Two-Tower for retrieval and Wide & Deep for re-ranking."
+        },
+        tech: ["PyTorch", "TurkishBERTweet", "Two-Tower", "Wide & Deep", "Embeddings", "Recommendation Systems"],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: {
+            tr: "Hedef; farklı platformlarda kullanıcı–içerik etkileşimlerinden (beğeni/yorum/takip vb.) öğrenerek önce hızlı bir aday içerik havuzu üretmek (retrieval), ardından kullanıcı bağlamını ve ek sinyalleri kullanarak en iyi sıralamayı üretmekti (re-ranking). İki aşamalı yaklaşım sayesinde hem ölçeklenebilirlik hem de kişiselleştirme kalitesi birlikte optimize edildi.",
+            en: "Goal was to (1) quickly retrieve a strong candidate set from multi-platform user–content interactions and (2) re-rank candidates with richer context signals. A two-stage setup improves scalability while keeping personalization quality high."
+          }
+        },
+        responsibilities: {
+          tr: [
+            "Instagram, Twitter ve Next Sosyal veri setlerinde gerçek + sentetik etkileşimlerle uçtan uca öneri pipeline’ı kurdum.",
+            "TurkishBERTweet ile kullanıcı/öğe embedding’leri çıkarıp, Two-Tower retrieval + Wide&Deep re-ranking mimarisini uyguladım."
+          ],
+          en: [
+            "Designed an end-to-end recommendation pipeline using real + synthetic interactions across multiple platforms.",
+            "Extracted user/item embeddings with TurkishBERTweet and implemented Two-Tower retrieval + Wide&Deep re-ranking."
+          ]
+        },
+        kpis: [
+          { label: { tr: "Mimari", en: "Architecture" }, value: "Two-Stage RecSys" },
+          { label: { tr: "Modelleme", en: "Modeling" }, value: "Two-Tower + W&D" }
+        ],
+        images: [
+          {
+            title: { tr: "Modelleme ve Akış", en: "Modeling & Flow" },
+            desc: {
+              tr: "Retrieval aşamasında kullanıcı ve içerik temsillerini ayrı kulelerde öğrenip benzerlik (similarity) ile aday seti ürettim. Re-ranking tarafında embedding’ler + etkileşim meta verileri ile Wide & Deep kullanarak bağlamsal sinyalleri sıralamaya taşıdım. Bu yapı, yüksek recall + daha iyi son liste kalitesi hedefler.",
+              en: "In retrieval, user and item representations are learned in separate towers and candidates are selected via similarity. For re-ranking, Wide & Deep combines embeddings with contextual features (interaction metadata) to produce a higher-quality final list."
+            }
+          },
+          {
+            title: { tr: "Özellikler ve Öğrenme", en: "Features & Learning" },
+            desc: {
+              tr: "Kullanıcı/öğe embedding’leri yanında; içerik türü, etkileşim tipi, zaman gibi sinyallerle feature engineering yaptım. Sentetik etkileşimlerle veri zenginleştirme yaklaşımını pipeline’a entegre ederek sparsity ve cold-start etkisini azaltmayı hedefledim.",
+              en: "Beyond embeddings, engineered features from content type, interaction type, and temporal signals. Added synthetic interactions to enrich data and reduce sparsity/cold-start issues."
+            }
+          }
+        ]
+      },
+
+      bmc: {
+        id: "bmc",
+        icon: "💬",
+        title: { tr: "SAP Envanter AI Asistanı", en: "SAP Inventory AI Assistant" },
+        company: { tr: "BMC", en: "BMC" },
+        period: "Tem – Ağu 2025",
+        location: "İzmir, Türkiye",
+        description: {
+          tr: "NestJS (backend), Next.js (frontend) ve OpenAI API (RAG) ile gerçek zamanlı SAP envanter verilerini getiren AI destekli chatbot geliştirdim; ABAP ile envanter yönetim modülleri tasarladım.",
+          en: "Built an AI chatbot that retrieves real-time SAP inventory data using NestJS + Next.js + OpenAI (RAG). Designed inventory modules in ABAP."
+        },
+        tech: ["NestJS", "Next.js", "OpenAI API", "RAG", "SAP", "ABAP", "TypeScript"],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: {
+            tr: "Kullanıcıların doğal dilde envanter sorgusu yapıp güvenilir cevap alabilmesi için RAG tabanlı bir asistan geliştirdim. Amaç; kurumsal dokümanlar/kurallar ve canlı SAP verisini birlikte kullanarak tutarlı, izlenebilir yanıt üretmek ve operasyonel süreci hızlandırmaktı.",
+            en: "Developed a RAG-based assistant so users can query inventory in natural language and get reliable answers. The system combines enterprise knowledge with live SAP data to produce consistent, traceable responses and speed up operations."
+          }
+        },
+        responsibilities: {
+          tr: [
+            "RAG akışını uçtan uca geliştirdim: sorgu → bağlam getirme → yanıt üretimi (NestJS + Next.js + OpenAI).",
+            "OOP ABAP ile malzeme takibi ve otomatik e-posta uyarıları gibi modüller tasarlayıp uyguladım."
+          ],
+          en: [
+            "Implemented the full RAG flow end-to-end: query → retrieval → generation (NestJS + Next.js + OpenAI).",
+            "Designed and implemented ABAP modules for material tracking and automated email alerts."
+          ]
+        },
+        kpis: [
+          { label: { tr: "Mimari", en: "Architecture" }, value: "RAG Chatbot" },
+          { label: { tr: "Stack", en: "Stack" }, value: "NestJS + Next.js" }
+        ],
+        images: [
+          {
+            title: { tr: "RAG Akışı ve Sistem", en: "RAG Flow & System" },
+            desc: {
+              tr: "Kullanıcı sorusunu önce ilgili bağlam (doküman/parça/kural) ile eşleyip ardından LLM’e kontrollü şekilde besleyen bir akış tasarladım. Yanıt kalitesini artırmak için prompt yapısı ve bağlam seçimi üzerinde iteratif iyileştirmeler yaptım.",
+              en: "Designed a pipeline that retrieves the most relevant context (docs/rules/snippets) before controlled LLM generation. Iteratively improved prompt structure and retrieval selection to increase answer quality."
+            }
+          },
+          {
+            title: { tr: "SAP Süreç Entegrasyonu", en: "SAP Process Integration" },
+            desc: {
+              tr: "Envanter süreçlerini ABAP modülleriyle destekleyerek chatbot kullanımını operasyonel akışa bağladım. Bildirim/uyarı mekanizmalarıyla proaktif kullanım senaryolarını genişlettim.",
+              en: "Connected the assistant to operational workflows via ABAP modules. Added alert/notification mechanisms to enable proactive usage scenarios."
+            }
+          }
+        ]
+      },
+
+      intertech: {
+        id: "intertech",
+        icon: "💰",
+        title: { tr: "Finansal İçgörüler AI Chatbot", en: "Financial Insights AI Chatbot" },
+        company: { tr: "Intertech", en: "Intertech" },
+        period: "Haz – Ağu 2024",
+        location: "İstanbul, Türkiye",
+        description: {
+          tr: "RAG mimarisiyle SQL + Next.js + Node.js entegre finansal içgörü chatbotu geliştirdim. Python scraping ile bültenleri otomatikleştirip Azure Blob Storage’a aktardım.",
+          en: "Built a RAG-based financial insights chatbot using SQL + Next.js + Node.js. Automated daily bulletins via Python scraping and stored them on Azure Blob Storage."
+        },
+        tech: ["Node.js", "Next.js", "SQL", "Python", "RAG", "Azure Blob Storage", "Web Scraping"],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: {
+            tr: "Finansal içeriklerin günlük toplanması, temizlenmesi, depolanması ve kullanıcı sorularına bağlamlı yanıt üretilmesi için uçtan uca bir RAG platformu kurguladım. Hedef; analist iş yükünü azaltırken güncel içgörüye erişimi hızlandırmaktı.",
+            en: "Designed an end-to-end RAG platform to collect, clean, store, and answer questions over financial content. The goal was to reduce analyst workload and speed up access to up-to-date insights."
+          }
+        },
+        responsibilities: {
+          tr: [
+            "Next.js + Node.js + SQL ile retrieval + cevap üretimi akışını web arayüzüne taşıdım.",
+            "Python scraping ile günlük bültenleri otomatik alıp işleyerek Azure Blob Storage’a aktardım."
+          ],
+          en: [
+            "Implemented the web experience for retrieval + generation using Next.js + Node.js + SQL.",
+            "Automated daily bulletin ingestion with Python scraping and stored processed data in Azure Blob Storage."
+          ]
+        },
+        kpis: [
+          { label: { tr: "Mimari", en: "Architecture" }, value: "RAG + Data Pipeline" },
+          { label: { tr: "Bulut", en: "Cloud" }, value: "Azure Blob Storage" }
+        ],
+        images: [
+          {
+            title: { tr: "Veri Toplama & Depolama", en: "Ingestion & Storage" },
+            desc: {
+              tr: "Kaynaklardan bültenleri otomatik çekip temizledim ve model/arama katmanına uygun formata getirdim. Bu akış günlük çalışacak şekilde tasarlanarak veri sürekliliği sağlandı.",
+              en: "Automated retrieval and cleaning of bulletins, then transformed them into a format suitable for retrieval and generation. The pipeline was designed to run daily for continuous freshness."
+            }
+          },
+          {
+            title: { tr: "Uçtan Uca Chat Deneyimi", en: "End-to-End Chat Experience" },
+            desc: {
+              tr: "Kullanıcı sorusu → ilgili içeriklerin retrieval’ı → yanıt üretimi akışını backend sorgu katmanı ile birleştirerek üretim odaklı hale getirdim. Yanıtların bağlamlı olması için kaynak parçalarıyla hizalama hedeflendi.",
+              en: "Combined query → retrieval → generation with a backend SQL layer to make the system production-oriented. Responses are grounded by aligning them with retrieved source snippets."
+            }
+          }
+        ]
+      },
+
+      arastirma: {
+        id: "arastirma",
+        icon: "🗣️",
+        title: { tr: "Niyet Tespiti & Slot Doldurma", en: "Intent Detection & Slot Filling" },
+        company: { tr: "Araştırma Projesi", en: "Research Project" },
+        period: "Eyl 2024 – Oca 2025",
+        location: "Sabancı Üniversitesi",
+        description: {
+          tr: "SNIPS veri setinde Slot-Gated BiLSTM’i yeniden ürettim ve değerlendirdim. Niyet tespiti için %97, slot doldurma için %79 doğruluk elde ettim. FastText ve Bayesian arama ile ML/DL modellerini kıyasladım.",
+          en: "Reproduced and evaluated Slot-Gated BiLSTM on SNIPS. Achieved 97% intent accuracy and 79% slot accuracy. Compared ML/DL models with FastText and Bayesian hyperparameter search."
+        },
+        tech: ["NLP", "Slot-Gated BiLSTM", "FastText", "Bayesian Search", "PyTorch", "SNIPS"],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: {
+            tr: "Amaç; intent detection ve slot filling görevlerini tek bir mimaride ortak optimize ederek daha tutarlı bir NLU altyapısı oluşturmaktı. Reprodüksiyon odaklı yaklaşım ile model davranışını metrikler ve karşılaştırmalar üzerinden analiz ettim.",
+            en: "Goal was to jointly optimize intent detection and slot filling in a unified NLU architecture. Using a reproduction-oriented approach, I analyzed behavior via metrics and systematic comparisons."
+          }
+        },
+        responsibilities: {
+          tr: [
+            "SNIPS üzerinde Slot-Gated BiLSTM reprodüksiyonu ve deneysel değerlendirme yaptım.",
+            "FastText embedding’leri ve Bayesian hiperparametre araması ile ML (LR, XGBoost) ve DL (LSTM, BiLSTM) kıyaslamaları yaptım."
+          ],
+          en: [
+            "Reproduced Slot-Gated BiLSTM and ran experimental evaluation on SNIPS.",
+            "Compared ML (LR, XGBoost) and DL (LSTM, BiLSTM) with FastText embeddings and Bayesian hyperparameter search."
+          ]
+        },
+        kpis: [
+          { label: { tr: "Intent", en: "Intent" }, value: "%97" },
+          { label: { tr: "Slot", en: "Slot" }, value: "%79" }
+        ],
+        images: [
+          {
+            title: { tr: "Model Mimarisi", en: "Model Architecture" },
+            desc: {
+              tr: "Intent ve slot görevleri arasında bilgi akışını slot-gate mekanizmasıyla kurarak ortak öğrenmeyi güçlendirdim. Ablation mantığında embedding ve model seçeneklerini kıyaslamaya uygun yapı hazırladım.",
+              en: "Enabled shared learning between intent and slots using a slot-gate mechanism. Prepared a structure suitable for ablation-style comparisons across embeddings and model variants."
+            }
+          },
+          {
+            title: { tr: "Deney & Karşılaştırma", en: "Experiments & Comparison" },
+            desc: {
+              tr: "Bayesian search ile hiperparametreleri optimize ederek performansı dengeli şekilde artırdım. Sonuçları intent/slot metrikleri üzerinden yorumlayıp model seçim stratejisi çıkardım.",
+              en: "Optimized hyperparameters with Bayesian search for balanced gains. Interpreted results through intent/slot metrics to derive a model selection strategy."
+            }
+          }
+        ]
+      },
+
+      influencer: {
+        id: "influencer",
+        icon: "📊",
+        title: { tr: "Instagram Influencer Sınıflandırması & Beğeni Tahmini", en: "Instagram Influencer Classification & Like Prediction" },
+        company: { tr: "Kişisel Proje", en: "Personal Project" },
+        period: "Eyl 2024 – Oca 2025",
+        location: "İstanbul, Türkiye",
+        description: {
+          tr: "%86.7 F1 skoru elde eden stacking sınıflandırıcı (Random Forest + Logistic Regression) geliştirdim. Gürültülü verilerde SMOTE ve alan odaklı ön işleme uyguladım; RF Regressor ile beğeni tahmini yaptım.",
+          en: "Built a stacking classifier (Random Forest + Logistic Regression) achieving 86.7 F1. Used SMOTE and domain-specific preprocessing; predicted likes with RF Regressor."
+        },
+        tech: ["Scikit-learn", "Random Forest", "Logistic Regression", "SMOTE", "Stacking", "Regression"],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: {
+            tr: "Amaç; influencer’ları segment bazlı sınıflandırmak ve etkileşim (beğeni) davranışını tahmin ederek karar destek sağlamak. Dengesiz/gürültülü veriyi iyileştirip daha sağlam bir genelleme için stacking yaklaşımını kullandım.",
+            en: "Goal was to segment influencers and predict engagement (likes) for decision support. Improved noisy/imbalanced data and used stacking to achieve stronger generalization."
+          }
+        },
+        responsibilities: {
+          tr: [
+            "Random Forest + Logistic Regression ile stacking classifier kurup %86.7 F1 elde ettim.",
+            "SMOTE ve domain-specific preprocessing ile veriyi iyileştirip RF Regressor ile beğeni tahmini yaptım."
+          ],
+          en: [
+            "Implemented a stacking classifier (RF + LR) and achieved 86.7 F1.",
+            "Applied SMOTE + domain-specific preprocessing and predicted likes using RF Regressor."
+          ]
+        },
+        kpis: [
+          { label: { tr: "Sınıflandırma", en: "Classification" }, value: "F1 = 86.7" },
+          { label: { tr: "Yaklaşım", en: "Approach" }, value: "Stacking + SMOTE" }
+        ],
+        images: [
+          {
+            title: { tr: "Veri & Ön İşleme", en: "Data & Preprocessing" },
+            desc: {
+              tr: "Gürültülü sosyal medya verileri için alan odaklı temizleme ve özellik çıkarımı yaptım. Dengesiz sınıflar için SMOTE ile dengeleme uygulayıp modelin minority sınıflarda da öğrenmesini güçlendirdim.",
+              en: "Performed domain-specific cleaning and feature extraction on noisy social media data. Applied SMOTE to balance classes and improve learning on minority segments."
+            }
+          },
+          {
+            title: { tr: "Sınıflandırma (Stacking)", en: "Classification (Stacking)" },
+            desc: {
+              tr: "Temel modellerin güçlü yanlarını birleştiren stacking kurgusuyla daha stabil performans elde ettim. F1 odaklı değerlendirme ile eşik/parametre ayarlarını optimize ettim.",
+              en: "Used stacking to combine strengths of base models and achieve more stable performance. Optimized thresholds/parameters with an F1-centric evaluation."
+            }
+          },
+          {
+            title: { tr: "Regresyon (Beğeni Tahmini)", en: "Regression (Like Prediction)" },
+            desc: {
+              tr: "Etkileşim dağılımındaki çarpıklığı dikkate alarak regresyon tarafını kurguladım. RF Regressor ile beğeni tahminleri üretip hata analizi yaptım.",
+              en: "Designed the regression setup with skewed engagement distributions in mind. Produced like predictions with RF Regressor and ran error analysis."
+            }
+          }
+        ]
+      },
+
+      echospace: {
+        id: "echospace",
+        icon: "🥽",
+        title: { tr: "EchoSpaceAR – AR Tabanlı Ses Farkındalığı", en: "EchoSpaceAR — AR-based Sound Awareness" },
+        company: { tr: "Proje (HCI)", en: "HCI Project" },
+        period: "Eyl 2025 – Oca 2026",
+        location: "Sabancı Üniversitesi",
+        description: {
+          tr: "Unity’de AR arayüz entegrasyonu ve C# scriptleriyle gerçek zamanlı cue/HUD akışı geliştirdim. Stereo sesten YamNet ile çevresel ses sınıflandırması, Whisper ile speech-to-text çıkarımı yaptım.",
+          en: "Built a real-time AR cue/HUD flow in Unity with C# scripts. Performed environmental sound classification with YAMNet and speech-to-text with Whisper."
+        },
+        tech: ["Unity", "C#", "AR UI", "YAMNet", "Whisper", "HCI"],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: {
+            tr: "Hedef; kullanıcının çevresel ses farkındalığını artıran bir AR arayüz tasarlamak ve gerçek zamanlı ses sınıflandırma + konuşma metinleştirme çıktılarıyla anlamlı geri bildirimler sunmaktı. UI kararları HCI prensipleriyle uyumlu olacak şekilde kurgulandı.",
+            en: "Goal was to increase environmental sound awareness via an AR interface, providing meaningful real-time feedback from sound classification and speech-to-text. UI decisions were grounded in HCI principles."
+          }
+        },
+        responsibilities: {
+          tr: [
+            "Unity’de AR UI entegrasyonu + C# scriptleriyle gerçek zamanlı cue/HUD akışı geliştirdim.",
+            "Stereo ses akışından YAMNet sınıflandırma ve Whisper STT çıktıları üretip sunucu tarafında işledim."
+          ],
+          en: [
+            "Implemented AR UI integration and real-time cue/HUD flow in Unity with C#.",
+            "Generated YAMNet classifications and Whisper STT from stereo audio and processed results server-side."
+          ]
+        },
+        kpis: [
+          { label: { tr: "Alan", en: "Domain" }, value: "AR + HCI" },
+          { label: { tr: "AI", en: "AI" }, value: "YAMNet + Whisper" }
+        ],
+        images: [
+          {
+            title: { tr: "AR Arayüz & Cue/HUD Akışı", en: "AR UI & Cue/HUD Flow" },
+            desc: {
+              tr: "Kullanıcıya bağlamlı uyarılar sunan AR katmanını tasarladım. UI bileşenleri gerçek zamanlı güncellenerek “ses → görsel ipucu” dönüşümü akıcı hale getirildi.",
+              en: "Designed an AR layer that presents contextual cues. UI components update in real-time to provide a smooth “sound → visual cue” experience."
+            }
+          },
+          {
+            title: { tr: "Ses İşleme Pipeline", en: "Audio Processing Pipeline" },
+            desc: {
+              tr: "Çevresel ses sınıflandırması (YAMNet) ve konuşma metinleştirme (Whisper) çıktıları birleştirilerek arayüze anlamlı şekilde yansıtıldı. Böylece kullanıcı hem ortam seslerini hem konuşma içeriğini görsel olarak takip edebildi.",
+              en: "Combined environmental sound classification (YAMNet) with speech-to-text (Whisper) and surfaced the results meaningfully in the UI, enabling users to track both ambient sounds and spoken content."
+            }
+          }
+        ]
+      },
+
+      music: {
+        id: "music",
+        icon: "🎵",
+        title: { tr: "Music Emotion Recognition on DEAM – Segment CNN & Attention Pooling", en: "Music Emotion Recognition on DEAM — Segment CNN & Attention Pooling" },
+        company: { tr: "Deep Learning Projesi", en: "Deep Learning Project" },
+        period: "Eyl 2025 – Oca 2026",
+        location: "Sabancı Üniversitesi",
+        description: {
+          tr: "DEAM üzerinde valence/arousal regresyonu için log-mel spectrogram, 5 sn segmentasyon (50% overlap) ve train-only global z-normalization pipeline’ı kurdum. Attention pooling + attention-head ensemble ile testte MSE=0.0114, Pearson=0.721, CCC=0.689 elde ettim.",
+          en: "For valence/arousal regression on DEAM, built a pipeline with log-mel spectrograms, 5s segmentation (50% overlap), and train-only global z-normalization. Improved song-level prediction using attention pooling + attention-head ensemble (MSE=0.0114, Pearson=0.721, CCC=0.689)."
+        },
+        tech: ["PyTorch", "CNN", "Attention Pooling", "Log-Mel", "Regression", "DEAM"],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: {
+            tr: "Amaç; şarkıyı tek bir pencereden değil, segment-level temsiller üzerinden öğrenip bu temsilleri dikkat (attention) ile ağırlıklandırarak song-level duygu tahminini güçlendirmekti. Bu sayede “hangi segmentler duyguyu taşıyor?” sorusuna da dolaylı bir açıklanabilirlik katmanı eklenmiş oldu. Train-only global z-normalization kullanarak veri sızıntısı (leakage) riskini azaltıp daha doğru değerlendirme hedefledim.",
+            en: "Goal was to learn emotion from segment-level representations and aggregate them with attention to improve song-level predictions. This also adds interpretability by indicating which segments matter most. Train-only global z-normalization reduces leakage risk and yields more trustworthy evaluation."
+          }
+        },
+        responsibilities: {
+          tr: [
+            "Log-mel spectrogram + 5 sn segmentasyon (50% overlap) + train-only global z-normalization içeren pipeline’ı kurguladım.",
+            "Attention pooling ve attention-head ensemble ile song-level performansı iyileştirdim."
+          ],
+          en: [
+            "Built the full pipeline: log-mel spectrograms + 5s segmentation (50% overlap) + train-only global z-normalization.",
+            "Improved song-level performance with attention pooling and an attention-head ensemble strategy."
+          ]
+        },
+        kpis: [
+          { label: { tr: "MSE", en: "MSE" }, value: "0.0114" },
+          { label: { tr: "CCC", en: "CCC" }, value: "0.689" }
+        ],
+        images: [
+          {
+            title: { tr: "Pipeline & Özellikler", en: "Pipeline & Features" },
+            desc: {
+              tr: "Ham ses sinyalini log-mel spectrogram’a dönüştürüp 5 saniyelik segmentler halinde (50% overlap) örnekledim. Normalizasyonu train-only global yaklaşımıyla yaparak test verisine bilgi sızıntısını engelledim. Bu pipeline, modelin hem stabil öğrenmesini hem de daha adil değerlendirilmesini sağlar.",
+              en: "Converted raw audio into log-mel spectrograms and sampled 5-second segments with 50% overlap. Used train-only global normalization to prevent leakage into the test set. This improves training stability and makes evaluation more reliable."
+            }
+          },
+          {
+            title: { tr: "Attention Pooling & Ensemble", en: "Attention Pooling & Ensemble" },
+            desc: {
+              tr: "Segment bazlı CNN çıktılarından şarkı düzeyinde tek tahmin üretmek için attention pooling kullandım. Ek olarak birden fazla attention-head’in çıktısını birleştirerek ensemble etkisi yarattım ve genelleme performansını artırdım. Böylece farklı segment türlerine duyarlı daha sağlam bir toplama mekanizması elde edildi.",
+              en: "Used attention pooling to aggregate segment-level CNN outputs into a single song-level prediction. Additionally combined multiple attention-head outputs (ensemble-like effect) to improve generalization and robustness across different segment patterns."
+            }
+          }
+        ]
+      },
+
+      sneakpeek: {
+        id: "sneakpeek",
+        icon: "🛍️",
+        title: { tr: "SneakPeek – E-ticaret Projesi", en: "SneakPeek — E-commerce Project" },
+        company: { tr: "Kişisel Proje", en: "Personal Project" },
+        period: "Mar 2025 – Haz 2025",
+        location: "İstanbul, Türkiye",
+        description: {
+          tr: "NestJS + Next.js ile mikroservis mimarisinde e-ticaret geliştirdim. OpenAI GPT API ile ayakkabı önerici entegre ettim; JWT auth, Kafka messaging ve Docker ile konteynerleştirilmiş dağıtım uyguladım.",
+          en: "Built a microservices e-commerce app with NestJS + Next.js. Integrated a GPT-based shoe recommender, JWT auth, Kafka messaging, and Dockerized deployment."
+        },
+        tech: ["NestJS", "Next.js", "Microservices", "OpenAI GPT", "JWT", "Kafka", "Docker"],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: {
+            tr: "Amaç; modern bir e-ticaret deneyimini ölçeklenebilir bir altyapıyla kurmak ve kullanıcıya AI destekli ürün keşfi sunmaktı. Servisler arası iletişim, güvenli kimlik doğrulama ve dağıtım süreçleri üretim mantığıyla kurgulandı.",
+            en: "Goal was to build a scalable e-commerce experience and add AI-assisted product discovery. Inter-service communication, secure auth, and deployment were designed with production practices in mind."
+          }
+        },
+        responsibilities: {
+          tr: [
+            "NestJS + Next.js ile mikroservis yaklaşımında e-ticaret altyapısını geliştirdim.",
+            "GPT önerici, JWT auth, Kafka mesajlaşma ve Docker dağıtım süreçlerini entegre ettim."
+          ],
+          en: [
+            "Implemented the microservices-based e-commerce infrastructure with NestJS + Next.js.",
+            "Integrated GPT recommender, JWT auth, Kafka messaging, and Docker-based deployment."
+          ]
+        },
+        kpis: [
+          { label: { tr: "Mimari", en: "Architecture" }, value: "Microservices" },
+          { label: { tr: "AI", en: "AI" }, value: "GPT-based Recommender" }
+        ],
+        images: [
+          {
+            title: { tr: "Sistem & AI Önerici", en: "System & AI Recommender" },
+            desc: {
+              tr: "Ürün keşfini iyileştirmek için GPT tabanlı öneri katmanı entegre ettim. İstek akışında JWT ile auth, servisler arası Kafka iletişimi ve Docker ile dağıtımı birlikte kurguladım.",
+              en: "Integrated a GPT-based recommendation layer to improve product discovery. Combined JWT auth, Kafka-based service communication, and Docker deployment into a cohesive request flow."
+            }
+          }
+        ]
+      }
+    };
+
+    // ============ GERİ UYUMLULUK / ÖNCELİK ============
+    function resolveProject(){
+      const id = localStorage.getItem("currentProjectId");
+      if(id && PROJECTS[id]) return PROJECTS[id];
+
+      const raw = localStorage.getItem("currentProject");
+      if(raw){
+        try{
+          const obj = JSON.parse(raw);
+          if(obj && obj.title && obj.company){
+            return normalizeLegacy(obj);
+          }
+        }catch(e){}
+      }
+      return null;
+    }
+
+    function normalizeLegacy(legacy){
+      const id = legacy.imagePrefix || "project";
+      const iconMap = {
+        baykar:"🎯", bmc:"💬", intertech:"💰", arastirma:"🗣️",
+        influencer:"📊", echospace:"🥽", music:"🎵", sneakpeek:"🛍️"
+      };
+
+      return {
+        id,
+        icon: iconMap[id] || "✨",
+        title: { tr: legacy.title || "Proje", en: legacy.title || "Project" },
+        company: { tr: legacy.company || "—", en: legacy.company || "—" },
+        period: legacy.period || "—",
+        location: legacy.location || "—",
+        description: { tr: legacy.description || "", en: legacy.description || "" },
+        tech: legacy.tech || [],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: { tr: legacy.description || "", en: legacy.description || "" }
+        },
+        responsibilities: {
+          tr: legacy.responsibilities || [],
+          en: legacy.responsibilities || []
+        },
+        kpis: (legacy.kpis || []).map(k => ({
+          label: { tr: k.label, en: k.label },
+          value: k.value
+        })),
+        images: (legacy.images || []).map(x => ({
+          title: { tr: x.title, en: x.title },
+          desc: { tr: x.desc, en: x.desc }
+        }))
+      };
+    }
+
+    // ============ UI ============
+    const project = resolveProject();
+
+    const titleEl = document.getElementById("project-title");
+    const companyEl = document.getElementById("company");
+    const descEl = document.getElementById("description");
+    const techEl = document.getElementById("tech-stack");
+    const contentEl = document.getElementById("project-content");
+
+    const crumbTitle = document.getElementById("crumbTitle");
+    const periodChip = document.getElementById("periodChip");
+    const locChip = document.getElementById("locChip");
+
+    // Lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    function openLightbox(src, alt){
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || (getLang()==="tr" ? "Proje görseli" : "Project image");
+      lightbox.classList.add("active");
+      lightbox.setAttribute("aria-hidden","false");
+    }
+    function closeLightbox(){
+      lightbox.classList.remove("active");
+      lightbox.setAttribute("aria-hidden","true");
+      lightboxImg.src = "";
+    }
+    lightbox.addEventListener("click", (e) => {
+      if(e.target === lightbox) closeLightbox();
+    });
+    lightboxClose.addEventListener("click", closeLightbox);
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeLightbox();
+    });
+
+    function escapeHtml(str){
+      return String(str ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function pick(obj){
+      const lang = getLang();
+      if(obj && typeof obj === "object" && (obj.tr || obj.en)){
+        return obj[lang] || obj.tr || obj.en || "";
+      }
+      return obj ?? "";
+    }
+
+    function imagePath(prefix, idx){
+      return `images/${prefix}${idx}.png`;
+    }
+
+    function createTechTag(t){
+      const div = document.createElement("div");
+      div.className = "tech-tag";
+      div.textContent = t;
+      return div;
+    }
+
+    function createBullet(text){
+      const row = document.createElement("div");
+      row.className = "bullet";
+      row.innerHTML = `<div class="dot"></div><div>${escapeHtml(text)}</div>`;
+      return row;
+    }
+
+    function createKpi(label, value){
+      const box = document.createElement("div");
+      box.className = "kpi";
+      box.innerHTML = `<div class="label">${escapeHtml(label)}</div><div class="value">${escapeHtml(value)}</div>`;
+      return box;
+    }
+
+    function render(){
+      const lang = getLang();
+      const T = UI_TEXT[lang];
+
+      if(!project){
+        document.body.innerHTML = `
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center;padding:2rem;">
+            <h1 style="font-size:2rem;margin-bottom:1rem;background:linear-gradient(135deg,#667eea,#764ba2,#f093fb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+              ${escapeHtml(T.notFoundTitle)}
+            </h1>
+            <p style="color:#666;max-width:700px;line-height:1.7;">
+              ${escapeHtml(T.notFoundDesc)}
+            </p>
+            <a href="index.html" class="back-btn" style="margin-top:1.8rem;">${escapeHtml(T.goHome)}</a>
+          </div>
+        `;
+        return;
+      }
+
+      const title = pick(project.title);
+      const company = pick(project.company);
+      const description = pick(project.description);
+      const overviewTitle = pick(project.overview?.title) || T.overviewTitle;
+      const overviewText = pick(project.overview?.text) || description;
+
+      document.title = `${title} ${T.pageTitleSuffix}`;
+
+      titleEl.textContent = title;
+      companyEl.textContent = company;
+      descEl.textContent = description;
+
+      crumbTitle.textContent = title;
+      periodChip.textContent = `📅 ${project.period || "—"}`;
+      locChip.textContent = `📍 ${project.location || "—"}`;
+
+      // Tech tags
+      techEl.innerHTML = "";
+      (project.tech || []).forEach(t => techEl.appendChild(createTechTag(t)));
+
+      // Main content
+      contentEl.innerHTML = "";
+
+      // Row: Overview + Highlights
+      const row = document.createElement("div");
+      row.className = "cards-row";
+
+      const overviewCard = document.createElement("div");
+      overviewCard.className = "card overview-card";
+      overviewCard.innerHTML = `
+        <h2>${escapeHtml(overviewTitle)}</h2>
+        <div class="sublead">${escapeHtml(T.overviewSub)}</div>
+        <p>${escapeHtml(overviewText)}</p>
+      `;
+
+      const highlightCard = document.createElement("div");
+      highlightCard.className = "card";
+      highlightCard.innerHTML = `
+        <h2>${escapeHtml(T.highlightsTitle)}</h2>
+        <div class="sublead">${escapeHtml(T.highlightsSub)}</div>
+      `;
+
+      const resp = (project.responsibilities && project.responsibilities[lang]) ? project.responsibilities[lang] : [];
+      const kpis = (project.kpis || []);
+
+      const bulletsWrap = document.createElement("div");
+      bulletsWrap.className = "bullets";
+      resp.forEach(r => bulletsWrap.appendChild(createBullet(r)));
+      if(resp.length === 0){
+        bulletsWrap.appendChild(createBullet(lang==="tr"
+          ? "Detaylar yakında genişletilecek (CV bazlı içerik güncelleniyor)."
+          : "Details will be expanded soon (CV-aligned content is being updated)."
+        ));
+      }
+
+      const kpiGrid = document.createElement("div");
+      kpiGrid.className = "kpi-grid";
+      kpis.forEach(k => kpiGrid.appendChild(createKpi(pick(k.label), k.value)));
+
+      highlightCard.appendChild(bulletsWrap);
+      if(kpis.length) highlightCard.appendChild(kpiGrid);
+
+      row.appendChild(overviewCard);
+      row.appendChild(highlightCard);
+      contentEl.appendChild(row);
+
+      // Image sections
+      const imgs = project.images || [];
+      imgs.forEach((img, index) => {
+        const section = document.createElement("div");
+        section.className = "image-section";
+
+        const src = imagePath(project.id, index + 1);
+        const imgTitle = pick(img.title) || (lang==="tr" ? "Detay" : "Detail");
+        const imgDesc = pick(img.desc) || "";
+        const alt = `${title} - ${imgTitle}`;
+
+        section.innerHTML = `
+          <img src="${src}" alt="${escapeHtml(alt)}" class="project-image" data-src="${src}"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="image-placeholder" style="display:none;">
+            <div style="filter: drop-shadow(0 10px 20px rgba(0,0,0,.18));">${escapeHtml(project.icon || "📌")}</div>
+            <div class="placeholder-sub">${escapeHtml(T.imgMissing)}</div>
+          </div>
+          <h3>${escapeHtml(imgTitle)}</h3>
+          <p>${escapeHtml(imgDesc)}</p>
+        `;
+
+        const imageEl = section.querySelector(".project-image");
+        if(imageEl){
+          imageEl.addEventListener("click", () => {
+            if(getComputedStyle(imageEl).display !== "none"){
+              openLightbox(imageEl.getAttribute("data-src"), imageEl.alt);
+            }
+          });
+        }
+
+        contentEl.appendChild(section);
+      });
+    }
+
+    // İlk yükleme
+    applyLang(getLang());
+    render();
+  </script>
+</body>
+</html>
