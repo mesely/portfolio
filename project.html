@@ -594,6 +594,93 @@
     // ============ PROJE VERİLERİ ============
     // Görseller: images/<prefix><n>.png
     const PROJECTS = {
+      chefinpocket: {
+        id: "chefinpocket",
+        icon: "🍳",
+        title: { tr: "ChefInPocket", en: "ChefInPocket" },
+        company: {
+          tr: "Sabancı Üniversitesi · CS310 Takım Projesi",
+          en: "Sabancı University · CS310 Team Project"
+        },
+        period: "Spring 2026",
+        location: "İstanbul, Türkiye",
+        description: {
+          tr: "Flutter ile geliştirilen çok ekranlı mobil/web deneyimini, Node.js tabanlı 6 mikroservis, MongoDB veri katmanı ve API gateway ile birleştiren akıllı tarif ve yemek planlama ürünü geliştirdik. Chef AI, malzeme özelleştirme, alışveriş listesi ve adım adım pişirme akışlarını tek bir ürün yolculuğunda topladık.",
+          en: "Built a smart recipe and meal-planning product that combines a multi-screen Flutter mobile/web experience with six Node.js microservices, a MongoDB-backed data layer, and an API gateway. The product brings Chef AI, ingredient customization, grocery planning, and step-by-step cooking into a single user journey."
+        },
+        tech: [
+          "Flutter",
+          "Node.js",
+          "Express",
+          "MongoDB",
+          "Microservices",
+          "Docker",
+          "Nginx"
+        ],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: {
+            tr: "ChefInPocket, kullanıcının tarif arama anından pişirme sürecinin son adımına kadar eşlik eden uçtan uca bir yemek asistanı olarak tasarlandı. Projede tarif keşfi, hızlı erişim kısayolları, Chef AI destekli soru-cevap, kişiselleştirilebilir malzeme değişimleri, alışveriş listesi ve rehberli pişirme akışlarını aynı ürün mimarisi içinde bir araya getirdik.",
+            en: "ChefInPocket was designed as an end-to-end cooking companion that supports the user from recipe discovery to the final cooking step. The product brings together recipe search, quick-access shortcuts, Chef AI Q&A, customizable ingredient swaps, grocery planning, and guided cooking inside one cohesive product architecture."
+          }
+        },
+        responsibilities: {
+          tr: [
+            "Flutter tabanlı kullanıcı yolculuğunu tarif keşfi, Chef AI, malzeme özelleştirme, grocery list ve guided cooking ekranları arasında tutarlı bir akışa dönüştürdüm.",
+            "Auth, recipe, pantry, community, assistant ve content servislerini API gateway üzerinden çalışan modüler backend yapısında bir araya getirdim.",
+            "Root-level Dockerfile ve Nginx kurulumu ile Flutter web build’ini ve backend servislerini Hugging Face Docker Space üzerinde çalışabilecek şekilde paketledim."
+          ],
+          en: [
+            "Turned the Flutter experience into a coherent product flow across recipe discovery, Chef AI, ingredient customization, grocery planning, and guided cooking screens.",
+            "Integrated the auth, recipe, pantry, community, assistant, and content services into a modular backend architecture behind a single API gateway.",
+            "Packaged the Flutter web build and backend services with a root-level Dockerfile and Nginx setup so the project can run on a Hugging Face Docker Space."
+          ]
+        },
+        kpis: [
+          { label: { tr: "İstemci", en: "Client" }, value: "Flutter Mobile/Web" },
+          { label: { tr: "Backend", en: "Backend" }, value: "6 Services + Gateway" },
+          { label: { tr: "Dağıtım", en: "Deployment" }, value: "Docker + Nginx" },
+          { label: { tr: "Kapsam", en: "Scope" }, value: "AI + Grocery + Cooking" }
+        ],
+        images: [
+          {
+            title: { tr: "Ana Sayfa ve Tarif Keşfi", en: "Home and Recipe Discovery" },
+            desc: {
+              tr: "Ana ekranda arama, mutfak kategorileri, günün önerisi ve hızlı erişim kartlarını tek bakışta sunarak kullanıcının uygulamaya hızlı giriş yapmasını hedefledik. Böylece keşif akışı ürünün geri kalan özelliklerine doğal bir başlangıç noktası sağlıyor.",
+              en: "The home screen gives users a clear entry point with search, cuisine shortcuts, a featured recipe, and quick-access cards. This makes recipe discovery feel immediate and sets up the rest of the product flow naturally."
+            }
+          },
+          {
+            title: { tr: "Chef AI Yardımcısı", en: "Chef AI Assistant" },
+            desc: {
+              tr: "Chef AI ekranı, tarif bağlamı içinde kullanıcıdan gelen sorulara yanıt verecek şekilde kurgulandı. Malzeme değişimleri, pişirme ipuçları ve zamanlama soruları için hafif ama ürün içine gömülü bir yardımcı deneyim oluşturduk.",
+              en: "The Chef AI screen is designed to answer user questions within the recipe context. It provides a lightweight but deeply integrated assistant experience for substitutions, cooking tips, and timing questions."
+            }
+          },
+          {
+            title: { tr: "Malzeme Özelleştirme", en: "Ingredient Customization" },
+            desc: {
+              tr: "Kullanıcı, pişirmeye başlamadan önce tarifteki malzemeler için önerilen değişimleri seçebiliyor. Bu akış, kişiselleştirme ve diyet/tercih uyarlamalarını ürünün merkezine taşıyarak tarifleri daha esnek hale getiriyor.",
+              en: "Users can choose suggested ingredient swaps before they start cooking. This flow brings personalization and preference-aware recipe adaptation into the core experience."
+            }
+          },
+          {
+            title: { tr: "Alışveriş Listesi", en: "Grocery Planning" },
+            desc: {
+              tr: "Eksik malzemeleri pişirme öncesi net bir kontrol listesine dönüştürerek hazırlık sürecini daha uygulanabilir hale getirdik. Grocery ekranı, tarif seçimi ile gerçek hayat alışveriş davranışı arasında pratik bir köprü kuruyor.",
+              en: "Missing ingredients are turned into a simple checklist so pre-cooking preparation becomes actionable. The grocery screen creates a practical bridge between recipe selection and real-world shopping."
+            }
+          },
+          {
+            title: { tr: "Adım Adım Pişirme", en: "Guided Cooking Steps" },
+            desc: {
+              tr: "Pişirme ekranı, kullanıcıyı numaralandırılmış adımlarla tarif boyunca yönlendiriyor ve karmaşıklığı azaltıyor. Bu yapı, özellikle ilk kez denenen tariflerde daha güvenli ve takip edilebilir bir deneyim sağlıyor.",
+              en: "The cooking screen guides the user through numbered steps and reduces cognitive load during the recipe flow. This makes the experience easier to follow, especially for recipes the user is trying for the first time."
+            }
+          }
+        ]
+      },
+
       baykar: {
         id: "baykar",
         icon: "🎯",
@@ -1023,7 +1110,7 @@
     function normalizeLegacy(legacy){
       const id = legacy.imagePrefix || "project";
       const iconMap = {
-        baykar:"🎯", bmc:"💬", intertech:"💰", arastirma:"🗣️",
+        chefinpocket:"🍳", baykar:"🎯", bmc:"💬", intertech:"💰", arastirma:"🗣️",
         influencer:"📊", echospace:"🥽", music:"🎵", sneakpeek:"🛍️"
       };
 

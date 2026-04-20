@@ -581,6 +581,18 @@
     // ===== Projeler (kapaklar: her projenin kendi ...1.png görseli) =====
     const PROJECTS = [
       {
+        id: "chefinpocket",
+        title_tr: "ChefInPocket",
+        title_en: "ChefInPocket",
+        company_tr: "Sabancı Üniversitesi · CS310 Takım Projesi",
+        company_en: "Sabancı University · CS310 Team Project",
+        summary_tr: "Flutter arayüzü, 6 mikroservis ve Chef AI ile tarif keşfi, malzeme özelleştirme, alışveriş listesi ve pişirme akışını birleştiren akıllı yemek planlama uygulaması.",
+        summary_en: "A smart meal-planning app that combines a Flutter interface, 6 microservices, and Chef AI for recipe discovery, ingredient customization, grocery planning, and guided cooking.",
+        tags: ["Flutter", "Microservices", "Docker"],
+        icon: "🍳",
+        cover: "images/chefinpocket1.png"
+      },
+      {
         id: "baykar",
         title_tr: "Sosyal Medya Öneri Sistemi",
         title_en: "Social Media Recommender System",
@@ -686,6 +698,7 @@
 
       PROJECTS.forEach(p => {
         const title = (lang === "en" ? p.title_en : p.title_tr) || p.title_tr || p.title_en || "Project";
+        const companyText = (lang === "en" ? (p.company_en || p.company) : (p.company_tr || p.company)) || "";
         const summary = (lang === "en" ? p.summary_en : p.summary_tr) || p.summary_tr || p.summary_en || "";
         const ariaLabel = TEXT[lang].openProjectAria(title);
 
@@ -734,7 +747,7 @@
 
         const company = document.createElement("div");
         company.className = "company";
-        company.textContent = p.company;
+        company.textContent = companyText;
 
         const desc = document.createElement("p");
         desc.textContent = summary;
