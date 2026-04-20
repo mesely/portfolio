@@ -937,6 +937,14 @@
         ],
         engineeringProjects: [
           {
+            id: "transporter",
+            cover: "images/transporter1.png",
+            title: "Transporter App with Chatbot",
+            org: "Independent Product · Transport 245",
+            description: "Cross-platform logistics marketplace for towing, freight, charging, and passenger transport, shipped with native mobile packaging and an in-app assistant.",
+            tags: ["Next.js 15", "Capacitor", "NestJS"]
+          },
+          {
             id: "bmc",
             cover: "images/bmc1.png",
             title: "Knowledge-Grounded Enterprise Question Answering",
@@ -1003,7 +1011,17 @@
         detailsLabel: "Detayları aç",
         statusLabel: "Durum:",
         achievementLabel: "Temel Çıktı:",
-        keywordsLabel: "Anahtar Kelimeler:"
+        keywordsLabel: "Anahtar Kelimeler:",
+        engineeringProjectsExtra: [
+          {
+            id: "transporter",
+            cover: "images/transporter1.png",
+            title: "Transporter App with Chatbot",
+            org: "Bağımsız Ürün · Transport 245",
+            description: "Kurtarıcı, nakliye, şarj ve yolcu taşıma sağlayıcılarını harita tabanlı arama, yerleşik chatbot ve native mobil paketleme ile birleştiren çapraz platform lojistik uygulaması.",
+            tags: ["Next.js 15", "Capacitor", "NestJS"]
+          }
+        ]
       },
       de: {
         navResearch: "Forschung",
@@ -1252,12 +1270,31 @@
       return tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
     }
 
+    function mergeLocalizedItems(baseItems, translatedItems = []) {
+      const translatedById = new Map((translatedItems || []).map((item) => [item.id, item]));
+      const merged = (baseItems || []).map((item) => (
+        translatedById.has(item.id) ? Object.assign({}, item, translatedById.get(item.id)) : item
+      ));
+
+      (translatedItems || []).forEach((item) => {
+        if (!merged.some((entry) => entry.id === item.id)) merged.push(item);
+      });
+
+      return merged;
+    }
+
     function contentFor(lang) {
       const translated = window.HOME_I18N && window.HOME_I18N[lang] ? window.HOME_I18N[lang] : null;
+      const engineeringBase = lang === "tr"
+        ? mergeLocalizedItems(COPY.en.engineeringProjects || [], COPY.tr.engineeringProjectsExtra || [])
+        : (COPY.en.engineeringProjects || []);
+
       return {
         research: translated && translated.research ? translated.research : (COPY.en.research || []),
         aiProjects: translated && translated.aiProjects ? translated.aiProjects : (COPY.en.aiProjects || []),
-        engineeringProjects: translated && translated.engineeringProjects ? translated.engineeringProjects : (COPY.en.engineeringProjects || []),
+        engineeringProjects: translated && translated.engineeringProjects
+          ? mergeLocalizedItems(engineeringBase, translated.engineeringProjects)
+          : engineeringBase,
         skills: translated && translated.skills ? translated.skills : (COPY.en.skills || [])
       };
     }

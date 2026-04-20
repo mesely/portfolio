@@ -1743,6 +1743,172 @@
         ]
       },
 
+      transporter: {
+        id: "transporter",
+        icon: "🚚",
+        title: { tr: "Transporter App with Chatbot", en: "Transporter App with Chatbot" },
+        company: {
+          tr: "Bağımsız Ürün · Transport 245",
+          en: "Independent Product · Transport 245"
+        },
+        period: { tr: "Şub 2026 – Devam Ediyor", en: "Feb 2026 – Present" },
+        location: { tr: "İstanbul, Türkiye", en: "Istanbul, Turkey" },
+        description: {
+          tr: "Kullanıcıları kurtarıcı, nakliye, mobil şarj ve yolcu taşıma sağlayıcılarıyla buluşturan; harita tabanlı arama, chatbot, değerlendirme/şikayet akışları ve kurum yönetimini tek üründe birleştiren çapraz platform lojistik uygulamasını geliştirdim.",
+          en: "Built a cross-platform logistics application that connects users with towing, freight, charging, and passenger transport providers through map-based discovery, an in-app chatbot, ratings/complaints workflows, and provider-management tooling."
+        },
+        tech: [
+          "Next.js 15",
+          "React 19",
+          "Capacitor",
+          "NestJS",
+          "MongoDB",
+          "Firebase Auth",
+          "MapLibre",
+          "TypeScript"
+        ],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: {
+            tr: "Transporter App with Chatbot, çok parçalı lojistik ihtiyaçlarını tek mobil deneyimde toplamak için geliştirildi. Ürün; kullanıcının yakındaki kurumları haritada keşfetmesini, kategori bazlı filtrelerle doğru hizmete ulaşmasını, kurumlarla arama/mesajlaşma başlatmasını ve süreç sonunda değerlendirme ya da şikayet bırakmasını mümkün kılıyor. Aynı ürün hattı iOS, Android ve web üzerinde çalışırken, Transport 245 markasıyla App Store ve Google Play dağıtımına da hazır hale getirildi.",
+            en: "Transporter App with Chatbot was built to unify fragmented logistics needs inside one mobile product. The app lets users discover nearby providers on a live map, narrow results by service category, initiate calls or messages, and leave ratings or complaints after the interaction. The same product line runs across iOS, Android, and web, and is prepared for public distribution under the Transport 245 brand on the App Store and Google Play."
+          }
+        },
+        responsibilities: {
+          tr: [
+            "Next.js 15 + React 19 arayüzünü Capacitor ile native iOS/Android paketlerine taşıyarak tek kod tabanından çok platformlu ürün akışı kurdum.",
+            "MapLibre tabanlı harita deneyimi, kategori/alt kategori filtreleri, favoriler, geçmiş siparişler, değerlendirme/şikayet ekranları ve chatbot akışlarını tek kullanıcı yolculuğunda birleştirdim.",
+            "NestJS + MongoDB backend tarafında kurum verileri, siparişler, tarifeler, raporlar ve chat modüllerini destekleyen servis mimarisini; provider/admin panelleriyle birlikte ürünle hizaladım."
+          ],
+          en: [
+            "Turned the Next.js 15 + React 19 interface into native iOS and Android packages with Capacitor, keeping the product flow on a single codebase.",
+            "Integrated the MapLibre-based map, category/subcategory filters, favorites, order history, ratings/complaints, and chatbot interactions into one coherent user journey.",
+            "Aligned the NestJS + MongoDB backend with the product by supporting provider data, orders, tariffs, reports, and chat modules together with provider/admin management screens."
+          ]
+        },
+        kpis: [
+          { label: { tr: "Platformlar", en: "Platforms" }, value: "iOS + Android + Web" },
+          { label: { tr: "Hizmet Modları", en: "Service Modes" }, value: "Tow + Freight + Charge + Passenger" },
+          { label: { tr: "Mobil Paketleme", en: "Native Packaging" }, value: "Capacitor" },
+          { label: { tr: "Yayın", en: "Release" }, value: "App Store + Google Play" }
+        ],
+        details: [
+          {
+            title: { tr: "Ürün Kapsamı", en: "Product Scope" },
+            lead: {
+              tr: "Uygulama sadece tek bir dikey için değil, farklı lojistik ihtiyaçlarını ortak bir keşif ve aksiyon yüzeyinde toplamak için tasarlandı.",
+              en: "The product was designed not for one narrow vertical, but to unify multiple logistics needs under a shared discovery and action surface."
+            },
+            bullets: {
+              tr: [
+                "Kurtarıcı, vinç, yurt içi/yurt dışı nakliye, mobil şarj, istasyon ve yolcu taşıma gibi farklı hizmet modlarını tek arayüz içinde bir araya getirdim.",
+                "Harita üstünden kurum keşfi, filtrelenmiş listeleme, arama/mesaj başlatma, siteye gitme, favorilere ekleme ve kurum detaylarını açma gibi aksiyonları aynı panel mantığıyla kurguladım.",
+                "Geçmiş sipariş, favoriler, değerlendirme bırakma ve şikayet oluşturma ekranlarıyla ürünün sadece keşif değil, sonrası için de kapalı devre bir deneyim sunmasını sağladım."
+              ],
+              en: [
+                "Brought towing, crane, domestic/international freight, mobile charging, station, and passenger transport modes into one shared interface.",
+                "Designed map discovery, filtered lists, call/message actions, website routing, favorites, and provider detail views around one consistent action-panel pattern.",
+                "Extended the product beyond discovery with order history, favorites, ratings, and complaint creation so the workflow remains closed-loop after service discovery."
+              ]
+            }
+          },
+          {
+            title: { tr: "Sistem Mimarisi", en: "System Architecture" },
+            lead: {
+              tr: "Ürünün ana mühendislik değeri, modern web stack’i native mobil dağıtıma ve operasyonel backend modüllerine bağlamasında yatıyor.",
+              en: "The main engineering value comes from connecting a modern web stack to native mobile distribution and operational backend modules."
+            },
+            paragraphs: {
+              tr: [
+                "Frontend tarafında Next.js 15, React 19 ve TypeScript kullanıldı; harita deneyimi MapLibre ile kuruldu, kimlik doğrulama ise Firebase üzerinden Google ve Apple girişlerini destekleyecek şekilde genişletildi.",
+                "Mobil tarafta Capacitor ile iOS ve Android projeleri üretildi; app adı, ikonlar, manifest ve native ayarlar Transport 245 markası altında yönetildi. Backend’de NestJS ve Mongoose tabanlı servisler; kurum verisi, tarifeler, sipariş, chat ve rapor modüllerini taşıyor."
+              ],
+              en: [
+                "On the frontend, the app uses Next.js 15, React 19, and TypeScript; the live map experience is powered by MapLibre, while authentication is expanded through Firebase to support Google and Apple sign-in.",
+                "On mobile, Capacitor generates the iOS and Android shells; app naming, icons, manifest assets, and native settings are managed under the Transport 245 brand. On the backend, NestJS and Mongoose-based services support provider data, tariffs, orders, chat, and reports."
+              ]
+            }
+          },
+          {
+            title: { tr: "Yayın ve Operasyon", en: "Release and Operations" },
+            lead: {
+              tr: "Bu proje sadece bir demo arayüz değil; gerçek kullanıcı, kurum ve destek akışlarını taşıyacak şekilde ürünleştirildi.",
+              en: "This is not just a demo UI; it was productized to handle real user, provider, and support workflows."
+            },
+            bullets: {
+              tr: [
+                "Provider kayıt ekranları ve yönetici modülleriyle kurum onboarding, tarife yönetimi ve destek operasyonlarını ürün içine gömdüm.",
+                "KVKK / kullanıcı sözleşmesi, destek sayfaları, şikayet modülleri ve değerlendirme akışlarıyla mağaza yayınına uygun güven ve yasal katmanlar ekledim.",
+                "Transport 245 markasıyla App Store ve Google Play için hazır native dağıtım hattı kurarak ürünü sadece web’de değil mağaza ekosisteminde de konumlandırdım."
+              ],
+              en: [
+                "Embedded provider onboarding, tariff management, and admin-side support workflows through dedicated provider-registration and management modules.",
+                "Added privacy/legal screens, support pages, complaint modules, and review flows to make the product ready for public-store expectations and trust requirements.",
+                "Prepared native distribution under the Transport 245 brand for both the App Store and Google Play so the product is positioned beyond the web alone."
+              ]
+            }
+          }
+        ],
+        images: [
+          {
+            src: "images/transporter1.png",
+            title: { tr: "Harita Odaklı Lojistik Keşfi", en: "Map-First Logistics Discovery" },
+            desc: {
+              tr: "Açılış ekranı, kullanıcıyı doğrudan yakınındaki hizmet ağına indiriyor. Harita üstündeki canlı yoğunluk ve kategori girişleri, kurtarıcıdan lastikçiye kadar hızlı keşif hissini öne çıkarıyor.",
+              en: "The opening screen drops the user directly into a nearby service network. Live density on the map and category-first entry points make discovery feel immediate across towing and roadside services."
+            }
+          },
+          {
+            src: "images/transporter2.png",
+            title: { tr: "Mobil Ürün Dili ve Mağaza Sunumu", en: "Mobile Product Language and Store Presentation" },
+            desc: {
+              tr: "Bu görsel, ürünün sadece fonksiyonel değil aynı zamanda mağaza vitrini için de hazırlandığını gösteriyor. Hız ve kullanım kolaylığı, App Store yaratıcılarında doğrudan vurgulanmış.",
+              en: "This visual shows that the product is shaped not only for functionality, but also for store-facing presentation. Speed and ease of use are framed directly in the App Store creative."
+            }
+          },
+          {
+            src: "images/transporter3.png",
+            title: { tr: "Küresel Ağ Görünürlüğü", en: "Worldwide Network Visibility" },
+            desc: {
+              tr: "Nakliye modu dünya çapında kurum kapsamasını gösteren daha geniş bir ağ görünümü sunuyor. Avrupa, Amerika ve Türkiye üzerindeki dağılım, ürünün yerel kullanımın ötesine uzanan bir platform mantığıyla düşünüldüğünü hissettiriyor.",
+              en: "The freight mode expands into a wider network view that communicates international provider coverage. The distribution across Europe, America, and Turkey frames the product as a platform rather than a purely local utility."
+            }
+          },
+          {
+            src: "images/transporter4.png",
+            title: { tr: "Nakliye Arama ve Aksiyon Paneli", en: "Freight Search and Action Panel" },
+            desc: {
+              tr: "Kategori ve alt kategori filtreleriyle kullanıcıyı doğrudan uygun nakliyeci listesine indiriyor. Kart içi arama, mesaj, form görüntüleme ve şikayet akışları aynı yüzeyde birleşiyor.",
+              en: "Category and subcategory filters take the user straight into an appropriate freight list. Call, message, review, and complaint actions are surfaced together inside the same card interaction model."
+            }
+          },
+          {
+            src: "images/transporter5.png",
+            title: { tr: "Ayarlar, Favoriler ve Şikayet Geçmişi", en: "Settings, Favorites, and Complaint History" },
+            desc: {
+              tr: "Ayarlar ekranı geçmiş siparişler, favori firmalar ve bırakılan değerlendirmeler gibi ilişkiyi uzun vadeye taşıyan parçaları içeriyor. Bu yapı ürünü tek seferlik aramadan düzenli kullanıma taşıyor.",
+              en: "The settings area includes past orders, favorite providers, and submitted ratings, extending the experience beyond a one-off search. That structure turns the app into a repeat-use service layer."
+            }
+          },
+          {
+            src: "images/transporter6.png",
+            title: { tr: "Şarj İstasyonu Keşfi", en: "Charging Station Discovery" },
+            desc: {
+              tr: "Şarj akışı, istasyon ve mobil şarj ayrımını netleştirirken kayıtlı kurumlara hızlı geri dönüş imkanı veriyor. Aynı tasarım sistemi farklı hizmet modlarına uyarlanarak ürün bütünlüğü korunuyor.",
+              en: "The charging flow distinguishes stations from mobile charging while making it easy to return to saved providers. The same design system adapts across service modes without losing product cohesion."
+            }
+          },
+          {
+            src: "images/transporter7.png",
+            title: { tr: "Yolcu Taşıma ve VIP Transfer", en: "Passenger Transport and VIP Transfer" },
+            desc: {
+              tr: "Yolcu taşıma görünümü, minibus/otobüs/VIP gibi seçenekleri aynı harita ve kart sistemiyle sunuyor. Böylece ürün yalnızca yük odaklı değil, hareketin farklı senaryolarına açılan çok modlu bir ağ haline geliyor.",
+              en: "The passenger transport view brings minibus, bus, and VIP transfer options into the same map-and-card system. That turns the product into a multi-modal mobility network rather than a freight-only experience."
+            }
+          }
+        ]
+      },
+
       bmc: {
         id: "bmc",
         icon: "💬",
