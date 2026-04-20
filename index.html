@@ -532,6 +532,12 @@
         gap: 0.85rem;
         overflow-x: auto;
         padding-bottom: 0.2rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        display: none;
       }
 
       .language-control {
@@ -568,6 +574,67 @@
       .skills-grid,
       .contact-band {
         grid-template-columns: 1fr;
+      }
+
+      .quick-links {
+        gap: 0.55rem;
+      }
+
+      .btn {
+        min-height: 2.85rem;
+        font-size: 0.93rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .hero {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+      }
+
+      .section {
+        padding-top: 2.6rem;
+        padding-bottom: 2.6rem;
+      }
+
+      .section-header h2 {
+        font-size: 1.65rem;
+      }
+
+      .quick-links {
+        gap: 0.5rem;
+      }
+
+      .btn {
+        flex: 1 1 calc(50% - 0.25rem);
+        justify-content: center;
+        font-size: 0.88rem;
+        padding: 0.7rem 0.65rem;
+      }
+
+      .btn:first-child {
+        flex: 1 1 100%;
+      }
+
+      .hero-summary {
+        font-size: 0.97rem;
+      }
+
+      .research-card img {
+        height: 9rem;
+      }
+
+      .engineering-card img {
+        height: 7rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 0.5rem;
       }
     }
   </style>
@@ -616,7 +683,8 @@
         </p>
 
         <div class="quick-links" aria-label="Quick links">
-          <a class="btn" href="SelmanYilmaz_CV.pdf" download data-i18n="cvButton">Download CV</a>
+          <a class="btn" href="public/SelmanYilmaz_CV_2026.pdf" download data-i18n="cvButton">Download CV</a>
+          <a class="btn secondary" href="public/SelmanYilmaz_Transcript_2026.pdf" download data-i18n="transcriptButton">Download Transcript</a>
           <a class="btn secondary" href="https://www.linkedin.com/in/mehmet-selman-y%C4%B1lmaz-76b34017b/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn secondary" href="https://github.com/mesely" target="_blank" rel="noopener">GitHub</a>
           <a class="btn secondary" href="mailto:selman.yilmaz@sabanciuniv.edu">Email</a>
@@ -740,6 +808,7 @@
         heroMetric: "CGPA 3.58 | Researcher in NLP, Network Science & Computational Social Science.",
         heroSummary: "I build research-oriented AI systems for low-resource NLP, political text analysis, and human-centered assistive interfaces, with a focus on rigorous evaluation and deployable software.",
         cvButton: "Download CV",
+        transcriptButton: "Download Transcript",
         focusTitle: "Research Focus",
         focusOne: "Low-resource and imbalanced NLP",
         focusTwo: "Multi-agent ensemble learning",
@@ -888,6 +957,7 @@
         heroMetric: "CGPA 3.58 | NLP, Ağ Bilimi ve Hesaplamalı Sosyal Bilimler araştırmacısı.",
         heroSummary: "Düşük kaynaklı NLP, politik metin analizi ve insan odaklı erişilebilirlik arayüzleri için araştırma odaklı AI sistemleri geliştiriyorum.",
         cvButton: "CV İndir",
+        transcriptButton: "Transkript İndir",
         focusTitle: "Araştırma Odağı",
         focusOne: "Düşük kaynaklı ve dengesiz NLP",
         focusTwo: "Çok ajanlı ensemble öğrenme",
@@ -924,6 +994,7 @@
         heroMetric: "CGPA 3.58 | Forschung in NLP, Netzwerkwissenschaft und Computational Social Science.",
         heroSummary: "Forschungsorientierte KI-Systeme für ressourcenarmes NLP, politische Textanalyse und barriereorientierte Assistenzschnittstellen.",
         cvButton: "Akademischen CV herunterladen",
+        transcriptButton: "Transkript herunterladen",
         focusTitle: "Forschungsschwerpunkte",
         focusOne: "Ressourcenarmes und unausgewogenes NLP",
         focusTwo: "Multi-Agent-Ensemble-Lernen",
@@ -958,6 +1029,7 @@
         heroMetric: "CGPA 3.58 | Recherche en NLP, science des réseaux et sciences sociales computationnelles.",
         heroSummary: "Je développe des systèmes d'IA orientés recherche pour le NLP à faibles ressources, l'analyse politique et les interfaces d'assistance accessibles.",
         cvButton: "Télécharger le CV académique",
+        transcriptButton: "Télécharger le relevé de notes",
         focusTitle: "Axes de recherche",
         focusOne: "NLP à faibles ressources et données déséquilibrées",
         focusTwo: "Apprentissage d'ensembles multi-agents",
@@ -992,6 +1064,7 @@
         heroMetric: "CGPA 3.58 | Onderzoeker in NLP, netwerkwetenschap en computationele sociale wetenschap.",
         heroSummary: "Ik bouw onderzoeksgerichte AI-systemen voor low-resource NLP, politieke tekstanalyse en mensgerichte assistieve interfaces.",
         cvButton: "Academisch CV downloaden",
+        transcriptButton: "Transcript downloaden",
         focusTitle: "Onderzoeksfocus",
         focusOne: "Low-resource en onevenwichtige NLP",
         focusTwo: "Multi-agent ensemble learning",
@@ -1026,6 +1099,7 @@
         heroMetric: "CGPA 3.58 | Forsker i NLP, netværksvidenskab og computational social science.",
         heroSummary: "Jeg bygger forskningsorienterede AI-systemer til low-resource NLP, politisk tekstanalyse og menneskecentrerede assistive interfaces.",
         cvButton: "Download akademisk CV",
+        transcriptButton: "Download karakterudskrift",
         focusTitle: "Forskningsfokus",
         focusOne: "Low-resource og ubalanceret NLP",
         focusTwo: "Multi-agent ensemble learning",
@@ -1060,6 +1134,7 @@
         heroMetric: "CGPA 3.58 | Forskare inom NLP, nätverksvetenskap och computational social science.",
         heroSummary: "Jag bygger forskningsorienterade AI-system för low-resource NLP, politisk textanalys och människocentrerade assistiva gränssnitt.",
         cvButton: "Ladda ner akademiskt CV",
+        transcriptButton: "Ladda ner betygsutdrag",
         focusTitle: "Forskningsfokus",
         focusOne: "Low-resource och obalanserad NLP",
         focusTwo: "Multi-agent ensemble learning",
@@ -1094,6 +1169,7 @@
         heroMetric: "CGPA 3.58 | Tutkimus NLP:ssä, verkostotieteessä ja laskennallisissa yhteiskuntatieteissä.",
         heroSummary: "Rakennan tutkimuslähtöisiä AI-järjestelmiä low-resource NLP:hen, poliittiseen tekstianalyysiin ja ihmiskeskeisiin esteettömyysratkaisuihin.",
         cvButton: "Lataa akateeminen CV",
+        transcriptButton: "Lataa opintorekisteriote",
         focusTitle: "Tutkimusfokus",
         focusOne: "Low-resource ja epätasapainoinen NLP",
         focusTwo: "Multi-agent ensemble learning",
