@@ -994,6 +994,74 @@
         ]
       },
 
+      polieco: {
+        id: "polieco",
+        icon: "🏛️",
+        title: { tr: "PoliEcoTRNetworSci – TBMM Politik Ekonomi Ağ Analizi", en: "PoliEcoTRNetworSci — TBMM Political Economy Network Analysis" },
+        company: { tr: "Akademik Araştırma Projesi", en: "Academic Research Project" },
+        period: "Oca 2026 – Devam ediyor / Jan 2026 – Present",
+        location: "Sabancı Üniversitesi, İstanbul / Sabancı University, Istanbul",
+        description: {
+          tr: "TBMM konuşmalarından yönlü ve işaretli parti ağları, kavram ağları ve aylık makro paneller üreten bir siyasi ekonomi araştırma pipeline’ı geliştirdim. NetworkX tabanlı ağ üretimini, hipotez testlerini, ekonomi verileriyle eşleştirmeyi ve insan etiketli model doğrulama akışını tek bir yeniden üretilebilir çalışma setinde birleştirdim.",
+          en: "Built a political economy research pipeline that turns TBMM speeches into signed directed inter-party networks, concept networks, and monthly macro panels. The stack combines NetworkX-based graph construction, hypothesis testing, macro-data integration, and human-annotated model validation in one reproducible workflow."
+        },
+        tech: ["Python", "NetworkX", "Pandas", "Statsmodels", "Matplotlib", "NLP", "TBMM", "Political Economy", "AutoBEME"],
+        overview: {
+          title: { tr: "Özet", en: "Summary" },
+          text: {
+            tr: "Bu projede amaç, meclis söylemini sadece metin olarak değil, zaman içinde değişen siyasi etkileşim ağı olarak okumaktı. Bu yüzden konuşmalardan kim kimi destekliyor, kim kimi hedef alıyor, hangi kavramlar ekonomi ve reform tartışmalarını taşıyor, bunlar finansal stres ve kur hareketleriyle birlikte nasıl hareket ediyor sorularını tek bir ölçüm çerçevesinde topladım. Sonuçta sadece güzel ağ görselleri değil, hipotez kurulabilen ve rapora taşınabilen bir araştırma paketi ortaya çıktı.",
+            en: "The goal was to read parliamentary speech not just as text, but as a changing political interaction network over time. I turned debates into a measurement framework that asks who supports whom, who attacks whom, which concepts carry economic and reform framing, and how those patterns move with financial stress and FX dynamics. The result is not just a set of polished network visualizations, but a full research package that supports testable hypotheses and publication-style reporting."
+          }
+        },
+        responsibilities: {
+          tr: [
+            "TBMM konuşmalarından parti -> parti yönlü ve işaretli ağları, kavram ağlarını ve yıllık/dönemlik alt ağları üreten veri pipeline’ını kurdum.",
+            "Closeness, betweenness, PageRank, reciprocity, konu sahipliği ve semantik mesafe gibi ölçüleri ekonomi verileri ve olay pencereleriyle eşleştiren istatistiksel analiz katmanını geliştirdim.",
+            "Model seçimini savunmak için insan etiketli gold set, çok-modelli karşılaştırma ve AutoBEME/BERT tabanlı doğrulama notebook’ları hazırladım."
+          ],
+          en: [
+            "Built the data pipeline that converts TBMM transcripts into signed directed party-to-party graphs, concept networks, and yearly/term-level subgraphs.",
+            "Developed the statistical layer that links closeness, betweenness, PageRank, reciprocity, topic ownership, and semantic distance to macro indicators and event windows.",
+            "Prepared human-annotated gold sets, model-comparison notebooks, and AutoBEME/BERT validation workflows to make model selection defensible."
+          ]
+        },
+        kpis: [
+          { label: { tr: "Kapsam", en: "Coverage" }, value: "TBMM 22–28. dönem" },
+          { label: { tr: "Ana katman", en: "Core layers" }, value: "Directed + Bipartite + Macro" },
+          { label: { tr: "Doğrulama", en: "Validation" }, value: "733-row annotation pack" }
+        ],
+        images: [
+          {
+            title: { tr: "Yönlü Parti Akışları", en: "Directed Inter-Party Flows" },
+            desc: {
+              tr: "Pozitif destek ve negatif saldırı ağlarını aynı çerçevede kurarak hangi partinin hedef düğüm, hangisinin saldırı kaynağı olduğunu görünür hale getirdim. Bu katman, kutuplaşmanın yalnızca konuşma hacmiyle değil, yönlü siyasi akışlarla ölçülmesini sağladı.",
+              en: "I modeled positive support and negative attack flows in the same frame to show which party acts as the main target and which one drives outgoing attacks. This layer measures polarization through directional political flow rather than raw speech volume."
+            }
+          },
+          {
+            title: { tr: "Parti Rolleri ve Merkezilik", en: "Party Roles and Centrality" },
+            desc: {
+              tr: "Ağın hangi tarafında baskın hedefleme, hangi tarafta köprü rolü ve hangi düğümde negatif baskı biriktiğini weighted targeting, betweenness ve PageRank ile özetledim. Böylece ağ metrikleri doğrudan siyasi yorum üretir hale geldi.",
+              en: "Summarized where outgoing pressure, brokerage, and incoming negative load accumulate using weighted targeting, betweenness, and PageRank. That turns graph metrics into directly interpretable political roles."
+            }
+          },
+          {
+            title: { tr: "Aylık Söylem-Makro Paneli", en: "Monthly Discourse-Macro Panel" },
+            desc: {
+              tr: "Aylık panelde ekonomi, reform, kriz, demokrasi ve anayasa çerçevelerini makro volatilite, finansal stres ve kur hareketleriyle birlikte izledim. Bu yapı, ağ ölçümlerini sadece statik grafik olmaktan çıkarıp zaman serisi hipotez testine taşıdı.",
+              en: "The monthly panel tracks economy, reform, crisis, democracy, and constitutional framing alongside macro volatility, financial stress, and FX movement. This turns the graphs from static visuals into a time-series hypothesis-testing setup."
+            }
+          },
+          {
+            title: { tr: "Yönlü Hipotez Testleri", en: "Directed Hypothesis Tests" },
+            desc: {
+              tr: "Directed ağdan türetilen değişkenleri Newey-West katsayılarıyla test ederek hangi siyasi ilişki desenlerinin gerçekten ekonomik stres ve semantik ayrışma ile bağlantılı olduğunu ayırdım. Görsel, ağ anlatısını nicel kanıt katmanına bağlayan son adımı gösteriyor.",
+              en: "Used Newey-West regression estimates on directed-network variables to separate which political interaction patterns are actually linked to financial stress and semantic divergence. This figure is the bridge from network storytelling to quantitative evidence."
+            }
+          }
+        ]
+      },
+
       music: {
         id: "music",
         icon: "🎵",
