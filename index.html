@@ -1,834 +1,1137 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mehmet Selman Yılmaz - Portfolio</title>
+  <title>Mehmet Selman Yılmaz | Academic Portfolio</title>
+  <meta
+    name="description"
+    content="Academic portfolio of Mehmet Selman Yılmaz, B.Sc. Computer Science Senior at Sabancı University, focused on NLP, AI, Network Science, and Computational Social Science."
+  />
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      letter-spacing: 0;
+    }
 
-    :root{
-      --g1:#667eea;
-      --g2:#764ba2;
-      --g3:#f093fb;
+    :root {
+      --ink: #1f2328;
+      --muted: #5f6670;
+      --paper: #ffffff;
+      --soft: #f6f7f5;
+      --soft-2: #ecefed;
+      --line: #d9dfdc;
+      --accent: #006b5f;
+      --accent-2: #9b4f2f;
+      --accent-soft: #e7f2ef;
+      --radius: 8px;
+      --shadow: 0 16px 36px rgba(31, 35, 40, 0.08);
+    }
 
-      --text:#1a1a1a;
-      --muted:#666;
-      --bg:#ffffff;
-      --bg-soft:#f8f9fa;
-
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      --shadow-hover: 0 20px 40px rgba(102, 126, 234, 0.2);
-      --radius: 20px;
-      --radius-sm: 12px;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    /* ===== Language Switch (Top Right) ===== */
-    .lang-switch{
-      position: fixed;
-      top: 2rem;
-      right: 2rem;
-      z-index: 1000;
-      display: inline-flex;
-      gap: .5rem;
-      padding: .45rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,.75);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0,0,0,.06);
-      box-shadow: 0 10px 22px rgba(0,0,0,.08);
-    }
-    .lang-btn{
-      border: none;
-      cursor: pointer;
-      padding: .55rem .9rem;
-      border-radius: 999px;
-      font-weight: 800;
-      font-size: .9rem;
-      color: var(--muted);
-      background: transparent;
-      transition: all .2s ease;
-    }
-    .lang-btn:hover{
-      background: rgba(102,126,234,.10);
-      color: var(--g2);
-    }
-    .lang-btn.active{
-      background: linear-gradient(135deg, var(--g1), var(--g2));
-      color: #fff;
-      box-shadow: 0 10px 18px rgba(102,126,234,.18);
-    }
-
-    /* Hamburger Menu Button */
-    .menu-btn {
-      position: fixed;
-      top: 2rem;
-      left: 2rem;
-      z-index: 1000;
-      background: linear-gradient(135deg, var(--g1), var(--g2));
-      border: none;
-      padding: 1rem;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-      transition: all 0.3s;
-    }
-    .menu-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-    }
-    .menu-btn span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background: #fff;
-      margin: 5px 0;
-      border-radius: 3px;
-      transition: all 0.3s;
-    }
-    .menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
-    .menu-btn.active span:nth-child(2) { opacity: 0; }
-    .menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
-
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      left: -350px;
-      top: 0;
-      width: 350px;
-      height: 100vh;
-      background: linear-gradient(180deg, var(--g1) 0%, var(--g2) 50%, var(--g3) 100%);
-      z-index: 999;
-      transition: left 0.4s ease;
-      box-shadow: 5px 0 30px rgba(0, 0, 0, 0.1);
-      overflow-y: auto;
-    }
-    .sidebar.active { left: 0; }
-    .sidebar-content { padding: 6rem 2rem 2rem; }
-    .sidebar h2 {
-      color: #fff;
-      font-size: 1.8rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-    .nav-links { list-style: none; margin-bottom: 3rem; }
-    .nav-links li { margin-bottom: 1rem; }
-    .nav-links a {
-      display: block;
-      color: #fff;
-      text-decoration: none;
-      padding: 1rem 1.5rem;
-      border-radius: 10px;
-      transition: all 0.3s;
-      font-size: 1.1rem;
-      font-weight: 500;
-    }
-    .nav-links a:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateX(10px);
-    }
-
-    .sidebar-contact {
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      padding-top: 2rem;
-    }
-    .sidebar-contact h3 {
-      color: #fff;
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-    }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.8rem;
-      margin-bottom: 0.8rem;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      transition: all 0.3s;
-    }
-    .contact-item:hover { background: rgba(255, 255, 255, 0.2); }
-    .contact-item svg {
-      width: 20px;
-      height: 20px;
-      fill: #fff;
-      flex-shrink: 0;
-    }
-    .contact-item a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.9rem;
-      word-break: break-word;
-    }
-
-    /* Overlay */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 998;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s;
-    }
-    .overlay.active { opacity: 1; visibility: visible; }
-
-    /* Hero */
-    .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem 5%;
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before{
-      content:"";
-      position:absolute;
-      width: 900px;
-      height: 900px;
-      left: 50%;
-      top: 40%;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(circle at center, rgba(102,126,234,.18), rgba(118,75,162,.12), rgba(240,147,251,.06), transparent 70%);
-      filter: blur(10px);
-      pointer-events:none;
-    }
-    .hero h1 {
-      font-size: 4.5rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--g1), var(--g2), var(--g3));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-size: 200% 200%;
-      animation: gradient 4s ease infinite;
-      z-index: 1;
-    }
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .hero .subtitle {
-      font-size: 1.8rem;
-      color: var(--g1);
-      font-weight: 600;
-      margin-bottom: 1rem;
-      z-index: 1;
-    }
-    .hero .description {
-      font-size: 1.2rem;
-      color: var(--muted);
-      max-width: 780px;
-      line-height: 1.7;
-      z-index: 1;
+      overflow-x: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
     }
 
-    /* Projects */
-    .projects {
-      padding: 6rem 5%;
-      background: var(--bg-soft);
+    img {
+      display: block;
+      max-width: 100%;
     }
-    .projects h2 {
-      text-align: center;
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--g1), var(--g2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
-    .projects .lead {
-      text-align: center;
-      color: var(--muted);
-      max-width: 900px;
-      margin: 0 auto 3rem;
-      line-height: 1.7;
-      font-size: 1.05rem;
-    }
-    .projects-grid {
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-      gap: 2.5rem;
-      max-width: 1400px;
-      margin: 0 auto;
+      grid-template-columns: auto 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 0.85rem 5%;
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
     }
-    .project-card {
-      background: #ffffff;
+
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border: 1px solid var(--ink);
       border-radius: var(--radius);
-      overflow: hidden;
-      transition: all 0.4s ease;
-      cursor: pointer;
-      border: 2px solid transparent;
-      box-shadow: var(--shadow);
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 650;
+    }
+
+    .nav-links a {
+      padding: 0.35rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--ink);
+      border-bottom-color: var(--accent);
       outline: none;
     }
-    .project-card:hover {
-      transform: translateY(-15px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--g2);
-    }
-    .project-card:focus-visible{
-      box-shadow: 0 0 0 4px rgba(102,126,234,.25), var(--shadow);
-      border-color: var(--g1);
+
+    .language-control {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 700;
     }
 
-    .project-image {
-      width: 100%;
-      height: 280px;
-      position: relative;
-      background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 50%, var(--g3) 100%);
-      overflow: hidden;
+    .language-control select {
+      min-width: 5.35rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 0.55rem 0.7rem;
+      font: inherit;
+      cursor: pointer;
     }
-    .project-image img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transform: scale(1.02);
-      filter: saturate(1.05) contrast(1.02);
+
+    main {
+      background: var(--paper);
     }
-    .project-image .overlay-layer{
-      position:absolute;
-      inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.35));
-      display:flex;
-      align-items:flex-end;
-      justify-content:flex-end;
-      padding: 1.2rem 1.2rem;
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.55fr);
+      gap: 3rem;
+      align-items: end;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 5.5rem 5% 4rem;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: Merriweather, Georgia, "Times New Roman", serif;
+      line-height: 1.18;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin-top: 0.7rem;
+      font-size: 4.15rem;
+    }
+
+    .subtitle {
+      margin-top: 1rem;
+      color: var(--ink);
+      font-size: 1.28rem;
+      font-weight: 750;
+    }
+
+    .metric-line {
+      margin-top: 0.8rem;
+      color: var(--accent-2);
+      font-weight: 800;
+    }
+
+    .hero-summary {
+      max-width: 760px;
+      margin-top: 1.4rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.7rem;
+    }
+
+    .btn,
+    .text-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.65rem;
+      border-radius: var(--radius);
+      font-weight: 800;
+      line-height: 1.2;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .btn {
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.75rem 1rem;
+    }
+
+    .btn.secondary {
+      border-color: var(--line);
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .btn:hover,
+    .btn:focus-visible,
+    .text-btn:hover,
+    .text-btn:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .btn.secondary:hover,
+    .btn.secondary:focus-visible {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .hero-panel {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.25rem;
+    }
+
+    .panel-label {
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .focus-list {
+      display: grid;
+      gap: 0.65rem;
+      margin-top: 0.9rem;
+      list-style: none;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .focus-list li {
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section {
+      padding: 4.8rem 5%;
+    }
+
+    .section.soft {
+      background: var(--soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(16rem, 0.65fr);
+      gap: 2.5rem;
+      align-items: end;
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      margin-top: 0.35rem;
+      font-size: 2.35rem;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1rem;
     }
 
-    /* Badge KALDIRILDI (id görünmesin diye) */
-
-    .project-icon{
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size: 1.6rem;
-      color:#fff;
-      background: rgba(255,255,255,.14);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,.22);
-      box-shadow: 0 8px 18px rgba(0,0,0,.12);
-      flex-shrink: 0;
+    .research-card,
+    .engineering-card,
+    .skill-column {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .project-content { padding: 2rem; }
-    .project-content h3 {
-      font-size: 1.6rem;
-      margin-bottom: 0.55rem;
-      color: var(--text);
-      letter-spacing: .2px;
+    .research-card img {
+      width: 100%;
+      height: 11rem;
+      object-fit: cover;
+      border-bottom: 1px solid var(--line);
+      filter: saturate(0.95) contrast(1.02);
     }
-    .project-content .company {
-      color: var(--g2);
-      font-weight: 700;
-      margin-bottom: 1rem;
-      font-size: 1.05rem;
+
+    .card-body {
+      padding: 1.25rem;
     }
-    .project-content p {
+
+    .status {
+      display: inline-flex;
+      margin-bottom: 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--accent);
+      padding: 0.26rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .research-card h3 {
+      font-size: 1.18rem;
+    }
+
+    .research-card p,
+    .engineering-card p {
       color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-      min-height: 3.4em;
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
     }
-    .project-tags {
+
+    .achievement {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .achievement strong {
+      color: var(--ink);
+    }
+
+    .keyword-row,
+    .skill-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-    .tag {
-      background: linear-gradient(135deg, var(--g1), var(--g2));
-      color: #fff;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 500;
+      gap: 0.45rem;
+      margin-top: 1rem;
     }
 
-    /* Footer */
+    .tag,
+    .skill-tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--ink);
+      padding: 0.3rem 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 760;
+    }
+
+    .engineering-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .engineering-card {
+      box-shadow: none;
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .engineering-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .engineering-card img {
+      width: 100%;
+      height: 8.5rem;
+      object-fit: cover;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .engineering-card h3 {
+      font-size: 1rem;
+    }
+
+    .text-btn {
+      margin-top: 1rem;
+      border: 1px solid var(--line);
+      color: var(--accent);
+      padding: 0.62rem 0.78rem;
+      font-size: 0.86rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-column {
+      padding: 1.25rem;
+      box-shadow: none;
+    }
+
+    .skill-column h3 {
+      font-size: 1.08rem;
+    }
+
+    .contact-band {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 2.5rem;
+      border-top: 1px solid var(--line);
+      padding-top: 1.4rem;
+    }
+
+    .contact-band p {
+      color: var(--muted);
+    }
+
     footer {
-      text-align: center;
-      padding: 3rem 5%;
-      background: #1a1a1a;
-      color: #fff;
-    }
-    footer p { margin-bottom: 0.5rem; }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 2.8rem; }
-      .hero .subtitle { font-size: 1.3rem; }
-      .hero .description { font-size: 1rem; }
-
-      .projects h2 { font-size: 2.5rem; }
-      .projects-grid { grid-template-columns: 1fr; }
-
-      .sidebar { width: 280px; left: -280px; }
-      .menu-btn { top: 1.5rem; left: 1.5rem; }
-      .lang-switch{ top: 1.5rem; right: 1.5rem; }
+      border-top: 1px solid var(--line);
+      padding: 2rem 5%;
+      background: var(--ink);
+      color: var(--paper);
     }
 
-    html { scroll-behavior: smooth; }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.9rem;
+      max-width: 1180px;
+      margin: 0 auto;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.92rem;
+    }
+
+    .footer-inner a {
+      color: #ffffff;
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 0.2rem;
+    }
+
+    @media (max-width: 1060px) {
+      .research-grid,
+      .engineering-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero,
+      .section-header {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        max-width: 680px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-header {
+        grid-template-columns: auto auto;
+      }
+
+      .nav-links {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+        gap: 0.85rem;
+        overflow-x: auto;
+        padding-bottom: 0.2rem;
+      }
+
+      .language-control {
+        justify-content: flex-end;
+      }
+
+      .language-control span {
+        display: none;
+      }
+
+      h1 {
+        font-size: 2.65rem;
+      }
+
+      .hero {
+        padding-top: 3.25rem;
+      }
+
+      .subtitle {
+        font-size: 1.1rem;
+      }
+
+      .section {
+        padding-top: 3.4rem;
+        padding-bottom: 3.4rem;
+      }
+
+      .section-header h2 {
+        font-size: 1.9rem;
+      }
+
+      .research-grid,
+      .engineering-grid,
+      .skills-grid,
+      .contact-band {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <!-- Language Switch -->
-  <div class="lang-switch" role="group" aria-label="Language switch">
-    <button class="lang-btn" id="btnTR" type="button">TR</button>
-    <button class="lang-btn" id="btnEN" type="button">EN</button>
-  </div>
+  <header class="site-header">
+    <a class="wordmark" href="#home" aria-label="Mehmet Selman Yılmaz home">MSY</a>
 
-  <!-- Hamburger Menu Button -->
-  <button class="menu-btn" id="menuBtn" aria-label="Menüyü Aç/Kapat">
-    <span></span><span></span><span></span>
-  </button>
-
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar" aria-hidden="true">
-    <div class="sidebar-content">
-      <h2 id="menuTitle">Menü</h2>
+    <nav aria-label="Primary navigation">
       <ul class="nav-links">
-        <li><a href="#home" class="nav-link" id="navHome">Ana Sayfa</a></li>
-        <li><a href="#projects" class="nav-link" id="navProjects">Projeler</a></li>
+        <li><a href="#research" data-i18n="navResearch">Research</a></li>
+        <li><a href="#engineering" data-i18n="navEngineering">Engineering</a></li>
+        <li><a href="#skills" data-i18n="navSkills">Skills</a></li>
+        <li><a href="#contact" data-i18n="navContact">Contact</a></li>
       </ul>
+    </nav>
 
-      <div class="sidebar-contact">
-        <h3 id="contactTitle">İletişim</h3>
+    <label class="language-control" for="languageSelect">
+      <span data-i18n="languageLabel">Language</span>
+      <select id="languageSelect" aria-label="Language">
+        <option value="en">EN</option>
+        <option value="tr">TR</option>
+        <option value="de">DE</option>
+        <option value="fr">FR</option>
+        <option value="nl">NL</option>
+        <option value="da">DA</option>
+        <option value="sv">SV</option>
+        <option value="fi">FI</option>
+      </select>
+    </label>
+  </header>
 
-        <div class="contact-item">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-          </svg>
-          <a href="mailto:selman.yilmaz@sabanciuniv.edu">selman.yilmaz@sabanciuniv.edu</a>
-        </div>
+  <main>
+    <section class="hero" id="home">
+      <div>
+        <p class="eyebrow" data-i18n="heroEyebrow">Academic Portfolio</p>
+        <h1>Mehmet Selman Yılmaz</h1>
+        <p class="subtitle" data-i18n="heroSubtitle">B.Sc. Computer Science Senior @ Sabancı University</p>
+        <p class="metric-line" data-i18n="heroMetric">
+          CGPA 3.58 | Researcher in NLP, Network Science &amp; Computational Social Science.
+        </p>
+        <p class="hero-summary" data-i18n="heroSummary">
+          I build research-oriented AI systems for low-resource NLP, political text analysis, and human-centered assistive interfaces, with a focus on rigorous evaluation and deployable software.
+        </p>
 
-        <div class="contact-item">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          <a href="https://github.com/mesely" target="_blank" rel="noopener">github.com/mesely</a>
-        </div>
-
-        <div class="contact-item">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-          </svg>
-          <a href="https://linkedin.com/in/mehmet-selman-yılmaz" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-
-        <div class="contact-item">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M20 10.999h-2v-2h2v2zm-4-2h-2v2h2v-2zm-4 0h-2v2h2v-2zm-4 0h-2v2h2v-2zm-4 0h-2v2h2v-2zm18-4.999v16c0 1.103-.897 2-2 2h-16c-1.103 0-2-.897-2-2v-16c0-1.103.897-2 2-2h16c1.103 0 2 .897 2 2zm-2 0h-16v16h16v-16zm-9 5.999h2v2h-2v-2zm10 2h-2v-2h2v2zm-12 4h2v2h-2v-2zm12 0h-2v2h2v2h-2v-2h-2v2h-2v-2h-2v2h-2v-2h-2v-2h2v-2h-2v-2h2v-2h2v2h2v-2h2v2h2v-2h2v2h2v2h-2v2h2v2z"/>
-          </svg>
-          <div>+90 537 408 10 74</div>
+        <div class="quick-links" aria-label="Quick links">
+          <a class="btn" href="SelmanYilmaz_CV.pdf" download data-i18n="cvButton">Download Academic CV</a>
+          <a class="btn secondary" href="https://www.linkedin.com/in/mehmet-selman-y%C4%B1lmaz-76b34017b/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn secondary" href="https://github.com/mesely" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn secondary" href="mailto:selman.yilmaz@sabanciuniv.edu">Email</a>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Overlay -->
-  <div class="overlay" id="overlay"></div>
+      <aside class="hero-panel" aria-labelledby="focusTitle">
+        <p class="panel-label" id="focusTitle" data-i18n="focusTitle">Research Focus</p>
+        <ul class="focus-list">
+          <li data-i18n="focusOne">Low-resource and imbalanced NLP</li>
+          <li data-i18n="focusTwo">Multi-agent ensemble learning</li>
+          <li data-i18n="focusThree">Dynamic signed networks in political speech</li>
+          <li data-i18n="focusFour">Human-centered AI for accessibility</li>
+        </ul>
+      </aside>
+    </section>
 
-  <!-- Hero -->
-  <section class="hero" id="home">
-    <h1>Mehmet Selman Yılmaz</h1>
-    <div class="subtitle">AI • NLP • Data Science</div>
-    <p class="description" id="heroDesc">
-      YZ Yazılım Mühendisi Adayı & Bilgisayar Bilimleri Öğrencisi<br />
-      Deep Learning | Natural Language Processing | RAG Sistemleri | Öneri Sistemleri
-    </p>
-  </section>
+    <section class="section soft" id="research">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker" data-i18n="researchKicker">Priority Section</p>
+            <h2 data-i18n="researchTitle">Research &amp; Upcoming Publications</h2>
+          </div>
+          <p class="section-lead" data-i18n="researchLead">
+            Ongoing research targeted for publication, positioned around NLP, AI, network science, and computational social science.
+          </p>
+        </div>
 
-  <!-- Projects -->
-  <section class="projects" id="projects">
-    <h2 id="projectsTitle">Projeler</h2>
-    <p class="lead" id="projectsLead">
-      CV’me uygun şekilde; öneri sistemleri, RAG tabanlı kurumsal asistanlar, NLP araştırmaları ve uçtan uca modern
-      ürün geliştirme deneyimlerimi bir araya getiren proje seçkisi.
-    </p>
+        <div class="research-grid" id="researchGrid"></div>
+      </div>
+    </section>
 
-    <div class="projects-grid" id="projectsGrid"></div>
-  </section>
+    <section class="section" id="engineering">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker" data-i18n="engineeringKicker">Selected Systems</p>
+            <h2 data-i18n="engineeringTitle">Other Engineering Projects</h2>
+          </div>
+          <p class="section-lead" data-i18n="engineeringLead">
+            Compact placeholders for additional software engineering work; titles can be edited as the portfolio evolves.
+          </p>
+        </div>
+
+        <div class="engineering-grid" id="engineeringGrid"></div>
+      </div>
+    </section>
+
+    <section class="section soft" id="skills">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker" data-i18n="skillsKicker">Technical Profile</p>
+            <h2 data-i18n="skillsTitle">Technical Skills</h2>
+          </div>
+          <p class="section-lead" data-i18n="skillsLead">
+            Research tooling and production development experience across Python, modern web stacks, and applied machine learning.
+          </p>
+        </div>
+
+        <div class="skills-grid" id="skillsGrid"></div>
+
+        <div class="contact-band" id="contact">
+          <div>
+            <p class="section-kicker" data-i18n="contactKicker">Get in touch</p>
+            <p data-i18n="contactText">Open to PhD discussions, research collaborations, and academic references.</p>
+          </div>
+          <a class="btn" href="mailto:selman.yilmaz@sabanciuniv.edu" data-i18n="contactButton">Email Mehmet Selman</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <p id="footerLine1">&copy; 2026 Mehmet Selman Yılmaz. Tüm hakları saklıdır.</p>
-    <p id="footerLine2" style="margin-top: 1rem; opacity: 0.7;">Sabancı Üniversitesi | Bilgisayar Bilimleri</p>
+    <div class="footer-inner">
+      <p data-i18n="footerCopy">© 2026 Mehmet Selman Yılmaz. All rights reserved.</p>
+      <p>
+        <a href="mailto:selman.yilmaz@sabanciuniv.edu">selman.yilmaz@sabanciuniv.edu</a>
+        <span aria-hidden="true"> · </span>
+        <a href="tel:+905374081074">+90 537 408 10 74</a>
+      </p>
+    </div>
   </footer>
 
   <script>
-    // ===== Menü Kontrolleri =====
-    const menuBtn = document.getElementById('menuBtn');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const SUPPORTED_LANGS = ["en", "tr", "de", "fr", "nl", "da", "sv", "fi"];
+    const STORAGE_KEY = "portfolioLanguageV2";
 
-    function closeMenu(){
-      menuBtn.classList.remove('active');
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-      sidebar.setAttribute('aria-hidden', 'true');
-    }
-
-    menuBtn.addEventListener('click', () => {
-      const isOpen = sidebar.classList.toggle('active');
-      menuBtn.classList.toggle('active');
-      overlay.classList.toggle('active');
-      sidebar.setAttribute('aria-hidden', String(!isOpen));
-    });
-
-    overlay.addEventListener('click', closeMenu);
-    navLinks.forEach(link => link.addEventListener('click', closeMenu));
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if(target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-
-    // ===== Dil Sistemi =====
-    const btnTR = document.getElementById("btnTR");
-    const btnEN = document.getElementById("btnEN");
-
-    const UI = {
-      menuTitle: document.getElementById("menuTitle"),
-      navHome: document.getElementById("navHome"),
-      navProjects: document.getElementById("navProjects"),
-      contactTitle: document.getElementById("contactTitle"),
-      heroDesc: document.getElementById("heroDesc"),
-      projectsTitle: document.getElementById("projectsTitle"),
-      projectsLead: document.getElementById("projectsLead"),
-      footerLine1: document.getElementById("footerLine1"),
-      footerLine2: document.getElementById("footerLine2"),
-    };
-
-    const TEXT = {
-      tr: {
-        menuTitle: "Menü",
-        navHome: "Ana Sayfa",
-        navProjects: "Projeler",
-        contactTitle: "İletişim",
-        heroDesc: "YZ Yazılım Mühendisi Adayı & Bilgisayar Bilimleri Öğrencisi<br />Deep Learning | Natural Language Processing | RAG Sistemleri | Öneri Sistemleri",
-        projectsTitle: "Projeler",
-        projectsLead: "CV’me uygun şekilde; öneri sistemleri, RAG tabanlı kurumsal asistanlar, NLP araştırmaları ve uçtan uca modern ürün geliştirme deneyimlerimi bir araya getiren proje seçkisi.",
-        footerLine1: "© 2026 Mehmet Selman Yılmaz. Tüm hakları saklıdır.",
-        footerLine2: "Sabancı Üniversitesi | Bilgisayar Bilimleri",
-        openProjectAria: (title) => `${title} projesini aç`
-      },
+    const COPY = {
       en: {
-        menuTitle: "Menu",
-        navHome: "Home",
-        navProjects: "Projects",
-        contactTitle: "Contact",
-        heroDesc: "AI Software Engineer Candidate & Computer Science Student<br />Deep Learning | Natural Language Processing | RAG Systems | Recommender Systems",
-        projectsTitle: "Projects",
-        projectsLead: "A curated set of projects aligned with my CV—recommender systems, RAG-based enterprise assistants, NLP research, and end-to-end modern product development.",
-        footerLine1: "© 2026 Mehmet Selman Yılmaz. All rights reserved.",
-        footerLine2: "Sabancı University | Computer Science",
-        openProjectAria: (title) => `Open project: ${title}`
+        navResearch: "Research",
+        navEngineering: "Engineering",
+        navSkills: "Skills",
+        navContact: "Contact",
+        languageLabel: "Language",
+        heroEyebrow: "Academic Portfolio",
+        heroSubtitle: "B.Sc. Computer Science Senior @ Sabancı University",
+        heroMetric: "CGPA 3.58 | Researcher in NLP, Network Science & Computational Social Science.",
+        heroSummary: "I build research-oriented AI systems for low-resource NLP, political text analysis, and human-centered assistive interfaces, with a focus on rigorous evaluation and deployable software.",
+        cvButton: "Download Academic CV",
+        focusTitle: "Research Focus",
+        focusOne: "Low-resource and imbalanced NLP",
+        focusTwo: "Multi-agent ensemble learning",
+        focusThree: "Dynamic signed networks in political speech",
+        focusFour: "Human-centered AI for accessibility",
+        researchKicker: "Priority Section",
+        researchTitle: "Research & Upcoming Publications",
+        researchLead: "Ongoing research targeted for publication, positioned around NLP, AI, network science, and computational social science.",
+        engineeringKicker: "Selected Systems",
+        engineeringTitle: "Other Engineering Projects",
+        engineeringLead: "Compact placeholders for additional software engineering work; titles can be edited as the portfolio evolves.",
+        skillsKicker: "Technical Profile",
+        skillsTitle: "Technical Skills",
+        skillsLead: "Research tooling and production development experience across Python, modern web stacks, and applied machine learning.",
+        contactKicker: "Get in touch",
+        contactText: "Open to PhD discussions, research collaborations, and academic references.",
+        contactButton: "Email Mehmet Selman",
+        footerCopy: "© 2026 Mehmet Selman Yılmaz. All rights reserved.",
+        detailsLabel: "View details",
+        statusLabel: "Status:",
+        achievementLabel: "Key Achievement:",
+        keywordsLabel: "Keywords:",
+        research: [
+          {
+            id: "beme",
+            cover: "images/beme2.png",
+            title: "AutoBEME – Bounty-Driven Evolutionary Market Ensembles for NLP",
+            status: "Manuscript in Preparation",
+            description: "Designed and developed a novel multi-agent ensemble framework simulating a financial market to optimize precision-recall trade-offs in low-resource multi-label classification.",
+            achievement: "Implemented Bootstrap-sampled Classifier Chains with asymmetric penalty weighting, outperforming fine-tuned BERT architectures (e.g., BERTurk) on highly imbalanced, domain-specific text datasets (Macro-F1 improvement from 0.624 to 0.640).",
+            keywords: ["Multi-agent Systems", "Classifier Chains", "Low-resource NLP", "Ensemble Learning"]
+          },
+          {
+            id: "polieco",
+            cover: "images/polieco1.png",
+            title: "Dynamic Signed Network Analysis of the Turkish Parliament (2002-2026)",
+            status: "Data Annotation & Analysis Phase (Targeting Computational Social Science venues)",
+            description: "Leading a computational social science project analyzing over two decades of parliamentary transcripts using dynamic network science.",
+            achievement: "Constructed directed, signed party-to-party networks to quantify political polarization, track cross-bloc negativity during economic crises, and test structural balance theories.",
+            keywords: ["Network Science", "Graph Theory", "Sentiment Analysis", "Political Economy"]
+          },
+          {
+            id: "echospace",
+            cover: "images/echospace1.png",
+            title: "EchoSpace-AR: AI-Driven Environmental Awareness for the Hearing Impaired",
+            status: "Active Development (HCI / AI integration)",
+            description: "Leading the AI and ensemble modeling components of a collaborative HCI project. Integrating real-time sound classification pipelines into an AR interface to provide visual environmental cues.",
+            keywords: ["Human-Centered AI", "Assistive AR", "Sound Classification", "HCI"]
+          }
+        ],
+        engineering: [
+          {
+            id: "baykar",
+            cover: "images/baykar1.png",
+            title: "Computational Personalized Ranking at Scale",
+            org: "Baykar Technology",
+            description: "Two-Tower retrieval and Wide & Deep re-ranking architecture for multi-platform personalization.",
+            tags: ["Recommender Systems", "PyTorch", "Ranking"]
+          },
+          {
+            id: "bmc",
+            cover: "images/bmc1.png",
+            title: "Knowledge-Grounded Enterprise Question Answering",
+            org: "BMC",
+            description: "Enterprise assistant combining inventory knowledge, retrieval, and structured backend integration.",
+            tags: ["Information Retrieval", "NestJS", "SAP"]
+          },
+          {
+            id: "intertech",
+            cover: "images/intertech1.png",
+            title: "Financial Text Intelligence and Retrieval Platform",
+            org: "Intertech",
+            description: "Pipeline for financial bulletins, document ingestion, SQL-backed search, and contextual answer generation.",
+            tags: ["NLP Systems", "Azure", "Node.js"]
+          },
+          {
+            id: "bluesky",
+            cover: "images/bluesky1.png",
+            title: "Topic-Aware Social Feed Generation for Turkish Discourse",
+            org: "Graduation Project",
+            description: "Real-time Turkish politics and science feed generation using AT Protocol, BERTurk, and PostgreSQL.",
+            tags: ["BERTurk", "AT Protocol", "PostgreSQL"]
+          },
+          {
+            id: "chefinpocket",
+            cover: "images/chefinpocket1.png",
+            title: "Full-Stack Meal Planning Application",
+            org: "Sabancı University",
+            description: "Flutter and microservice-based food planning system with recipe discovery and guided cooking flows.",
+            tags: ["Flutter", "Microservices", "Docker"]
+          },
+          {
+            id: "music",
+            cover: "images/music1.png",
+            title: "Music Emotion Recognition with Attention Pooling",
+            org: "Deep Learning Project",
+            description: "Log-mel CNN with attention pooling for valence-arousal prediction on DEAM.",
+            tags: ["CNN", "Attention", "PyTorch"]
+          },
+          {
+            id: "influencer",
+            cover: "images/influencer1.png",
+            title: "Influencer Segmentation and Engagement Modeling",
+            org: "Applied ML Project",
+            description: "Stacking classifier and Random Forest regressor for noisy, imbalanced social media data.",
+            tags: ["SMOTE", "Stacking", "Regression"]
+          },
+          {
+            id: "arastirma",
+            cover: "images/arastirma1.png",
+            title: "Intent Detection and Slot Filling for Dialogue",
+            org: "NLP Research Project",
+            description: "Joint intent and slot optimization using Slot-Gated BiLSTM and Turkish text features.",
+            tags: ["NLP", "BiLSTM", "FastText"]
+          }
+        ],
+        skills: [
+          { title: "Research / AI", items: ["PyTorch", "Hugging Face", "Scikit-learn", "NetworkX", "NLP"] },
+          { title: "Development", items: ["Python", "TypeScript", "React", "Flutter", "C++"] },
+          { title: "Methods", items: ["Graph Theory", "Classifier Chains", "Information Retrieval", "Statistical Modeling", "Evaluation Design"] }
+        ]
+      },
+      tr: {
+        navResearch: "Araştırma",
+        navEngineering: "Mühendislik",
+        navSkills: "Yetenekler",
+        navContact: "İletişim",
+        languageLabel: "Dil",
+        heroEyebrow: "Akademik Portfolyo",
+        heroSubtitle: "B.Sc. Bilgisayar Bilimleri Son Sınıf @ Sabancı Üniversitesi",
+        heroMetric: "CGPA 3.58 | NLP, Ağ Bilimi ve Hesaplamalı Sosyal Bilimler araştırmacısı.",
+        heroSummary: "Düşük kaynaklı NLP, politik metin analizi ve insan odaklı erişilebilirlik arayüzleri için araştırma odaklı AI sistemleri geliştiriyorum.",
+        cvButton: "Akademik CV İndir",
+        focusTitle: "Araştırma Odağı",
+        focusOne: "Düşük kaynaklı ve dengesiz NLP",
+        focusTwo: "Çok ajanlı ensemble öğrenme",
+        focusThree: "Politik söylemde dinamik işaretli ağlar",
+        focusFour: "Erişilebilirlik için insan odaklı AI",
+        researchKicker: "Öncelikli Bölüm",
+        researchTitle: "Araştırmalar ve Yaklaşan Yayınlar",
+        researchLead: "NLP, AI, ağ bilimi ve hesaplamalı sosyal bilimler ekseninde yayına hedeflenen devam eden araştırmalar.",
+        engineeringKicker: "Seçili Sistemler",
+        engineeringTitle: "Diğer Mühendislik Projeleri",
+        engineeringLead: "Ek yazılım mühendisliği işleri için kompakt alan; başlıklar portfolyo geliştikçe kolayca düzenlenebilir.",
+        skillsKicker: "Teknik Profil",
+        skillsTitle: "Teknik Yetenekler",
+        skillsLead: "Python, modern web teknolojileri ve uygulamalı makine öğrenmesi boyunca araştırma ve üretim deneyimi.",
+        contactKicker: "İletişime geç",
+        contactText: "PhD görüşmeleri, araştırma iş birlikleri ve akademik referans konuşmaları için açığım.",
+        contactButton: "Mehmet Selman'a E-posta Gönder",
+        footerCopy: "© 2026 Mehmet Selman Yılmaz. Tüm hakları saklıdır.",
+        detailsLabel: "Detayları aç",
+        statusLabel: "Durum:",
+        achievementLabel: "Temel Çıktı:",
+        keywordsLabel: "Anahtar Kelimeler:"
+      },
+      de: {
+        navResearch: "Forschung",
+        navEngineering: "Engineering",
+        navSkills: "Kompetenzen",
+        navContact: "Kontakt",
+        languageLabel: "Sprache",
+        heroEyebrow: "Akademisches Portfolio",
+        heroSubtitle: "B.Sc. Informatik, Abschlussjahr @ Sabancı University",
+        heroMetric: "CGPA 3.58 | Forschung in NLP, Netzwerkwissenschaft und Computational Social Science.",
+        heroSummary: "Forschungsorientierte KI-Systeme für ressourcenarmes NLP, politische Textanalyse und barriereorientierte Assistenzschnittstellen.",
+        cvButton: "Akademischen CV herunterladen",
+        focusTitle: "Forschungsschwerpunkte",
+        focusOne: "Ressourcenarmes und unausgewogenes NLP",
+        focusTwo: "Multi-Agent-Ensemble-Lernen",
+        focusThree: "Dynamische signierte Netzwerke in politischer Sprache",
+        focusFour: "Menschzentrierte KI für Barrierefreiheit",
+        researchKicker: "Priorität",
+        researchTitle: "Forschung & kommende Publikationen",
+        researchLead: "Laufende, publikationsorientierte Forschung in NLP, KI, Netzwerkwissenschaft und Computational Social Science.",
+        engineeringKicker: "Ausgewählte Systeme",
+        engineeringTitle: "Weitere Engineering-Projekte",
+        engineeringLead: "Kompakte Platzhalter für zusätzliche Softwareprojekte.",
+        skillsKicker: "Technisches Profil",
+        skillsTitle: "Technische Kompetenzen",
+        skillsLead: "Forschungstools und Entwicklungserfahrung mit Python, modernen Web-Stacks und angewandtem ML.",
+        contactKicker: "Kontakt",
+        contactText: "Offen für PhD-Gespräche, Forschungskooperationen und akademische Referenzen.",
+        contactButton: "E-Mail senden",
+        footerCopy: "© 2026 Mehmet Selman Yılmaz. Alle Rechte vorbehalten.",
+        detailsLabel: "Details ansehen",
+        statusLabel: "Status:",
+        achievementLabel: "Wichtigstes Ergebnis:",
+        keywordsLabel: "Schlüsselwörter:"
+      },
+      fr: {
+        navResearch: "Recherche",
+        navEngineering: "Ingénierie",
+        navSkills: "Compétences",
+        navContact: "Contact",
+        languageLabel: "Langue",
+        heroEyebrow: "Portfolio académique",
+        heroSubtitle: "B.Sc. Informatique, dernière année @ Sabancı University",
+        heroMetric: "CGPA 3.58 | Recherche en NLP, science des réseaux et sciences sociales computationnelles.",
+        heroSummary: "Je développe des systèmes d'IA orientés recherche pour le NLP à faibles ressources, l'analyse politique et les interfaces d'assistance accessibles.",
+        cvButton: "Télécharger le CV académique",
+        focusTitle: "Axes de recherche",
+        focusOne: "NLP à faibles ressources et données déséquilibrées",
+        focusTwo: "Apprentissage d'ensembles multi-agents",
+        focusThree: "Réseaux signés dynamiques dans le discours politique",
+        focusFour: "IA centrée humain pour l'accessibilité",
+        researchKicker: "Section prioritaire",
+        researchTitle: "Recherche & publications à venir",
+        researchLead: "Travaux en cours visant des publications en NLP, IA, science des réseaux et sciences sociales computationnelles.",
+        engineeringKicker: "Systèmes sélectionnés",
+        engineeringTitle: "Autres projets d'ingénierie",
+        engineeringLead: "Emplacements compacts pour d'autres projets logiciels.",
+        skillsKicker: "Profil technique",
+        skillsTitle: "Compétences techniques",
+        skillsLead: "Outils de recherche et développement avec Python, stacks web modernes et ML appliqué.",
+        contactKicker: "Contact",
+        contactText: "Ouvert aux discussions de doctorat, collaborations de recherche et références académiques.",
+        contactButton: "Envoyer un e-mail",
+        footerCopy: "© 2026 Mehmet Selman Yılmaz. Tous droits réservés.",
+        detailsLabel: "Voir les détails",
+        statusLabel: "Statut :",
+        achievementLabel: "Résultat clé :",
+        keywordsLabel: "Mots-clés :"
+      },
+      nl: {
+        navResearch: "Onderzoek",
+        navEngineering: "Engineering",
+        navSkills: "Vaardigheden",
+        navContact: "Contact",
+        languageLabel: "Taal",
+        heroEyebrow: "Academisch portfolio",
+        heroSubtitle: "B.Sc. Computer Science laatstejaars @ Sabancı University",
+        heroMetric: "CGPA 3.58 | Onderzoeker in NLP, netwerkwetenschap en computationele sociale wetenschap.",
+        heroSummary: "Ik bouw onderzoeksgerichte AI-systemen voor low-resource NLP, politieke tekstanalyse en mensgerichte assistieve interfaces.",
+        cvButton: "Academisch CV downloaden",
+        focusTitle: "Onderzoeksfocus",
+        focusOne: "Low-resource en onevenwichtige NLP",
+        focusTwo: "Multi-agent ensemble learning",
+        focusThree: "Dynamische signed networks in politieke taal",
+        focusFour: "Mensgerichte AI voor toegankelijkheid",
+        researchKicker: "Prioriteit",
+        researchTitle: "Onderzoek & aankomende publicaties",
+        researchLead: "Lopend onderzoek gericht op publicatie in NLP, AI, netwerkwetenschap en computationele sociale wetenschap.",
+        engineeringKicker: "Geselecteerde systemen",
+        engineeringTitle: "Andere engineeringprojecten",
+        engineeringLead: "Compacte placeholders voor aanvullende softwareprojecten.",
+        skillsKicker: "Technisch profiel",
+        skillsTitle: "Technische vaardigheden",
+        skillsLead: "Onderzoekstools en ontwikkelervaring met Python, moderne webstacks en toegepaste ML.",
+        contactKicker: "Contact",
+        contactText: "Open voor PhD-gesprekken, onderzoekssamenwerkingen en academische referenties.",
+        contactButton: "Stuur e-mail",
+        footerCopy: "© 2026 Mehmet Selman Yılmaz. Alle rechten voorbehouden.",
+        detailsLabel: "Details bekijken",
+        statusLabel: "Status:",
+        achievementLabel: "Belangrijkste resultaat:",
+        keywordsLabel: "Trefwoorden:"
+      },
+      da: {
+        navResearch: "Forskning",
+        navEngineering: "Engineering",
+        navSkills: "Kompetencer",
+        navContact: "Kontakt",
+        languageLabel: "Sprog",
+        heroEyebrow: "Akademisk portfolio",
+        heroSubtitle: "B.Sc. Computer Science, sidste år @ Sabancı University",
+        heroMetric: "CGPA 3.58 | Forsker i NLP, netværksvidenskab og computational social science.",
+        heroSummary: "Jeg bygger forskningsorienterede AI-systemer til low-resource NLP, politisk tekstanalyse og menneskecentrerede assistive interfaces.",
+        cvButton: "Download akademisk CV",
+        focusTitle: "Forskningsfokus",
+        focusOne: "Low-resource og ubalanceret NLP",
+        focusTwo: "Multi-agent ensemble learning",
+        focusThree: "Dynamiske signed networks i politisk tale",
+        focusFour: "Menneskecentreret AI for tilgængelighed",
+        researchKicker: "Prioritet",
+        researchTitle: "Forskning & kommende publikationer",
+        researchLead: "Igangværende forskning målrettet publikation inden for NLP, AI, netværksvidenskab og computational social science.",
+        engineeringKicker: "Udvalgte systemer",
+        engineeringTitle: "Andre engineeringprojekter",
+        engineeringLead: "Kompakte placeholders til yderligere softwareprojekter.",
+        skillsKicker: "Teknisk profil",
+        skillsTitle: "Tekniske kompetencer",
+        skillsLead: "Forskningsværktøjer og udviklingserfaring med Python, moderne webstacks og anvendt ML.",
+        contactKicker: "Kontakt",
+        contactText: "Åben for PhD-samtaler, forskningssamarbejder og akademiske referencer.",
+        contactButton: "Send e-mail",
+        footerCopy: "© 2026 Mehmet Selman Yılmaz. Alle rettigheder forbeholdes.",
+        detailsLabel: "Se detaljer",
+        statusLabel: "Status:",
+        achievementLabel: "Nøgleresultat:",
+        keywordsLabel: "Nøgleord:"
+      },
+      sv: {
+        navResearch: "Forskning",
+        navEngineering: "Engineering",
+        navSkills: "Färdigheter",
+        navContact: "Kontakt",
+        languageLabel: "Språk",
+        heroEyebrow: "Akademisk portfolio",
+        heroSubtitle: "B.Sc. Computer Science, sista året @ Sabancı University",
+        heroMetric: "CGPA 3.58 | Forskare inom NLP, nätverksvetenskap och computational social science.",
+        heroSummary: "Jag bygger forskningsorienterade AI-system för low-resource NLP, politisk textanalys och människocentrerade assistiva gränssnitt.",
+        cvButton: "Ladda ner akademiskt CV",
+        focusTitle: "Forskningsfokus",
+        focusOne: "Low-resource och obalanserad NLP",
+        focusTwo: "Multi-agent ensemble learning",
+        focusThree: "Dynamiska signed networks i politiskt tal",
+        focusFour: "Människocentrerad AI för tillgänglighet",
+        researchKicker: "Prioritet",
+        researchTitle: "Forskning & kommande publikationer",
+        researchLead: "Pågående forskning med publiceringsmål inom NLP, AI, nätverksvetenskap och computational social science.",
+        engineeringKicker: "Utvalda system",
+        engineeringTitle: "Andra engineeringprojekt",
+        engineeringLead: "Kompakta placeholders för ytterligare mjukvaruprojekt.",
+        skillsKicker: "Teknisk profil",
+        skillsTitle: "Tekniska färdigheter",
+        skillsLead: "Forskningsverktyg och utvecklingserfarenhet med Python, moderna webbstackar och tillämpad ML.",
+        contactKicker: "Kontakt",
+        contactText: "Öppen för PhD-samtal, forskningssamarbeten och akademiska referenser.",
+        contactButton: "Skicka e-post",
+        footerCopy: "© 2026 Mehmet Selman Yılmaz. Alla rättigheter förbehållna.",
+        detailsLabel: "Visa detaljer",
+        statusLabel: "Status:",
+        achievementLabel: "Nyckelresultat:",
+        keywordsLabel: "Nyckelord:"
+      },
+      fi: {
+        navResearch: "Tutkimus",
+        navEngineering: "Engineering",
+        navSkills: "Taidot",
+        navContact: "Yhteys",
+        languageLabel: "Kieli",
+        heroEyebrow: "Akateeminen portfolio",
+        heroSubtitle: "B.Sc. Computer Science, viimeinen vuosi @ Sabancı University",
+        heroMetric: "CGPA 3.58 | Tutkimus NLP:ssä, verkostotieteessä ja laskennallisissa yhteiskuntatieteissä.",
+        heroSummary: "Rakennan tutkimuslähtöisiä AI-järjestelmiä low-resource NLP:hen, poliittiseen tekstianalyysiin ja ihmiskeskeisiin esteettömyysratkaisuihin.",
+        cvButton: "Lataa akateeminen CV",
+        focusTitle: "Tutkimusfokus",
+        focusOne: "Low-resource ja epätasapainoinen NLP",
+        focusTwo: "Multi-agent ensemble learning",
+        focusThree: "Dynaamiset signed networks poliittisessa puheessa",
+        focusFour: "Ihmiskeskeinen AI esteettömyyteen",
+        researchKicker: "Prioriteetti",
+        researchTitle: "Tutkimus & tulevat julkaisut",
+        researchLead: "Julkaisuihin tähtäävä käynnissä oleva tutkimus NLP:n, AI:n, verkostotieteen ja laskennallisten yhteiskuntatieteiden alueilla.",
+        engineeringKicker: "Valitut järjestelmät",
+        engineeringTitle: "Muut engineering-projektit",
+        engineeringLead: "Kompaktit placeholderit muille ohjelmistoprojekteille.",
+        skillsKicker: "Tekninen profiili",
+        skillsTitle: "Tekniset taidot",
+        skillsLead: "Tutkimustyökalut ja kehityskokemus Pythonilla, moderneilla web-stackeilla ja sovelletulla ML:llä.",
+        contactKicker: "Ota yhteyttä",
+        contactText: "Avoin PhD-keskusteluille, tutkimusyhteistyölle ja akateemisille suosituksille.",
+        contactButton: "Lähetä sähköposti",
+        footerCopy: "© 2026 Mehmet Selman Yılmaz. Kaikki oikeudet pidätetään.",
+        detailsLabel: "Näytä tiedot",
+        statusLabel: "Tila:",
+        achievementLabel: "Keskeinen tulos:",
+        keywordsLabel: "Avainsanat:"
       }
     };
 
-    function getLang(){
-      const saved = localStorage.getItem("lang");
-      return (saved === "en" || saved === "tr") ? saved : "tr";
+    const languageSelect = document.getElementById("languageSelect");
+    const researchGrid = document.getElementById("researchGrid");
+    const engineeringGrid = document.getElementById("engineeringGrid");
+    const skillsGrid = document.getElementById("skillsGrid");
+
+    function copyFor(lang) {
+      return Object.assign({}, COPY.en, COPY[lang] || {});
     }
 
-    function setLang(lang){
-      localStorage.setItem("lang", lang);
-      applyLang(lang);
-      renderProjects(); // kart metinleri değişsin
+    function getInitialLang() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return SUPPORTED_LANGS.includes(saved) ? saved : "en";
     }
 
-    function applyLang(lang){
-      document.documentElement.lang = lang;
-      btnTR.classList.toggle("active", lang === "tr");
-      btnEN.classList.toggle("active", lang === "en");
-
-      UI.menuTitle.textContent = TEXT[lang].menuTitle;
-      UI.navHome.textContent = TEXT[lang].navHome;
-      UI.navProjects.textContent = TEXT[lang].navProjects;
-      UI.contactTitle.textContent = TEXT[lang].contactTitle;
-      UI.heroDesc.innerHTML = TEXT[lang].heroDesc;
-      UI.projectsTitle.textContent = TEXT[lang].projectsTitle;
-      UI.projectsLead.textContent = TEXT[lang].projectsLead;
-      UI.footerLine1.textContent = TEXT[lang].footerLine1;
-      UI.footerLine2.textContent = TEXT[lang].footerLine2;
-      menuBtn.setAttribute("aria-label", lang === "tr" ? "Menüyü Aç/Kapat" : "Open/Close Menu");
+    function setLanguage(lang) {
+      const nextLang = SUPPORTED_LANGS.includes(lang) ? lang : "en";
+      localStorage.setItem(STORAGE_KEY, nextLang);
+      localStorage.setItem("lang", nextLang === "tr" ? "tr" : "en");
+      document.documentElement.lang = nextLang;
+      languageSelect.value = nextLang;
+      render(nextLang);
     }
 
-    btnTR.addEventListener("click", () => setLang("tr"));
-    btnEN.addEventListener("click", () => setLang("en"));
-
-    // ===== Projeler (kapaklar: her projenin kendi ...1.png görseli) =====
-    const PROJECTS = [
-      {
-        id: "chefinpocket",
-        title_tr: "ChefInPocket",
-        title_en: "ChefInPocket",
-        company_tr: "Sabancı Üniversitesi · CS310 Takım Projesi",
-        company_en: "Sabancı University · CS310 Team Project",
-        summary_tr: "Flutter arayüzü, 6 mikroservis ve Chef AI ile tarif keşfi, malzeme özelleştirme, alışveriş listesi ve pişirme akışını birleştiren akıllı yemek planlama uygulaması.",
-        summary_en: "A smart meal-planning app that combines a Flutter interface, 6 microservices, and Chef AI for recipe discovery, ingredient customization, grocery planning, and guided cooking.",
-        tags: ["Flutter", "Microservices", "Docker"],
-        icon: "🍳",
-        cover: "images/chefinpocket1.png"
-      },
-      {
-        id: "beme",
-        title_tr: "BEME - Bounty-driven Evolutionary Market Ensemble",
-        title_en: "BEME - Bounty-driven Evolutionary Market Ensemble",
-        company_tr: "Açık Kaynak / Kişisel Proje",
-        company_en: "Open-source / Personal Project",
-        summary_tr: "Ajan marketi, Auto-Bounty, temperature-scaled logit pricing, Unified P&L ve Apocalypse Classifier Chains ile ayrıntılı matematiksel ensemble framework’ü.",
-        summary_en: "A detailed mathematical ensemble framework with agent markets, Auto-Bounty, temperature-scaled logit pricing, Unified P&L, and Apocalypse Classifier Chains.",
-        tags: ["Market Ensemble", "Math", "Research"],
-        icon: "🧬",
-        cover: "images/beme2.png"
-      },
-      {
-        id: "baykar",
-        title_tr: "Sosyal Medya Öneri Sistemi",
-        title_en: "Social Media Recommender System",
-        company: "Baykar Technology",
-        summary_tr: "Two-Tower (retrieval) + Wide & Deep (re-ranking) mimarisiyle çok platformlu kişiselleştirme.",
-        summary_en: "Multi-platform personalization with a Two-Tower retrieval model and Wide & Deep re-ranking.",
-        tags: ["Deep Learning", "Two-Tower", "PyTorch"],
-        icon: "🎯",
-        cover: "images/baykar1.png"
-      },
-      {
-        id: "influencer",
-        title_tr: "Instagram Influencer Analizi",
-        title_en: "Instagram Influencer Analytics",
-        company: "Kişisel Proje / Personal Project",
-        summary_tr: "Sınıflandırma ve engagement tahmini: stacking + RF regressor, dengesiz veri için SMOTE.",
-        summary_en: "Classification + engagement prediction using stacking, RF regressor, and SMOTE for imbalance.",
-        tags: ["Machine Learning", "SMOTE", "Stacking"],
-        icon: "📊",
-        cover: "images/influencer1.png"
-      },
-      {
-        id: "arastirma",
-        title_tr: "Intent Detection & Slot Filling",
-        title_en: "Intent Detection & Slot Filling",
-        company: "Araştırma Projesi / Research Project",
-        summary_tr: "Slot-Gated BiLSTM ile intent + slot görevlerini birlikte optimize eden NLP pipeline.",
-        summary_en: "An NLP pipeline that jointly optimizes intent and slot tasks using Slot-Gated BiLSTM.",
-        tags: ["NLP", "BiLSTM", "FastText"],
-        icon: "🗣️",
-        cover: "images/arastirma1.png"
-      },
-      {
-        id: "bmc",
-        title_tr: "SAP Envanter AI Asistanı",
-        title_en: "SAP Inventory AI Assistant",
-        company: "BMC",
-        summary_tr: "Kurumsal RAG chatbot: SAP dokümanları + vektör arama + LLM yanıt üretimi.",
-        summary_en: "Enterprise RAG chatbot: SAP docs + vector retrieval + LLM answer generation.",
-        tags: ["RAG", "NestJS", "OpenAI API"],
-        icon: "💬",
-        cover: "images/bmc1.png"
-      },
-      {
-        id: "intertech",
-        title_tr: "Finansal İçgörüler AI Chatbot",
-        title_en: "Financial Insights AI Chatbot",
-        company: "Intertech",
-        summary_tr: "RAG tabanlı finansal içgörü chatbotu: Next.js + Node.js + SQL + Azure veri pipeline.",
-        summary_en: "RAG-based financial insights chatbot: Next.js + Node.js + SQL + Azure data pipeline.",
-        tags: ["Azure", "Python", "Node.js"],
-        icon: "💰",
-        cover: "images/intertech1.png"
-      },
-      {
-        id: "sneakpeek",
-        title_tr: "SneakPeek E-Ticaret Projesi",
-        title_en: "SneakPeek E-commerce Project",
-        company: "Kişisel Proje / Personal Project",
-        summary_tr: "Mikroservis e-ticaret: NestJS + Next.js, GPT önerici, JWT auth, Kafka ve Docker.",
-        summary_en: "Microservices e-commerce: NestJS + Next.js, GPT recommender, JWT auth, Kafka, Docker.",
-        tags: ["NestJS", "Next.js", "Kafka"],
-        icon: "🛍️",
-        cover: "images/sneakpeek1.png"
-      },
-      {
-        id: "echospace",
-        title_tr: "EchoSpaceAR – AR Tabanlı Ses Farkındalığı",
-        title_en: "EchoSpaceAR — AR-based Sound Awareness",
-        company: "HCI Project",
-        summary_tr: "Unity AR arayüz + YamNet çevresel ses sınıflandırma + Whisper speech-to-text pipeline.",
-        summary_en: "Unity AR UI + YAMNet environmental sound classification + Whisper STT pipeline.",
-        tags: ["AR", "Unity", "HCI"],
-        icon: "🥽",
-        cover: "images/echo1.png"
-      },
-      {
-        id: "polieco",
-        title_tr: "PoliEcoTRNetworSci – TBMM Politik Ekonomi Ağ Analizi",
-        title_en: "PoliEcoTRNetworSci — TBMM Political Economy Network Analysis",
-        company: "Akademik Araştırma Projesi / Academic Research Project",
-        summary_tr: "TBMM konuşmalarından yönlü ve işaretli parti ağları kurup ekonomik söylem, kutuplaşma ve makro-finans ilişkilerini test ettiğim NetworkX tabanlı araştırma pipeline’ı.",
-        summary_en: "A NetworkX-based research pipeline that builds signed directed inter-party networks from TBMM speeches and tests links between economic framing, polarization, and macro-financial stress.",
-        tags: ["Python", "NetworkX", "NLP"],
-        icon: "🏛️",
-        cover: "images/polieco1.png"
-      },
-      {
-        id: "bluesky",
-        title_tr: "BlueSky Turkish Politics & Science Feed Generator",
-        title_en: "BlueSky Turkish Politics & Science Feed Generator",
-        company_tr: "Bitirme Projesi",
-        company_en: "Graduation Project",
-        summary_tr: "AT Protocol firehose, BERTurk ve Railway ile çalışan gerçek zamanlı Türkçe siyaset ve bilim akış üretim sistemi.",
-        summary_en: "A real-time Turkish politics and science feed generator built on the AT Protocol firehose, BERTurk, and Railway.",
-        tags: ["AT Protocol", "BERTurk", "Flask", "PostgreSQL"],
-        icon: "🦋",
-        cover: "images/bluesky1.png"
-      },
-      {
-        id: "music",
-        title_tr: "Music Emotion Recognition on DEAM",
-        title_en: "Music Emotion Recognition on DEAM",
-        company: "Deep Learning Project",
-        summary_tr: "Log-mel + 5sn segment CNN + attention pooling; testte MSE=0.0114, Pearson=0.721, CCC=0.689.",
-        summary_en: "Log-mel + 5s segment CNN + attention pooling; test MSE=0.0114, Pearson=0.721, CCC=0.689.",
-        tags: ["CNN", "Attention", "PyTorch"],
-        icon: "🎵",
-        cover: "images/music1.png"
-      },
-      {
-        id: "tbmm",
-        title_tr: "TBMM Siyasi-Ekonomik Ağ Analizi",
-        title_en: "TBMM Political-Economy Network Analysis",
-        company: "Sabancı Üniversitesi / Sabanci University",
-        summary_tr: "2002-2026 arasındaki 1.33M+ TBMM konuşmasını işleyip çok katmanlı ağlar, dönem dashboard’ları ve kelime alanı analizleri üreten araştırma pipeline’ı.",
-        summary_en: "A research pipeline over 1.33M+ TBMM speeches (2002-2026) for multilayer networks, term dashboards, and lexical field analysis.",
-        tags: ["Network Science", "NLP", "Political Economy"],
-        icon: "🕸️",
-        cover: "images/tbmm1.png"
-      }
-    ];
-
-    // ===== Kartları Render Et =====
-    const grid = document.getElementById("projectsGrid");
-
-    function createTag(t){
-      const span = document.createElement("span");
-      span.className = "tag";
-      span.textContent = t;
-      return span;
-    }
-
-    function renderProjects(){
-      const lang = getLang();
-      grid.innerHTML = "";
-
-      PROJECTS.forEach(p => {
-        const title = (lang === "en" ? p.title_en : p.title_tr) || p.title_tr || p.title_en || "Project";
-        const companyText = (lang === "en" ? p.company_en : p.company_tr) || p.company || p.company_tr || p.company_en || "";
-        const summary = (lang === "en" ? p.summary_en : p.summary_tr) || p.summary_tr || p.summary_en || "";
-        const ariaLabel = TEXT[lang].openProjectAria(title);
-
-        const card = document.createElement("div");
-        card.className = "project-card";
-        card.tabIndex = 0;
-        card.setAttribute("role", "button");
-        card.setAttribute("aria-label", ariaLabel);
-
-        card.addEventListener("click", () => openProject(p.id));
-        card.addEventListener("keydown", (e) => {
-          if(e.key === "Enter" || e.key === " "){
-            e.preventDefault();
-            openProject(p.id);
-          }
-        });
-
-        const image = document.createElement("div");
-        image.className = "project-image";
-
-        const img = document.createElement("img");
-        img.src = p.cover;
-        img.alt = title + " cover image";
-        img.loading = "lazy";
-        img.onerror = () => {
-          img.remove(); // Görsel yoksa gradient kalsın
-        };
-
-        const overlayLayer = document.createElement("div");
-        overlayLayer.className = "overlay-layer";
-
-        // Badge kaldırıldı: sadece ikon var
-        const icon = document.createElement("div");
-        icon.className = "project-icon";
-        icon.textContent = p.icon;
-
-        image.appendChild(img);
-        overlayLayer.appendChild(icon);
-        image.appendChild(overlayLayer);
-
-        const content = document.createElement("div");
-        content.className = "project-content";
-
-        const h3 = document.createElement("h3");
-        h3.textContent = title;
-
-        const company = document.createElement("div");
-        company.className = "company";
-        company.textContent = companyText;
-
-        const desc = document.createElement("p");
-        desc.textContent = summary;
-
-        const tags = document.createElement("div");
-        tags.className = "project-tags";
-        p.tags.forEach(t => tags.appendChild(createTag(t)));
-
-        content.appendChild(h3);
-        content.appendChild(company);
-        content.appendChild(desc);
-        content.appendChild(tags);
-
-        card.appendChild(image);
-        card.appendChild(content);
-
-        grid.appendChild(card);
+    function setTextContent(copy) {
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.getAttribute("data-i18n");
+        if (copy[key]) node.textContent = copy[key];
       });
     }
 
-    // ===== Proje Açma (Aynı Sekme) =====
-    function openProject(projectId) {
-      // Eski sistemden kalan kayıt hep Baykar'a kilitlemesin diye temizliyoruz
-      localStorage.removeItem("currentProject");
-
-      // Yeni sistem: ID ile aç
-      localStorage.setItem("currentProjectId", projectId);
-
-      // Aynı sekmede aç
-      window.location.href = "project.html";
+    function tagList(tags) {
+      return tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
     }
 
-    // İlk yükleme
-    applyLang(getLang());
-    renderProjects();
+    function renderResearch(copy) {
+      researchGrid.innerHTML = copy.research.map((item) => `
+        <article class="research-card">
+          <img src="${item.cover}" alt="${escapeHtml(item.title)}" loading="lazy" />
+          <div class="card-body">
+            <span class="status">${escapeHtml(copy.statusLabel)} ${escapeHtml(item.status)}</span>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.description)}</p>
+            ${item.achievement ? `<p class="achievement"><strong>${escapeHtml(copy.achievementLabel)}</strong> ${escapeHtml(item.achievement)}</p>` : ""}
+            <div class="keyword-row" aria-label="${escapeHtml(copy.keywordsLabel)}">
+              ${tagList(item.keywords)}
+            </div>
+            <a class="text-btn" href="project.html" data-project-id="${item.id}">${escapeHtml(copy.detailsLabel)}</a>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderEngineering(copy) {
+      engineeringGrid.innerHTML = copy.engineering.map((item) => `
+        <article class="engineering-card">
+          <img src="${item.cover}" alt="${escapeHtml(item.title)}" loading="lazy" />
+          <div class="card-body">
+            <h3>${escapeHtml(item.title)}</h3>
+            <p><strong>${escapeHtml(item.org)}</strong></p>
+            <p>${escapeHtml(item.description)}</p>
+            <div class="keyword-row">${tagList(item.tags)}</div>
+            <a class="text-btn" href="project.html" data-project-id="${item.id}">${escapeHtml(copy.detailsLabel)}</a>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderSkills(copy) {
+      skillsGrid.innerHTML = copy.skills.map((group) => `
+        <section class="skill-column">
+          <h3>${escapeHtml(group.title)}</h3>
+          <div class="skill-tags">
+            ${group.items.map((item) => `<span class="skill-tag">${escapeHtml(item)}</span>`).join("")}
+          </div>
+        </section>
+      `).join("");
+    }
+
+    function render(lang) {
+      const copy = copyFor(lang);
+      setTextContent(copy);
+      renderResearch(copy);
+      renderEngineering(copy);
+      renderSkills(copy);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest("[data-project-id]");
+      if (!link) return;
+      localStorage.setItem("currentProjectId", link.getAttribute("data-project-id"));
+    });
+
+    languageSelect.addEventListener("change", (event) => setLanguage(event.target.value));
+
+    setLanguage(getInitialLang());
   </script>
 </body>
 </html>
