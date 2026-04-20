@@ -593,6 +593,18 @@
         cover: "images/chefinpocket1.png"
       },
       {
+        id: "beme",
+        title_tr: "BEME - Bounty-driven Evolutionary Market Ensemble",
+        title_en: "BEME - Bounty-driven Evolutionary Market Ensemble",
+        company_tr: "Açık Kaynak / Kişisel Proje",
+        company_en: "Open-source / Personal Project",
+        summary_tr: "Dengesiz çok etiketli sınıflandırma için prediction market ve evrimsel seçim kullanan scikit-learn uyumlu Python kütüphanesi.",
+        summary_en: "A scikit-learn compatible Python library for imbalanced multi-label classification built on prediction markets and evolutionary selection.",
+        tags: ["Python", "Open Source", "Machine Learning"],
+        icon: "🧬",
+        cover: "images/beme1.png"
+      },
+      {
         id: "baykar",
         title_tr: "Sosyal Medya Öneri Sistemi",
         title_en: "Social Media Recommender System",
@@ -681,6 +693,18 @@
         cover: "images/polieco1.png"
       },
       {
+        id: "bluesky",
+        title_tr: "BlueSky Turkish Politics & Science Feed Generator",
+        title_en: "BlueSky Turkish Politics & Science Feed Generator",
+        company_tr: "Bitirme Projesi",
+        company_en: "Graduation Project",
+        summary_tr: "AT Protocol firehose, BERTurk ve Railway ile çalışan gerçek zamanlı Türkçe siyaset ve bilim akış üretim sistemi.",
+        summary_en: "A real-time Turkish politics and science feed generator built on the AT Protocol firehose, BERTurk, and Railway.",
+        tags: ["AT Protocol", "BERTurk", "Flask", "PostgreSQL"],
+        icon: "🦋",
+        cover: "images/bluesky1.png"
+      },
+      {
         id: "music",
         title_tr: "Music Emotion Recognition on DEAM",
         title_en: "Music Emotion Recognition on DEAM",
@@ -690,6 +714,17 @@
         tags: ["CNN", "Attention", "PyTorch"],
         icon: "🎵",
         cover: "images/music1.png"
+      },
+      {
+        id: "tbmm",
+        title_tr: "TBMM Siyasi-Ekonomik Ağ Analizi",
+        title_en: "TBMM Political-Economy Network Analysis",
+        company: "Sabancı Üniversitesi / Sabanci University",
+        summary_tr: "2002-2026 arasındaki 1.33M+ TBMM konuşmasını işleyip çok katmanlı ağlar, dönem dashboard’ları ve kelime alanı analizleri üreten araştırma pipeline’ı.",
+        summary_en: "A research pipeline over 1.33M+ TBMM speeches (2002-2026) for multilayer networks, term dashboards, and lexical field analysis.",
+        tags: ["Network Science", "NLP", "Political Economy"],
+        icon: "🕸️",
+        cover: "images/tbmm1.png"
       }
     ];
 
@@ -709,7 +744,7 @@
 
       PROJECTS.forEach(p => {
         const title = (lang === "en" ? p.title_en : p.title_tr) || p.title_tr || p.title_en || "Project";
-        const companyText = (lang === "en" ? (p.company_en || p.company) : (p.company_tr || p.company)) || "";
+        const companyText = (lang === "en" ? p.company_en : p.company_tr) || p.company || p.company_tr || p.company_en || "";
         const summary = (lang === "en" ? p.summary_en : p.summary_tr) || p.summary_tr || p.summary_en || "";
         const ariaLabel = TEXT[lang].openProjectAria(title);
 
