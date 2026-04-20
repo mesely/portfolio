@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Proje Detayı</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]]
+      },
+      svg: { fontCache: "global" }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -364,6 +374,147 @@
       .kpi-grid{ grid-template-columns: 1fr; }
     }
 
+    /* Research / math sections */
+    .detail-section{
+      background:
+        linear-gradient(135deg, rgba(102,126,234,.08), rgba(240,147,251,.08)),
+        #fff;
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+      animation: fadeInUp 0.6s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .detail-section::before{
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 999px;
+      right: -90px;
+      top: -120px;
+      background: radial-gradient(circle, rgba(102,126,234,.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .detail-section h2{
+      color: var(--g2);
+      font-size: 1.55rem;
+      margin-bottom: .65rem;
+      position: relative;
+    }
+
+    .detail-lead{
+      font-weight: 850;
+      line-height: 1.75;
+      color: #333;
+      margin-bottom: 1.1rem;
+      position: relative;
+    }
+
+    .detail-copy{
+      display: grid;
+      gap: .85rem;
+      position: relative;
+    }
+
+    .detail-copy p{
+      line-height: 1.85;
+      color: #444;
+      font-size: 1.04rem;
+    }
+
+    .detail-bullets{
+      display: grid;
+      gap: .7rem;
+      margin-top: .35rem;
+      position: relative;
+    }
+
+    .formula-grid{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .9rem;
+      margin-top: 1.25rem;
+      position: relative;
+    }
+
+    .formula-card{
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: 0 12px 24px rgba(0,0,0,.06);
+      overflow-x: auto;
+    }
+
+    .formula-label{
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 950;
+      margin-bottom: .45rem;
+      letter-spacing: .01em;
+      text-transform: uppercase;
+    }
+
+    .formula-tex{
+      min-width: max-content;
+      color: #1f2430;
+      font-size: 1.02rem;
+      line-height: 1.6;
+      padding: .25rem 0;
+    }
+
+    .table-wrap{
+      margin-top: 1.25rem;
+      overflow-x: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,.08);
+      box-shadow: 0 12px 24px rgba(0,0,0,.06);
+      position: relative;
+    }
+
+    .detail-table{
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      background: #fff;
+    }
+
+    .detail-table th,
+    .detail-table td{
+      padding: .9rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(0,0,0,.07);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    .detail-table th{
+      background: linear-gradient(135deg, rgba(102,126,234,.12), rgba(118,75,162,.12));
+      color: var(--g2);
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .detail-table tr:last-child td{
+      border-bottom: 0;
+    }
+
+    .detail-table td:first-child{
+      font-weight: 900;
+      color: #252531;
+    }
+
+    @media (max-width: 800px){
+      .detail-section{ padding: 1.45rem; }
+      .formula-grid{ grid-template-columns: 1fr; }
+      .formula-tex{ font-size: .95rem; }
+    }
+
     /* Image sections */
     .image-section {
       background: #ffffff;
@@ -694,8 +845,8 @@
         period: "Nis 2026 – Devam Ediyor",
         location: "Remote",
         description: {
-          tr: "AutoBEME, sınıflandırıcıları sanal sermayeye sahip piyasa ajanları gibi modelleyen bir ensemble framework’ü. Her ajan örnek başına olasılık üretir; market fiyatı sermaye ağırlıklı logit ortalamasıyla çıkarılır; ajan sermayesi ground truth, market konsensüsü, güven katsayısı, class-imbalance bounty’si ve FutureValue çarpanı üzerinden güncellenir.",
-          en: "AutoBEME is an ensemble framework that treats classifiers as market agents with virtual capital. Each agent produces probabilities, the market price is computed through capital-weighted logit averaging, and agent capital is updated from ground truth, consensus error, confidence, class-imbalance bounty, and a FutureValue multiplier."
+          tr: "AutoBEME, sınıflandırıcıları sanal sermayeye sahip piyasa ajanları gibi modelleyen araştırma odaklı bir ensemble framework’ü. Sistem; bootstrap ajan çeşitliliği, Auto-Bounty sınıf ağırlığı, temperature-scaled logit market fiyatlaması, unified P&L sermaye güncellemesi ve evrimsel yeniden dengeleme akışını tek bir scikit-learn uyumlu API altında toplar.",
+          en: "AutoBEME is a research-driven ensemble framework that models classifiers as market agents with virtual capital. It combines bootstrap agent diversity, Auto-Bounty class weighting, temperature-scaled logit market pricing, unified P&L capital updates, and evolutionary rebalancing behind a single scikit-learn compatible API."
         },
         tech: [
           "Python",
@@ -708,37 +859,376 @@
         overview: {
           title: { tr: "Özet", en: "Summary" },
           text: {
-            tr: "LaTeX paper’daki temel akış şu: eğitim verisi çok etiketli bir dizi olarak alınır; N ajan farklı bootstrap alt kümelerinde eğitilir; nadir sınıflar için Auto-Bounty katsayısı hesaplanır; her örnekte ajan olasılıkları sermaye ağırlıklı logit uzayında birleşerek market fiyatını üretir. Ardından P&L formülü ajanı, yalnızca doğru tahmin ettiği için değil, marketten ne kadar iyi ayrıştığı için ödüllendirir. Belirli aralıklarla en güçlü ajanlar zayıf ajanlara kopyalanır ve piyasa zamanla başarılı stratejilere evrilir.",
-            en: "The paper’s core flow is: the multi-label dataset is streamed into a market; N agents are trained on different bootstrap subsets; rare classes receive an Auto-Bounty multiplier; each sample is priced by combining agent probabilities in capital-weighted logit space; and the P&L formula rewards agents not merely for being correct, but for being correctly different from market consensus. Periodically, strong agents are cloned into weak ones, so the market evolves toward strategies that keep earning capital."
+            tr: "Paper’daki ana fikir, klasik precision/recall ödünleşimini statik bir karar sınırı olmaktan çıkarıp ekonomik teşviklerle kontrol edilen bir market simülasyonuna çevirmek. Her ajan farklı veri alt kümelerinde eğitilir, doğru ve özgüvenli ayrıştığı sürece sermaye kazanır; final tahmin ise en çok sermaye biriktiren ajanların daha fazla oy gücü aldığı market konsensüsünden üretilir.",
+            en: "The paper turns the usual precision/recall trade-off from a static decision boundary into a market simulation controlled by economic incentives. Each agent is trained on a different data subset, earns capital when it is confidently and correctly different from consensus, and the final prediction comes from a market consensus where richer agents receive more voting power."
           }
         },
         responsibilities: {
           tr: [
-            "Market fiyatını P_c = sigmoid((1/T) * Σ w_i logit(p_i,c)) şeklinde tanımlayıp ajan oylarını sermaye ağırlıklı ve temperature kontrollü hale getirdim.",
-            "Class imbalance için beta_c = 1 + ln(max_k n_k / n_c) Auto-Bounty katsayısını ekledim; nadir sınıfları doğru yakalayan ajanların daha fazla sermaye kazanmasını sağladım.",
-            "Unified P&L formülünü B_i,c * (1 + Gamma_i,c) * Phi_i olarak kurdum; doğru yönde, özgüvenli ve marketten ayrışan ajanları ödüllendirdim.",
-            "Vanguard, Sovereign ve Apocalypse modlarını farklı tau, temperature, leverage ve model aileleriyle tanımladım; Apocalypse tarafında Classifier Chain + asimetrik ceza ağırlığı kullandım."
+            "Çok etiketli veriyi ajan marketine taşıyan matematiksel modeli kurdum: ajan sermayesi, risk katsayısı, aktif sınıf seti ve sektör izolasyonu birlikte çalışıyor.",
+            "Market fiyatını sermaye ağırlıklı logit ortalamasıyla tanımladım; temperature parametresiyle konsensüsün ne kadar keskin veya yumuşak olacağını kontrol ettim.",
+            "Unified P&L formülüyle ajanı sadece doğru tahmin ettiği için değil, ground truth’a doğru yönde marketten ayrıştığı için ödüllendirdim.",
+            "Vanguard, Sovereign ve Apocalypse modlarını farklı threshold, temperature, leverage ve model aileleriyle tasarladım; Apocalypse tarafında Classifier Chain ve asimetrik ceza kullandım."
           ],
           en: [
-            "Defined the market price as P_c = sigmoid((1/T) * Σ w_i logit(p_i,c)), making votes capital-weighted and temperature-controlled.",
-            "Added the Auto-Bounty coefficient beta_c = 1 + ln(max_k n_k / n_c), so agents that correctly detect rare classes earn more capital.",
-            "Built the Unified P&L update as B_i,c * (1 + Gamma_i,c) * Phi_i, rewarding confident agents that are correctly positioned against market consensus.",
-            "Configured Vanguard, Sovereign, and Apocalypse modes with different tau, temperature, leverage, and model families; Apocalypse uses Classifier Chains with asymmetric class penalties."
+            "Built the mathematical model that streams multi-label data into an agent market: capital, risk, active class sets, and sector isolation work together.",
+            "Defined market pricing through capital-weighted logit averaging; the temperature parameter controls whether consensus becomes sharp or soft.",
+            "Designed the Unified P&L rule so agents are rewarded not only for being correct, but for being correctly positioned away from market consensus.",
+            "Designed Vanguard, Sovereign, and Apocalypse modes with different thresholds, temperatures, leverage values, and model families; Apocalypse uses Classifier Chains and asymmetric penalties."
           ]
         },
         kpis: [
-          { label: { tr: "Market Fiyatı", en: "Market Price" }, value: "capital-weighted logit" },
-          { label: { tr: "Auto-Bounty", en: "Auto-Bounty" }, value: "1 + ln(max n / n_c)" },
-          { label: { tr: "P&L", en: "P&L" }, value: "Base * Confidence * FutureValue" },
-          { label: { tr: "En İyi F1", en: "Best F1" }, value: "0.9035 / 0.8636" }
+          { label: { tr: "En İyi Text F1", en: "Best Text F1" }, value: "0.9035" },
+          { label: { tr: "SONAR F1", en: "SONAR F1" }, value: "0.8636" },
+          { label: { tr: "Text Recall", en: "Text Recall" }, value: "0.9491" },
+          { label: { tr: "Text Precision", en: "Text Precision" }, value: "0.9182" }
+        ],
+        details: [
+          {
+            title: { tr: "Mimari Akış", en: "Architecture Flow" },
+            lead: {
+              tr: "AutoBEME’nin akışı bir finans piyasası analojisi üzerine kuruluyor: sınıflandırıcılar ajan, olasılıklar fiyat teklifi, sermaye oy gücü, P&L ise öğrenme/evolüsyon sinyali gibi davranıyor.",
+              en: "AutoBEME is built around a financial-market analogy: classifiers are agents, probabilities are bids, capital is voting power, and P&L becomes the learning/evolution signal."
+            },
+            bullets: {
+              tr: [
+                "Veri çok etiketli bir eğitim dizisi olarak alınır ve gerekirse Auto-Caster ile 1D binary hedefler iki kolonlu forma çevrilir.",
+                "N ajan farklı bootstrap alt kümelerinde eğitilir; böylece ajanlar aynı problemi farklı örnek dağılımlarından öğrenir.",
+                "Her sınıf için nadirliği ölçen Auto-Bounty katsayısı hesaplanır ve az görülen sınıfları doğru yakalayan ajanlar daha fazla ödüllendirilir.",
+                "Tahmin anında ajan olasılıkları logit uzayına taşınır, sermaye ağırlıklarıyla birleştirilir ve sigmoid ile tekrar olasılık uzayına döndürülür.",
+                "Unified P&L ajan sermayesini günceller; belirli periyotlarda güçlü ajanların stratejileri zayıf ajanlara kopyalanarak piyasa evrim geçirir."
+              ],
+              en: [
+                "Data enters as a multi-label training sequence; when needed, Auto-Caster converts 1D binary targets into a two-column representation.",
+                "N agents are trained on different bootstrap subsets, so each agent learns the same problem from a different sample distribution.",
+                "Auto-Bounty measures class rarity, making correct rare-class calls more valuable.",
+                "During prediction, agent probabilities are moved into logit space, combined by capital weights, and mapped back into probability space with a sigmoid.",
+                "Unified P&L updates agent capital; at scheduled intervals, strong strategies are cloned into weak agents so the market evolves."
+              ]
+            },
+            formulas: [
+              {
+                label: { tr: "Eğitim Dizisi", en: "Training Sequence" },
+                tex: "\\[\\mathcal{D}=\\{(x_t,\\mathbf{y}_t)\\}_{t=1}^{T},\\quad x_t\\in\\mathbb{R}^{d},\\quad \\mathbf{y}_t\\in\\{0,1\\}^{K}\\]"
+              },
+              {
+                label: { tr: "Ajan Tanımı", en: "Agent State" },
+                tex: "\\[a_i=\\bigl(C_i(t),\\ r_i,\\ \\mathcal{M}_i,\\ S_i,\\ \\mathcal{C}_i\\bigr),\\quad C_i(0)=100\\]"
+              }
+            ]
+          },
+          {
+            title: { tr: "Ajan Kurulumu ve Bootstrap Çeşitliliği", en: "Agent Initialization and Bootstrap Diversity" },
+            lead: {
+              tr: "Amaç tek bir güçlü modelden çok, farklı önyargılara sahip bir ajan piyasası üretmek. Bu yüzden ajanlar aynı eğitim setinin farklı alt örneklerinden başlatılıyor.",
+              en: "The goal is not a single strong model, but a market of agents with different inductive biases. Agents therefore start from different subsets of the same training data."
+            },
+            paragraphs: {
+              tr: [
+                "Vanguard, Sovereign ve Custom modlarında ajanlar stratified split ile farklı eğitim alt kümelerine dağıtılır. Apocalypse modunda ise her ajan eğitim verisinin yüzde 85’ini replacement olmadan örnekler; bu yapı Classifier Chain ajanlarının birbirinden yeterince farklı karar zincirleri kurmasını sağlar.",
+                "Ajanlar COMMODITY ve FINANCE olarak iki sektöre ayrılır. Sektör izolasyonu, tek bir kötü stratejinin tüm sınıfları domine etmesini engeller; her sektör kendi aktif sınıf kümesini takip eder."
+              ],
+              en: [
+                "In Vanguard, Sovereign, and Custom modes, agents are assigned different training subsets through stratified splitting. In Apocalypse mode, each agent samples 85% of the training data without replacement, which helps Classifier Chain agents build sufficiently different decision chains.",
+                "Agents are split into COMMODITY and FINANCE sectors. Sector isolation prevents one weak strategy from dominating every class; each sector tracks its own active class set."
+              ]
+            },
+            formulas: [
+              {
+                label: { tr: "Stratified Eğitim Alt Kümesi", en: "Stratified Training Subset" },
+                tex: "\\[\\mathcal{D}^{\\text{train}}_i=\\text{StratifiedSplit}(\\mathcal{D},\\ \\text{test\\_size}=0.30,\\ \\text{seed}=i)\\]"
+              },
+              {
+                label: { tr: "Apocalypse Bootstrap", en: "Apocalypse Bootstrap" },
+                tex: "\\[\\mathcal{I}_i=\\text{Sample}(\\{1,\\dots,n\\},\\ \\lfloor0.85n\\rfloor,\\ \\text{replace}=\\text{False})\\]"
+              },
+              {
+                label: { tr: "Sektör Sınıf Setleri", en: "Sector Class Sets" },
+                tex: "\\[\\mathcal{C}_i=\\begin{cases}\\{1,3,5,\\dots\\}\\cap\\{0,\\dots,K-1\\},&S_i=\\text{COMMODITY}\\\\\\{0,2,4,\\dots\\}\\cap\\{0,\\dots,K-1\\},&S_i=\\text{FINANCE}\\end{cases}\\]"
+              }
+            ]
+          },
+          {
+            title: { tr: "Auto-Bounty: Sınıf Dengesizliği Teşviki", en: "Auto-Bounty: Class-Imbalance Incentive" },
+            lead: {
+              tr: "Nadir sınıflar klasik loss fonksiyonlarında kolayca ezilebilir. Auto-Bounty, pozitif sınıf frekansına göre otomatik bir ödül çarpanı üretir.",
+              en: "Rare classes are easily overwhelmed in standard loss functions. Auto-Bounty computes an automatic reward multiplier from positive-label frequency."
+            },
+            paragraphs: {
+              tr: [
+                "Her sınıf için pozitif örnek sayısı hesaplanır. En sık görülen sınıf referans alınır; daha nadir sınıfların bounty değeri logaritmik olarak yükselir. Böylece model, nadir ama önemli pozitifleri yakalayan ajanlara daha fazla sermaye aktarır."
+              ],
+              en: [
+                "The number of positive examples is computed for each class. The most frequent class is used as the reference, and rarer classes receive a logarithmically larger bounty. Agents that catch rare positives therefore earn more capital."
+              ]
+            },
+            formulas: [
+              {
+                label: { tr: "Pozitif Sayım", en: "Positive Count" },
+                tex: "\\[n_c=\\sum_{t=1}^{T}y_{t,c}\\]"
+              },
+              {
+                label: { tr: "Auto-Bounty", en: "Auto-Bounty" },
+                tex: "\\[\\beta_c=1+\\ln\\!\\left(\\frac{\\max_k n_k}{\\max(n_c,1)}\\right)\\]"
+              }
+            ]
+          },
+          {
+            title: { tr: "Market Fiyat Keşfi", en: "Market Price Discovery" },
+            lead: {
+              tr: "Final tahmin tek bir modelden gelmez. Her sınıf için, o sınıfı takip eden ajanların sermaye ağırlıklı logit teklifleri market fiyatına dönüştürülür.",
+              en: "The final prediction does not come from one model. For each class, agents tracking that class contribute capital-weighted logit bids that become the market price."
+            },
+            paragraphs: {
+              tr: [
+                "Olasılıklar önce 0.01 ile 0.99 arasında kırpılır; bu, logit uzayında sonsuz değerleri önler. Ardından her ajan, o sınıf için mevcut sermayesi oranında ağırlık alır.",
+                "Temperature T konsensüsün sertliğini belirler. Küçük T zengin ajanların etkisini keskinleştirip precision tarafını güçlendirir; büyük T oyları yumuşatıp recall odaklı davranışı destekler."
+              ],
+              en: [
+                "Probabilities are clipped to the 0.01-0.99 interval to avoid logit singularities. Each agent then receives a class-specific weight proportional to its current capital.",
+                "Temperature T controls consensus softness. Smaller T sharpens the influence of wealthy agents and favors precision; larger T softens the vote and supports recall-oriented behavior."
+              ]
+            },
+            formulas: [
+              {
+                label: { tr: "Sermaye Ağırlığı", en: "Capital Weight" },
+                tex: "\\[w_{i,c}=\\frac{C_i(t)}{\\sum_{j\\in I_c}C_j(t)},\\quad I_c=\\{i:c\\in\\mathcal{C}_i\\}\\]"
+              },
+              {
+                label: { tr: "Temperature-Scaled Market Fiyatı", en: "Temperature-Scaled Market Price" },
+                tex: "\\[\\mathcal{P}_c=\\sigma\\!\\left(\\frac{1}{T}\\sum_{i\\in I_c}w_{i,c}\\,\\operatorname{logit}(p_{i,c})\\right)\\]"
+              },
+              {
+                label: { tr: "Karar Eşiği", en: "Decision Threshold" },
+                tex: "\\[\\hat{y}_c=\\mathbf{1}[\\mathcal{P}_c>\\tau]\\]"
+              }
+            ]
+          },
+          {
+            title: { tr: "Unified P&L: Sermaye Güncellemesi", en: "Unified P&L: Capital Update" },
+            lead: {
+              tr: "P&L formülünün önemli yanı, ajanı sadece doğru tahmin ettiği için ödüllendirmemesi. Ajan, market konsensüsünden doğru yönde ayrıştığında para kazanır.",
+              en: "The key idea in the P&L formula is that agents are not rewarded merely for being correct. They earn money when they diverge from market consensus in the correct direction."
+            },
+            paragraphs: {
+              tr: [
+                "Base term, ground truth ile market fiyatı arasındaki hata yönünü; ajan olasılığı ile market fiyatı arasındaki ayrışma yönüyle çarpar. Bu değer pozitifse ajan marketten daha iyi konumlanmıştır.",
+                "Confidence multiplier, 0.5’ten uzak tahminleri daha güçlü ödüllendirir veya cezalandırır. FutureValue ise sermayesi düşmüş ama doğru sinyal üreten ajanlara recovery alanı açar."
+              ],
+              en: [
+                "The base term multiplies the error direction between ground truth and market price by the divergence direction between the agent probability and market price. If the value is positive, the agent was better positioned than the market.",
+                "The confidence multiplier amplifies predictions far from 0.5. FutureValue gives low-capital agents a recovery mechanism when they produce correct signals."
+              ]
+            },
+            formulas: [
+              {
+                label: { tr: "Base Term", en: "Base Term" },
+                tex: "\\[B_{i,c}=(y_{t,c}-\\mathcal{P}_c)(p_{i,c}-\\mathcal{P}_c)r_iL\\beta_c\\]"
+              },
+              {
+                label: { tr: "Confidence", en: "Confidence" },
+                tex: "\\[\\Gamma_{i,c}=|p_{i,c}-0.5|\\times2\\]"
+              },
+              {
+                label: { tr: "FutureValue", en: "FutureValue" },
+                tex: "\\[\\Phi_i(t)=\\begin{cases}1+\\dfrac{100}{C_i(t)+1},&C_i(t)<100\\\\1,&C_i(t)\\ge100\\end{cases}\\]"
+              },
+              {
+                label: { tr: "Birleşik P&L", en: "Combined P&L" },
+                tex: "\\[\\delta_{i,c}=B_{i,c}(1+\\Gamma_{i,c})\\Phi_i(t)\\]"
+              },
+              {
+                label: { tr: "Balance Update", en: "Balance Update" },
+                tex: "\\[C_i(t+1)=\\max\\!\\left(1.0,\\ C_i(t)+\\sum_{c\\in\\mathcal{C}_i}\\delta_{i,c}\\right)\\]"
+              }
+            ]
+          },
+          {
+            title: { tr: "Evrimsel Rebalance", en: "Evolutionary Rebalancing" },
+            lead: {
+              tr: "Market yalnızca ağırlık güncellemez; belirli aralıklarla ajan popülasyonunu da yeniden düzenler. Bu kısım ensemble’ı statik oylamadan çıkarıp evrimsel bir strateji havuzuna dönüştürür.",
+              en: "The market does not only update weights; it periodically reorganizes the agent population. This turns the ensemble from static voting into an evolutionary strategy pool."
+            },
+            paragraphs: {
+              tr: [
+                "İlk 250 adım warm-up olarak ele alınır ve daha sık rebalance yapılır. Sonrasında kullanıcı tarafından belirlenen R periyodu kullanılır.",
+                "Her sektörde en yüksek sermayeli ajan parent, en düşük sermayeli ajan child olur. Parent modelinin deep copy’si child’a aktarılır; parent sermayesinin yüzde 10’u transfer edilerek child yeniden piyasaya sokulur."
+              ],
+              en: [
+                "The first 250 steps are treated as warm-up and rebalance more frequently. After that, the user-configurable R period is used.",
+                "Within each sector, the richest agent becomes the parent and the poorest agent becomes the child. The parent model is deep-copied into the child, and 10% of the parent capital is transferred to relaunch the child."
+              ]
+            },
+            formulas: [
+              {
+                label: { tr: "Rebalance Periyodu", en: "Rebalance Period" },
+                tex: "\\[\\Delta_{\\text{rebalance}}=\\begin{cases}20,&t<250\\\\R,&t\\ge250\\end{cases}\\]"
+              },
+              {
+                label: { tr: "Parent / Child Seçimi", en: "Parent / Child Selection" },
+                tex: "\\[a^*=\\arg\\max_{a_i:S_i=S}C_i(t),\\quad a_- = \\arg\\min_{a_i:S_i=S}C_i(t)\\]"
+              },
+              {
+                label: { tr: "Sermaye Transferi", en: "Capital Transfer" },
+                tex: "\\[\\Delta_{\\text{transfer}}=0.1C_{a^*}(t),\\quad C_{a_-}(t)\\leftarrow\\max(100,\\Delta_{\\text{transfer}})\\]"
+              }
+            ]
+          },
+          {
+            title: { tr: "Operational Modes", en: "Operational Modes" },
+            lead: {
+              tr: "AutoBEME aynı matematiksel çekirdeği farklı ekonomik ayarlarla üç davranış moduna çevirir: recall odaklı Vanguard, precision odaklı Sovereign ve F1/denge odaklı Apocalypse.",
+              en: "AutoBEME turns the same mathematical core into three behavioral modes through different economic settings: recall-oriented Vanguard, precision-oriented Sovereign, and F1/balance-oriented Apocalypse."
+            },
+            table: {
+              columns: {
+                tr: ["Mode", "Amaç", "τ", "T", "L", "Base Model"],
+                en: ["Mode", "Goal", "τ", "T", "L", "Base Model"]
+              },
+              rows: [
+                [
+                  "recall / Vanguard",
+                  { tr: "False negative maliyetini düşürmek, yüksek recall", en: "Reduce false negatives, maximize recall" },
+                  "0.30",
+                  "1.05",
+                  "35.0",
+                  "Logistic Regression, balanced"
+                ],
+                [
+                  "precision / Sovereign",
+                  { tr: "False positive maliyetini düşürmek, yüksek precision", en: "Reduce false positives, maximize precision" },
+                  "0.65",
+                  "0.70",
+                  "20.0",
+                  "Calibrated LinearSVC, balanced"
+                ],
+                [
+                  "balanced / Apocalypse",
+                  { tr: "F1 dengesini kırmak, label dependency yakalamak", en: "Break the F1 ceiling and capture label dependency" },
+                  "0.45",
+                  "1.05",
+                  "30.0",
+                  "Classifier Chains, SVM+LR, W={0:1, 1:4}"
+                ],
+                [
+                  "custom",
+                  { tr: "Kullanıcı modelini aynı market API’sine bağlamak", en: "Attach a user model to the same market API" },
+                  "0.45",
+                  "1.00",
+                  "25.0",
+                  "User-provided estimator"
+                ]
+              ]
+            }
+          },
+          {
+            title: { tr: "Apocalypse Architecture", en: "Apocalypse Architecture" },
+            lead: {
+              tr: "Apocalypse modu klasik independent multi-output yaklaşımı yerine Classifier Chain kullanır. Böylece model, bir label tahminini sonraki label’ların girdisine dönüştürerek etiket bağımlılıklarını öğrenir.",
+              en: "Apocalypse replaces independent multi-output prediction with Classifier Chains. A predicted label becomes part of the input for later labels, letting the model learn inter-label dependencies."
+            },
+            paragraphs: {
+              tr: [
+                "Her zincirde label sırası rastgele permütasyonla belirlenir. Zincir linkleri SVM ve Logistic Regression çekirdekleriyle kurulur; pozitif sınıf için 4 kat ceza ağırlığı false negative maliyetini yükseltir.",
+                "Bu mod market simülasyonunun en başarılı pratik varyantı oldu: karmaşık sparse text ve SONAR signal verisinde LinearSVC baseline F1 tavanını geçti."
+              ],
+              en: [
+                "Each chain uses a random label permutation. Chain links use SVM and Logistic Regression cores; a 4x positive-class penalty increases the cost of false negatives.",
+                "This became the strongest practical variant of the market: on complex sparse text and SONAR signal data, it surpassed the LinearSVC baseline F1 ceiling."
+              ]
+            },
+            formulas: [
+              {
+                label: { tr: "Classifier Chain", en: "Classifier Chain" },
+                tex: "\\[P(y_{\\pi(k)}\\mid x)=\\mathcal{F}_{\\pi(k)}\\bigl(x,\\hat{y}_{\\pi(1)},\\dots,\\hat{y}_{\\pi(k-1)}\\bigr)\\]"
+              },
+              {
+                label: { tr: "Asimetrik Ceza", en: "Asymmetric Penalty" },
+                tex: "\\[W=\\{0:1,\\ 1:4\\}\\]"
+              }
+            ]
+          },
+          {
+            title: { tr: "Deney Sonuçları ve Yorum", en: "Experimental Results and Interpretation" },
+            lead: {
+              tr: "Benchmark üç farklı veri rejimini kapsıyor: sparse çok etiketli text, küçük dense signal ve dense binary spam sınıflandırması. Sonuçlar AutoBEME’nin karmaşık dağılımlarda güçlü olduğunu, basit dense problemlerde ise ekstra bias ekleyebildiğini gösteriyor.",
+              en: "The benchmark covers three regimes: sparse multi-label text, small dense signal data, and dense binary spam classification. Results show AutoBEME is strongest on complex distributions, while simple dense problems may not need the extra inductive bias."
+            },
+            table: {
+              columns: {
+                tr: ["Dataset", "Baseline", "Vanguard", "Sovereign", "Apocalypse", "Yorum"],
+                en: ["Dataset", "Baseline", "Vanguard", "Sovereign", "Apocalypse", "Interpretation"]
+              },
+              rows: [
+                [
+                  "Memory Text (K=10)",
+                  "SVM F1=0.8923",
+                  "F1=0.8650, Recall=0.9491",
+                  "F1=0.8863, Precision=0.9182",
+                  "F1=0.9035",
+                  {
+                    tr: "Apocalypse 0.90 F1 eşiğini geçti; Vanguard recall, Sovereign precision hedefini doğruladı.",
+                    en: "Apocalypse broke the 0.90 F1 barrier; Vanguard validated recall targeting and Sovereign validated precision targeting."
+                  }
+                ],
+                [
+                  "SONAR (K=2)",
+                  "SVM F1=0.8263",
+                  "F1=0.8182",
+                  "F1=0.8000",
+                  "F1/Recall/Precision=0.8636",
+                  {
+                    tr: "Apocalypse üç metriğin tamamında en iyi sonucu verdi; chain mimarisi signal yapısını yakaladı.",
+                    en: "Apocalypse led all three metrics; the chain architecture captured useful signal structure."
+                  }
+                ],
+                [
+                  "SPAMBASE (K=2)",
+                  "SVM F1=0.9241",
+                  "F1=0.9123",
+                  "F1=0.9140, Precision=0.9459",
+                  "F1=0.8978, Precision=0.9506",
+                  {
+                    tr: "Linear SVM zaten near-optimal; market/chain yapısı bu basit dense problemde over-regularization etkisi yarattı.",
+                    en: "Linear SVM was already near-optimal; the market/chain structure over-regularized this simpler dense problem."
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            title: { tr: "API Katmanı", en: "API Layer" },
+            lead: {
+              tr: "Quick Start görseli bu yüzden kapak olarak bırakıldı: projenin ürün değeri, tüm bu matematiksel market simülasyonunu tek bir fit/predict çağrısına indirgemesi.",
+              en: "This is why the Quick Start remains the cover visual: the product value is compressing the full mathematical market simulation into one fit/predict workflow."
+            },
+            formulas: [
+              {
+                label: { tr: "Auto-Caster", en: "Auto-Caster" },
+                tex: "\\[y^{\\text{1D}}\\in\\{0,1\\}^{n}\\longrightarrow \\mathbf{Y}^{\\text{2D}}=[1-y^{\\text{1D}},\\ y^{\\text{1D}}]\\in\\{0,1\\}^{n\\times2}\\]"
+              }
+            ],
+            bullets: {
+              tr: [
+                "Kullanıcı AutoBEME(mode='recall'|'precision'|'balanced') seçerek aynı API ile farklı precision/recall davranışları elde eder.",
+                "Vanguard, Sovereign ve Custom market.predict yolunu; Apocalypse ise raw chain probabilities üzerinden capital-weighted _hack_predict yolunu kullanır.",
+                "API tasarımında amaç araştırma prototipini scikit-learn ekosisteminde hızlı denenebilir bir sınıfa dönüştürmekti."
+              ],
+              en: [
+                "Users select AutoBEME(mode='recall'|'precision'|'balanced') to obtain different precision/recall behavior through the same API.",
+                "Vanguard, Sovereign, and Custom use the market.predict path; Apocalypse uses capital-weighted _hack_predict over raw chain probabilities.",
+                "The API design turns the research prototype into a scikit-learn compatible class that can be tested quickly."
+              ]
+            }
+          }
         ],
         images: [
           {
             src: "images/beme2.png",
-            title: { tr: "Quick Start: Matematiği Tek API’ye İndirme", en: "Quick Start: Compressing the Math into One API" },
+            title: { tr: "Quick Start: Tüm Market Matematiğini Tek API’ye İndirme", en: "Quick Start: Compressing the Full Market Math into One API" },
             desc: {
-              tr: "Portfolyoda görsel olarak Quick Start’ı öne çıkarıyorum çünkü projenin asıl değeri, karmaşık market simülasyonunu scikit-learn uyumlu fit/predict API’sine indirgemesi. Bu tek çağrının altında ajan bootstrap’i, Auto-Bounty, temperature-scaled pricing, Unified P&L, mode-specific threshold ve evrimsel rebalance akışı çalışıyor.",
-              en: "The portfolio uses the Quick Start as the main visual because the key product idea is compressing a complex market simulation into a scikit-learn compatible fit/predict API. Under that one call, the system runs agent bootstrapping, Auto-Bounty, temperature-scaled pricing, Unified P&L, mode-specific thresholding, and evolutionary rebalancing."
+              tr: "Diğer görseller yerine bu kapak bırakıldı; çünkü proje görselden çok matematiksel mimariyle anlatılıyor. Bu küçük Quick Start çağrısının altında bootstrap ajanları, Auto-Bounty, market price discovery, Unified P&L, Apocalypse Classifier Chains ve evrimsel rebalance akışı çalışıyor.",
+              en: "This is the only retained visual because the project is better explained through its mathematical architecture. Under this small Quick Start call, the system runs bootstrap agents, Auto-Bounty, market price discovery, Unified P&L, Apocalypse Classifier Chains, and evolutionary rebalancing."
             }
           }
         ]
@@ -1549,6 +2039,111 @@
       return box;
     }
 
+    function pickArray(obj){
+      const picked = pick(obj);
+      if(Array.isArray(picked)) return picked;
+      return picked ? [picked] : [];
+    }
+
+    function createFormulaCard(formula){
+      const card = document.createElement("div");
+      card.className = "formula-card";
+
+      const label = document.createElement("div");
+      label.className = "formula-label";
+      label.textContent = pick(formula.label);
+
+      const tex = document.createElement("div");
+      tex.className = "formula-tex";
+      tex.textContent = formula.tex || formula.value || "";
+
+      card.appendChild(label);
+      card.appendChild(tex);
+      return card;
+    }
+
+    function createDetailTable(table){
+      const wrap = document.createElement("div");
+      wrap.className = "table-wrap";
+
+      const el = document.createElement("table");
+      el.className = "detail-table";
+
+      const thead = document.createElement("thead");
+      const headerRow = document.createElement("tr");
+      pickArray(table.columns).forEach(col => {
+        const th = document.createElement("th");
+        th.textContent = col;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      el.appendChild(thead);
+
+      const tbody = document.createElement("tbody");
+      (table.rows || []).forEach(row => {
+        const tr = document.createElement("tr");
+        row.forEach(cell => {
+          const td = document.createElement("td");
+          td.textContent = pick(cell);
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+      el.appendChild(tbody);
+      wrap.appendChild(el);
+      return wrap;
+    }
+
+    function createDetailSection(section){
+      const el = document.createElement("section");
+      el.className = "detail-section";
+
+      const title = document.createElement("h2");
+      title.textContent = pick(section.title);
+      el.appendChild(title);
+
+      const lead = pick(section.lead);
+      if(lead){
+        const leadEl = document.createElement("div");
+        leadEl.className = "detail-lead";
+        leadEl.textContent = lead;
+        el.appendChild(leadEl);
+      }
+
+      const paragraphs = pickArray(section.paragraphs);
+      if(paragraphs.length){
+        const copy = document.createElement("div");
+        copy.className = "detail-copy";
+        paragraphs.forEach(text => {
+          const p = document.createElement("p");
+          p.textContent = text;
+          copy.appendChild(p);
+        });
+        el.appendChild(copy);
+      }
+
+      const bullets = pickArray(section.bullets);
+      if(bullets.length){
+        const bulletsWrap = document.createElement("div");
+        bulletsWrap.className = "detail-bullets";
+        bullets.forEach(text => bulletsWrap.appendChild(createBullet(text)));
+        el.appendChild(bulletsWrap);
+      }
+
+      if(section.formulas && section.formulas.length){
+        const formulas = document.createElement("div");
+        formulas.className = "formula-grid";
+        section.formulas.forEach(f => formulas.appendChild(createFormulaCard(f)));
+        el.appendChild(formulas);
+      }
+
+      if(section.table){
+        el.appendChild(createDetailTable(section.table));
+      }
+
+      return el;
+    }
+
     function render(){
       const lang = getLang();
       const T = UI_TEXT[lang];
@@ -1634,6 +2229,11 @@
       row.appendChild(highlightCard);
       contentEl.appendChild(row);
 
+      // Research-style detail sections
+      (project.details || []).forEach(section => {
+        contentEl.appendChild(createDetailSection(section));
+      });
+
       // Image sections
       const imgs = project.images || [];
       imgs.forEach((img, index) => {
@@ -1667,6 +2267,10 @@
 
         contentEl.appendChild(section);
       });
+
+      if(window.MathJax && window.MathJax.typesetPromise){
+        window.MathJax.typesetPromise([contentEl]).catch(() => {});
+      }
     }
 
     // İlk yükleme
