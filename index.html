@@ -301,6 +301,12 @@
       overflow: hidden;
     }
 
+    .research-card,
+    .engineering-card {
+      display: flex;
+      flex-direction: column;
+    }
+
     .research-card img {
       width: 100%;
       height: 11rem;
@@ -311,18 +317,20 @@
 
     .card-body {
       padding: 1.25rem;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
     }
 
     .status {
-      display: inline-flex;
+      display: block;
       margin-bottom: 0.75rem;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--soft);
       color: var(--accent);
-      padding: 0.26rem 0.65rem;
+      padding: 0;
       font-size: 0.78rem;
       font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .research-card h3 {
@@ -348,21 +356,23 @@
 
     .keyword-row,
     .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
+      display: block;
       margin-top: 1rem;
     }
 
     .tag,
     .skill-tag {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--soft);
       color: var(--ink);
-      padding: 0.3rem 0.6rem;
-      font-size: 0.78rem;
-      font-weight: 760;
+      padding: 0;
+      font-size: 0.86rem;
+      font-weight: 650;
+    }
+
+    .tag:not(:last-child)::after,
+    .skill-tag:not(:last-child)::after {
+      content: " · ";
+      color: var(--muted);
+      font-weight: 400;
     }
 
     .engineering-grid {
@@ -392,6 +402,27 @@
       font-size: 1rem;
     }
 
+    .project-org {
+      color: var(--ink);
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-top: 0.8rem;
+    }
+
+    .meta-caption {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+    }
+
     .text-btn {
       margin-top: 1rem;
       border: 1px solid var(--line);
@@ -413,6 +444,20 @@
 
     .skill-column h3 {
       font-size: 1.08rem;
+    }
+
+    .skill-list {
+      display: grid;
+      gap: 0.5rem;
+      list-style: none;
+      margin-top: 0.95rem;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .skill-list li {
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--line);
     }
 
     .contact-band {
@@ -529,6 +574,7 @@
     <nav aria-label="Primary navigation">
       <ul class="nav-links">
         <li><a href="#research" data-i18n="navResearch">Research</a></li>
+        <li><a href="#projects" data-i18n="navProjects">Projects</a></li>
         <li><a href="#engineering" data-i18n="navEngineering">Engineering</a></li>
         <li><a href="#skills" data-i18n="navSkills">Skills</a></li>
         <li><a href="#contact" data-i18n="navContact">Contact</a></li>
@@ -564,7 +610,7 @@
         </p>
 
         <div class="quick-links" aria-label="Quick links">
-          <a class="btn" href="SelmanYilmaz_CV.pdf" download data-i18n="cvButton">Download Academic CV</a>
+          <a class="btn" href="SelmanYilmaz_CV.pdf" download data-i18n="cvButton">Download CV</a>
           <a class="btn secondary" href="https://www.linkedin.com/in/mehmet-selman-y%C4%B1lmaz-76b34017b/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn secondary" href="https://github.com/mesely" target="_blank" rel="noopener">GitHub</a>
           <a class="btn secondary" href="mailto:selman.yilmaz@sabanciuniv.edu">Email</a>
@@ -598,19 +644,19 @@
       </div>
     </section>
 
-    <section class="section" id="engineering">
+    <section class="section" id="projects">
       <div class="section-inner">
         <div class="section-header">
           <div>
-            <p class="section-kicker" data-i18n="engineeringKicker">Selected Systems</p>
-            <h2 data-i18n="engineeringTitle">Other Engineering Projects</h2>
+            <p class="section-kicker" data-i18n="projectsKicker">Selected Applied Work</p>
+            <h2 data-i18n="projectsTitle">Other AI / NLP / Data Science Projects</h2>
           </div>
-          <p class="section-lead" data-i18n="engineeringLead">
-            Compact placeholders for additional software engineering work; titles can be edited as the portfolio evolves.
+          <p class="section-lead" data-i18n="projectsLead">
+            Additional applied AI, NLP, and data science work spanning retrieval, ranking, multimodal modeling, and production-facing ML systems.
           </p>
         </div>
 
-        <div class="engineering-grid" id="engineeringGrid"></div>
+        <div class="engineering-grid" id="projectsGrid"></div>
       </div>
     </section>
 
@@ -631,10 +677,25 @@
         <div class="contact-band" id="contact">
           <div>
             <p class="section-kicker" data-i18n="contactKicker">Get in touch</p>
-            <p data-i18n="contactText">Open to PhD discussions, research collaborations, and academic references.</p>
           </div>
           <a class="btn" href="mailto:selman.yilmaz@sabanciuniv.edu" data-i18n="contactButton">Email Mehmet Selman</a>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="engineering">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker" data-i18n="engineeringKicker">Software Systems</p>
+            <h2 data-i18n="engineeringTitle">Other Engineering Projects</h2>
+          </div>
+          <p class="section-lead" data-i18n="engineeringLead">
+            Additional full-stack and product engineering work beyond the AI-heavy project set above.
+          </p>
+        </div>
+
+        <div class="engineering-grid" id="engineeringGrid"></div>
       </div>
     </section>
   </main>
@@ -657,6 +718,7 @@
     const COPY = {
       en: {
         navResearch: "Research",
+        navProjects: "Projects",
         navEngineering: "Engineering",
         navSkills: "Skills",
         navContact: "Contact",
@@ -665,7 +727,7 @@
         heroSubtitle: "B.Sc. Computer Science Senior @ Sabancı University",
         heroMetric: "CGPA 3.58 | Researcher in NLP, Network Science & Computational Social Science.",
         heroSummary: "I build research-oriented AI systems for low-resource NLP, political text analysis, and human-centered assistive interfaces, with a focus on rigorous evaluation and deployable software.",
-        cvButton: "Download Academic CV",
+        cvButton: "Download CV",
         focusTitle: "Research Focus",
         focusOne: "Low-resource and imbalanced NLP",
         focusTwo: "Multi-agent ensemble learning",
@@ -674,14 +736,16 @@
         researchKicker: "Priority Section",
         researchTitle: "Research & Upcoming Publications",
         researchLead: "Ongoing research targeted for publication, positioned around NLP, AI, network science, and computational social science.",
-        engineeringKicker: "Selected Systems",
+        projectsKicker: "Selected Applied Work",
+        projectsTitle: "Other AI / NLP / Data Science Projects",
+        projectsLead: "Additional applied AI, NLP, and data science work spanning retrieval, ranking, multimodal modeling, and production-facing ML systems.",
+        engineeringKicker: "Software Systems",
         engineeringTitle: "Other Engineering Projects",
-        engineeringLead: "Compact placeholders for additional software engineering work; titles can be edited as the portfolio evolves.",
+        engineeringLead: "Additional full-stack and product engineering work beyond the AI-heavy project set above.",
         skillsKicker: "Technical Profile",
         skillsTitle: "Technical Skills",
         skillsLead: "Research tooling and production development experience across Python, modern web stacks, and applied machine learning.",
         contactKicker: "Get in touch",
-        contactText: "Open to PhD discussions, research collaborations, and academic references.",
         contactButton: "Email Mehmet Selman",
         footerCopy: "© 2026 Mehmet Selman Yılmaz. All rights reserved.",
         detailsLabel: "View details",
@@ -704,19 +768,21 @@
             title: "Dynamic Signed Network Analysis of the Turkish Parliament (2002-2026)",
             status: "Data Annotation & Analysis Phase (Targeting Computational Social Science venues)",
             description: "Leading a computational social science project analyzing over two decades of parliamentary transcripts using dynamic network science.",
-            achievement: "Constructed directed, signed party-to-party networks to quantify political polarization, track cross-bloc negativity during economic crises, and test structural balance theories.",
+            achievement: "Constructed directed, signed party-to-party networks to quantify political polarization, track cross-bloc negativity during economic crises, test structural balance theories, and validate stance/sentiment decisions with AutoBEME-based model comparison workflows.",
             keywords: ["Network Science", "Graph Theory", "Sentiment Analysis", "Political Economy"]
           },
           {
             id: "echospace",
             cover: "images/echospace1.png",
+            coverPosition: "center 12%",
             title: "EchoSpace-AR: AI-Driven Environmental Awareness for the Hearing Impaired",
             status: "Active Development (HCI / AI integration)",
             description: "Leading the AI and ensemble modeling components of a collaborative HCI project. Integrating real-time sound classification pipelines into an AR interface to provide visual environmental cues.",
+            achievement: "Uses AutoBEME-derived ensemble experimentation alongside sound-event classification and speech-to-text signals to improve robust environmental awareness in AR.",
             keywords: ["Human-Centered AI", "Assistive AR", "Sound Classification", "HCI"]
           }
         ],
-        engineering: [
+        aiProjects: [
           {
             id: "baykar",
             cover: "images/baykar1.png",
@@ -750,14 +816,6 @@
             tags: ["BERTurk", "AT Protocol", "PostgreSQL"]
           },
           {
-            id: "chefinpocket",
-            cover: "images/chefinpocket1.png",
-            title: "Full-Stack Meal Planning Application",
-            org: "Sabancı University",
-            description: "Flutter and microservice-based food planning system with recipe discovery and guided cooking flows.",
-            tags: ["Flutter", "Microservices", "Docker"]
-          },
-          {
             id: "music",
             cover: "images/music1.png",
             title: "Music Emotion Recognition with Attention Pooling",
@@ -782,14 +840,33 @@
             tags: ["NLP", "BiLSTM", "FastText"]
           }
         ],
+        engineeringProjects: [
+          {
+            id: "chefinpocket",
+            cover: "images/chefinpocket1.png",
+            title: "Full-Stack Meal Planning Application",
+            org: "Sabancı University",
+            description: "Flutter and microservice-based food planning system with recipe discovery and guided cooking flows.",
+            tags: ["Flutter", "Microservices", "Docker"]
+          },
+          {
+            id: "sneakpeek",
+            cover: "images/sneakpeek1.png",
+            title: "Microservices E-commerce Platform",
+            org: "Personal Project",
+            description: "NestJS and Next.js commerce system with JWT auth, Kafka messaging, Docker deployment, and AI-assisted recommendation flows.",
+            tags: ["Node.js", "Docker", "Kafka"]
+          }
+        ],
         skills: [
-          { title: "Research / AI", items: ["PyTorch", "Hugging Face", "Scikit-learn", "NetworkX", "NLP"] },
-          { title: "Development", items: ["Python", "TypeScript", "React", "Flutter", "C++"] },
-          { title: "Methods", items: ["Graph Theory", "Classifier Chains", "Information Retrieval", "Statistical Modeling", "Evaluation Design"] }
+          { title: "Research / AI", items: ["PyTorch", "TensorFlow", "Hugging Face", "Scikit-learn", "NetworkX", "NLTK", "NLP"] },
+          { title: "Development", items: ["Python", "TypeScript", "JavaScript", "Node.js", "React", "Flutter", "C++", "Docker"] },
+          { title: "Data / Tooling", items: ["Pandas", "SQL", "Git", "Matplotlib", "Statsmodels", "PostgreSQL"] }
         ]
       },
       tr: {
         navResearch: "Araştırma",
+        navProjects: "Projeler",
         navEngineering: "Mühendislik",
         navSkills: "Yetenekler",
         navContact: "İletişim",
@@ -798,7 +875,7 @@
         heroSubtitle: "B.Sc. Bilgisayar Bilimleri Son Sınıf @ Sabancı Üniversitesi",
         heroMetric: "CGPA 3.58 | NLP, Ağ Bilimi ve Hesaplamalı Sosyal Bilimler araştırmacısı.",
         heroSummary: "Düşük kaynaklı NLP, politik metin analizi ve insan odaklı erişilebilirlik arayüzleri için araştırma odaklı AI sistemleri geliştiriyorum.",
-        cvButton: "Akademik CV İndir",
+        cvButton: "CV İndir",
         focusTitle: "Araştırma Odağı",
         focusOne: "Düşük kaynaklı ve dengesiz NLP",
         focusTwo: "Çok ajanlı ensemble öğrenme",
@@ -807,14 +884,16 @@
         researchKicker: "Öncelikli Bölüm",
         researchTitle: "Araştırmalar ve Yaklaşan Yayınlar",
         researchLead: "NLP, AI, ağ bilimi ve hesaplamalı sosyal bilimler ekseninde yayına hedeflenen devam eden araştırmalar.",
-        engineeringKicker: "Seçili Sistemler",
+        projectsKicker: "Uygulamalı Çalışmalar",
+        projectsTitle: "Diğer AI / NLP / Veri Bilimi Projeleri",
+        projectsLead: "Retrieval, ranking, çok kipli modelleme ve üretime yakın ML sistemleri boyunca seçilmiş uygulamalı çalışmalar.",
+        engineeringKicker: "Yazılım Sistemleri",
         engineeringTitle: "Diğer Mühendislik Projeleri",
-        engineeringLead: "Ek yazılım mühendisliği işleri için kompakt alan; başlıklar portfolyo geliştikçe kolayca düzenlenebilir.",
+        engineeringLead: "Yukarıdaki AI ağırlıklı setin dışında kalan ek full-stack ve ürün mühendisliği çalışmaları.",
         skillsKicker: "Teknik Profil",
         skillsTitle: "Teknik Yetenekler",
         skillsLead: "Python, modern web teknolojileri ve uygulamalı makine öğrenmesi boyunca araştırma ve üretim deneyimi.",
         contactKicker: "İletişime geç",
-        contactText: "PhD görüşmeleri, araştırma iş birlikleri ve akademik referans konuşmaları için açığım.",
         contactButton: "Mehmet Selman'a E-posta Gönder",
         footerCopy: "© 2026 Mehmet Selman Yılmaz. Tüm hakları saklıdır.",
         detailsLabel: "Detayları aç",
@@ -1030,6 +1109,7 @@
 
     const languageSelect = document.getElementById("languageSelect");
     const researchGrid = document.getElementById("researchGrid");
+    const projectsGrid = document.getElementById("projectsGrid");
     const engineeringGrid = document.getElementById("engineeringGrid");
     const skillsGrid = document.getElementById("skillsGrid");
 
@@ -1065,31 +1145,36 @@
     function renderResearch(copy) {
       researchGrid.innerHTML = copy.research.map((item) => `
         <article class="research-card">
-          <img src="${item.cover}" alt="${escapeHtml(item.title)}" loading="lazy" />
+          <img src="${item.cover}" alt="${escapeHtml(item.title)}" loading="lazy" style="${item.coverPosition ? `object-position:${item.coverPosition};` : ""}" />
           <div class="card-body">
             <span class="status">${escapeHtml(copy.statusLabel)} ${escapeHtml(item.status)}</span>
             <h3>${escapeHtml(item.title)}</h3>
             <p>${escapeHtml(item.description)}</p>
             ${item.achievement ? `<p class="achievement"><strong>${escapeHtml(copy.achievementLabel)}</strong> ${escapeHtml(item.achievement)}</p>` : ""}
-            <div class="keyword-row" aria-label="${escapeHtml(copy.keywordsLabel)}">
-              ${tagList(item.keywords)}
+            <div class="card-footer">
+              <div class="meta-caption">${escapeHtml(copy.keywordsLabel)}</div>
+              <div class="keyword-row" aria-label="${escapeHtml(copy.keywordsLabel)}">
+                ${tagList(item.keywords)}
+              </div>
+              <a class="text-btn" href="project.html" data-project-id="${item.id}">${escapeHtml(copy.detailsLabel)}</a>
             </div>
-            <a class="text-btn" href="project.html" data-project-id="${item.id}">${escapeHtml(copy.detailsLabel)}</a>
           </div>
         </article>
       `).join("");
     }
 
-    function renderEngineering(copy) {
-      engineeringGrid.innerHTML = copy.engineering.map((item) => `
+    function renderProjectGrid(target, items, copy) {
+      target.innerHTML = items.map((item) => `
         <article class="engineering-card">
           <img src="${item.cover}" alt="${escapeHtml(item.title)}" loading="lazy" />
           <div class="card-body">
             <h3>${escapeHtml(item.title)}</h3>
-            <p><strong>${escapeHtml(item.org)}</strong></p>
+            <div class="project-org">${escapeHtml(item.org)}</div>
             <p>${escapeHtml(item.description)}</p>
-            <div class="keyword-row">${tagList(item.tags)}</div>
-            <a class="text-btn" href="project.html" data-project-id="${item.id}">${escapeHtml(copy.detailsLabel)}</a>
+            <div class="card-footer">
+              <div class="keyword-row">${tagList(item.tags)}</div>
+              <a class="text-btn" href="project.html" data-project-id="${item.id}">${escapeHtml(copy.detailsLabel)}</a>
+            </div>
           </div>
         </article>
       `).join("");
@@ -1099,9 +1184,9 @@
       skillsGrid.innerHTML = copy.skills.map((group) => `
         <section class="skill-column">
           <h3>${escapeHtml(group.title)}</h3>
-          <div class="skill-tags">
-            ${group.items.map((item) => `<span class="skill-tag">${escapeHtml(item)}</span>`).join("")}
-          </div>
+          <ul class="skill-list">
+            ${group.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+          </ul>
         </section>
       `).join("");
     }
@@ -1110,7 +1195,8 @@
       const copy = copyFor(lang);
       setTextContent(copy);
       renderResearch(copy);
-      renderEngineering(copy);
+      renderProjectGrid(projectsGrid, copy.aiProjects || [], copy);
+      renderProjectGrid(engineeringGrid, copy.engineeringProjects || [], copy);
       renderSkills(copy);
     }
 

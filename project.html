@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -655,6 +655,328 @@
       .project-image { max-height: 65vh; }
       .image-placeholder { min-height: 300px; font-size: 3.8rem; }
     }
+
+    /* Academic theme overrides */
+    :root{
+      --ink:#1f2328;
+      --muted:#5f6670;
+      --paper:#ffffff;
+      --soft:#f6f7f5;
+      --line:#d9dfdc;
+      --accent:#006b5f;
+      --accent-2:#9b4f2f;
+      --accent-soft:#e7f2ef;
+      --radius:8px;
+      --shadow:0 16px 36px rgba(31, 35, 40, 0.08);
+      --shadow-2:0 16px 36px rgba(31, 35, 40, 0.12);
+    }
+
+    *{
+      letter-spacing:0;
+    }
+
+    body{
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    nav{
+      padding: 0.85rem 5%;
+      background: rgba(255,255,255,.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .back-btn{
+      padding: 0.72rem 0.92rem;
+      background: var(--paper);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: none;
+    }
+
+    .back-btn:hover{
+      transform: translateY(-2px);
+      box-shadow: none;
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .crumb{
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .nav-actions{
+      gap: 1rem;
+    }
+
+    .language-control{
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+      color: var(--muted);
+      font-size:.86rem;
+      font-weight:700;
+    }
+
+    .language-control select{
+      min-width:5.35rem;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      padding: .55rem .7rem;
+      font: inherit;
+      cursor:pointer;
+    }
+
+    .project-header{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 4.3rem 5% 1.6rem;
+      text-align: left;
+      background: var(--paper);
+    }
+
+    .project-header::before{
+      display:none;
+    }
+
+    .project-header h1,
+    .card h2,
+    .detail-section h2,
+    .image-section h3{
+      font-family: Merriweather, Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background: none;
+      -webkit-text-fill-color: initial;
+      -webkit-background-clip: initial;
+    }
+
+    .project-header h1{
+      font-size: 2.9rem;
+      margin-bottom: .95rem;
+      line-height: 1.16;
+    }
+
+    .meta-row{
+      justify-content: flex-start;
+      gap: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .company-badge,
+    .meta-chip{
+      background: none;
+      color: var(--muted);
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      font-size: .9rem;
+      font-weight: 750;
+    }
+
+    .company-badge{
+      color: var(--ink);
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-size: .78rem;
+    }
+
+    .description{
+      max-width: 880px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.8;
+    }
+
+    .tech-stack{
+      max-width:1180px;
+      margin: 0 auto;
+      padding: 0 5% 1.4rem;
+      justify-content:flex-start;
+      gap: 0;
+      background: none;
+      border: 0;
+    }
+
+    .tech-tag{
+      background: none;
+      color: var(--muted);
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      font-size: .9rem;
+      font-weight: 650;
+    }
+
+    .tech-tag:not(:last-child)::after{
+      content: " · ";
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .project-content{
+      max-width:1180px;
+      padding: 0 5% 4rem;
+      gap: 1rem;
+    }
+
+    .card,
+    .detail-section,
+    .image-section{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--paper);
+      padding: 1.35rem;
+    }
+
+    .card h2,
+    .detail-section h2{
+      font-size: 1.3rem;
+      margin-bottom: .65rem;
+    }
+
+    .card .sublead,
+    .detail-lead{
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 700;
+      margin-bottom: .9rem;
+    }
+
+    .card p,
+    .detail-copy p,
+    .image-section p{
+      color: var(--muted);
+      font-size: .98rem;
+      line-height: 1.8;
+    }
+
+    .bullet{
+      padding: .85rem 0 .85rem .9rem;
+      border-radius: 0;
+      background: none;
+      border: 0;
+      border-left: 2px solid var(--accent);
+    }
+
+    .bullet .dot{
+      width: 7px;
+      height: 7px;
+      margin-top: .47rem;
+      background: var(--accent);
+      box-shadow: none;
+    }
+
+    .bullet div{
+      color: var(--ink);
+      font-size: .97rem;
+      font-weight: 650;
+    }
+
+    .kpi{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow:none;
+      padding: .9rem;
+    }
+
+    .kpi .label{
+      color: var(--muted);
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .kpi .value{
+      color: var(--ink);
+      background: none;
+      -webkit-text-fill-color: initial;
+      font-size: 1.02rem;
+    }
+
+    .detail-section{
+      background: var(--paper);
+      overflow: visible;
+    }
+
+    .detail-section::before{
+      display:none;
+    }
+
+    .formula-card{
+      background: var(--soft);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow:none;
+    }
+
+    .formula-label{
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .table-wrap{
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      box-shadow:none;
+    }
+
+    .detail-table th{
+      background: var(--soft);
+      color: var(--ink);
+    }
+
+    .image-section h3{
+      font-size: 1.18rem;
+      margin-bottom: .55rem;
+    }
+
+    .project-image{
+      border-radius: var(--radius);
+      background: var(--soft);
+    }
+
+    .lightbox-close{
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: none;
+    }
+
+    .lightbox-img{
+      border-radius: var(--radius);
+    }
+
+    @media (max-width: 768px){
+      .project-header{
+        padding-top: 3rem;
+      }
+
+      .project-header h1{
+        font-size: 2.15rem;
+      }
+
+      .language-control span{
+        display:none;
+      }
+
+      .meta-row{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .35rem;
+      }
+    }
   </style>
 </head>
 
@@ -673,10 +995,19 @@
     </div>
 
     <div class="nav-actions">
-      <div class="lang-switch" role="group" aria-label="Language switch">
-        <button class="lang-btn" id="btnTR" type="button">TR</button>
-        <button class="lang-btn" id="btnEN" type="button">EN</button>
-      </div>
+      <label class="language-control" for="languageSelect">
+        <span id="langLabel">Language</span>
+        <select id="languageSelect" aria-label="Language">
+          <option value="en">EN</option>
+          <option value="tr">TR</option>
+          <option value="de">DE</option>
+          <option value="fr">FR</option>
+          <option value="nl">NL</option>
+          <option value="da">DA</option>
+          <option value="sv">SV</option>
+          <option value="fi">FI</option>
+        </select>
+      </label>
     </div>
   </nav>
 
@@ -706,46 +1037,57 @@
 
   <script>
     // ===== Dil (index ile aynı key) =====
-    const btnTR = document.getElementById("btnTR");
-    const btnEN = document.getElementById("btnEN");
+    const SUPPORTED_LANGS = ["en", "tr", "de", "fr", "nl", "da", "sv", "fi"];
+    const languageSelect = document.getElementById("languageSelect");
+    const langLabel = document.getElementById("langLabel");
 
     function getLang(){
       const portfolioLang = localStorage.getItem("portfolioLanguageV2");
       const saved = localStorage.getItem("lang");
-      if(portfolioLang === "tr" || saved === "tr") return "tr";
+      if(SUPPORTED_LANGS.includes(portfolioLang)) return portfolioLang;
+      if(saved === "tr") return "tr";
       return "en";
     }
     function setLang(lang){
-      localStorage.setItem("lang", lang);
-      applyLang(lang);
+      const next = SUPPORTED_LANGS.includes(lang) ? lang : "en";
+      localStorage.setItem("portfolioLanguageV2", next);
+      localStorage.setItem("lang", next === "tr" ? "tr" : "en");
+      languageSelect.value = next;
+      applyLang(next);
       render(); // içerikler dil değiştirsin
+    }
+
+    function uiCopy(lang){
+      return lang === "tr" ? UI_TEXT.tr : UI_TEXT.en;
     }
 
     const UI_TEXT = {
       tr: {
+        languageLabel: "Dil",
         back: "Geri Dön",
         crumbPrefix: "Projeler / ",
         notFoundTitle: "Proje bulunamadı",
         notFoundDesc: "Proje bilgisi bulunamadı. Lütfen ana sayfadan bir projeyi tekrar aç.",
         goHome: "Ana Sayfaya Dön",
         overviewTitle: "Özet",
-        overviewSub: "Bu projenin amacı ve genel yaklaşımı.",
-        highlightsTitle: "Öne Çıkanlar",
-        highlightsSub: "Projede doğrudan üstlendiğim katkılar ve çıktılar.",
+        overviewSub: "Araştırma çerçevesi, kapsam ve hedef.",
+        highlightsTitle: "Katkılar",
+        highlightsSub: "Doğrudan üstlendiğim teknik sorumluluklar ve ölçülebilir çıktılar.",
         imgMissing: "Görsel bulunamadı",
         close: "Kapat",
         pageTitleSuffix: "— Proje Detayı",
       },
       en: {
+        languageLabel: "Language",
         back: "Back",
         crumbPrefix: "Projects / ",
         notFoundTitle: "Project not found",
         notFoundDesc: "Project details could not be loaded. Please open a project again from the home page.",
         goHome: "Go to Home",
         overviewTitle: "Summary",
-        overviewSub: "Goal, scope, and overall approach of the project.",
-        highlightsTitle: "Highlights",
-        highlightsSub: "Direct contributions, responsibilities, and concrete outputs.",
+        overviewSub: "Research framing, scope, and objective.",
+        highlightsTitle: "Contributions",
+        highlightsSub: "Direct technical responsibilities and measurable outputs.",
         imgMissing: "Image not found",
         close: "Close",
         pageTitleSuffix: "— Project Details",
@@ -753,19 +1095,19 @@
     };
 
     function applyLang(lang){
+      const T = uiCopy(lang);
       document.documentElement.lang = lang;
-      btnTR.classList.toggle("active", lang === "tr");
-      btnEN.classList.toggle("active", lang === "en");
+      languageSelect.value = lang;
+      langLabel.textContent = T.languageLabel;
 
-      document.getElementById("backBtnText").textContent = UI_TEXT[lang].back;
-      document.getElementById("crumbPrefix").textContent = UI_TEXT[lang].crumbPrefix;
+      document.getElementById("backBtnText").textContent = T.back;
+      document.getElementById("crumbPrefix").textContent = T.crumbPrefix;
 
-      document.getElementById("lightboxClose").setAttribute("aria-label", UI_TEXT[lang].close);
+      document.getElementById("lightboxClose").setAttribute("aria-label", T.close);
       document.getElementById("lightboxImg").alt = (lang === "tr" ? "Proje görseli" : "Project image");
     }
 
-    btnTR.addEventListener("click", () => setLang("tr"));
-    btnEN.addEventListener("click", () => setLang("en"));
+    languageSelect.addEventListener("change", (event) => setLang(event.target.value));
 
     // ============ PROJE VERİLERİ ============
     // Görseller: images/<prefix><n>.png
@@ -1529,10 +1871,10 @@
         period: "Eyl 2025 – Oca 2026",
         location: "Sabancı Üniversitesi",
         description: {
-          tr: "Unity’de AR arayüz entegrasyonu ve C# scriptleriyle gerçek zamanlı cue/HUD akışı geliştirdim. Stereo sesten YamNet ile çevresel ses sınıflandırması, Whisper ile speech-to-text çıkarımı yaptım.",
-          en: "Built a real-time AR cue/HUD flow in Unity with C# scripts. Performed environmental sound classification with YAMNet and speech-to-text with Whisper."
+          tr: "Unity’de AR arayüz entegrasyonu ve C# scriptleriyle gerçek zamanlı cue/HUD akışı geliştirdim. Stereo sesten YamNet ile çevresel ses sınıflandırması, Whisper ile speech-to-text çıkarımı yaptım ve AutoBEME tabanlı ensemble deneyleriyle sınıflandırma tarafını güçlendirdim.",
+          en: "Built a real-time AR cue/HUD flow in Unity with C# scripts. Performed environmental sound classification with YAMNet, speech-to-text with Whisper, and strengthened the classification stack with AutoBEME-based ensemble experiments."
         },
-        tech: ["Unity", "C#", "AR UI", "YAMNet", "Whisper", "HCI"],
+        tech: ["Unity", "C#", "AR UI", "YAMNet", "Whisper", "AutoBEME", "HCI"],
         overview: {
           title: { tr: "Özet", en: "Summary" },
           text: {
@@ -1543,11 +1885,13 @@
         responsibilities: {
           tr: [
             "Unity’de AR UI entegrasyonu + C# scriptleriyle gerçek zamanlı cue/HUD akışı geliştirdim.",
-            "Stereo ses akışından YAMNet sınıflandırma ve Whisper STT çıktıları üretip sunucu tarafında işledim."
+            "Stereo ses akışından YAMNet sınıflandırma ve Whisper STT çıktıları üretip sunucu tarafında işledim.",
+            "Çevresel ses sınıflandırması için AutoBEME tabanlı ensemble denemeleri kurup hata dayanıklılığını artıran model karşılaştırmaları hazırladım."
           ],
           en: [
             "Implemented AR UI integration and real-time cue/HUD flow in Unity with C#.",
-            "Generated YAMNet classifications and Whisper STT from stereo audio and processed results server-side."
+            "Generated YAMNet classifications and Whisper STT from stereo audio and processed results server-side.",
+            "Set up AutoBEME-based ensemble experiments for environmental sound classification and prepared model comparisons to improve robustness."
           ]
         },
         kpis: [
@@ -1580,8 +1924,8 @@
         period: "Oca 2026 – Devam ediyor / Jan 2026 – Present",
         location: "Sabancı Üniversitesi, İstanbul / Sabancı University, Istanbul",
         description: {
-          tr: "TBMM konuşmalarından yönlü ve işaretli parti ağları, kavram ağları ve aylık makro paneller üreten bir siyasi ekonomi araştırma pipeline’ı geliştirdim. NetworkX tabanlı ağ üretimini, hipotez testlerini, ekonomi verileriyle eşleştirmeyi ve insan etiketli model doğrulama akışını tek bir yeniden üretilebilir çalışma setinde birleştirdim.",
-          en: "Built a political economy research pipeline that turns TBMM speeches into signed directed inter-party networks, concept networks, and monthly macro panels. The stack combines NetworkX-based graph construction, hypothesis testing, macro-data integration, and human-annotated model validation in one reproducible workflow."
+          tr: "TBMM konuşmalarından yönlü ve işaretli parti ağları, kavram ağları ve aylık makro paneller üreten bir siyasi ekonomi araştırma pipeline’ı geliştirdim. NetworkX tabanlı ağ üretimini, hipotez testlerini, ekonomi verileriyle eşleştirmeyi ve AutoBEME destekli insan etiketli model doğrulama akışını tek bir yeniden üretilebilir çalışma setinde birleştirdim.",
+          en: "Built a political economy research pipeline that turns TBMM speeches into signed directed inter-party networks, concept networks, and monthly macro panels. The stack combines NetworkX-based graph construction, hypothesis testing, macro-data integration, and AutoBEME-supported human-annotated model validation in one reproducible workflow."
         },
         tech: ["Python", "NetworkX", "Pandas", "Statsmodels", "Matplotlib", "NLP", "TBMM", "Political Economy", "AutoBEME"],
         overview: {
@@ -2035,7 +2379,8 @@
     function pick(obj){
       const lang = getLang();
       if(obj && typeof obj === "object" && (obj.tr || obj.en)){
-        return obj[lang] || obj.tr || obj.en || "";
+        if(lang === "tr") return obj.tr || obj.en || "";
+        return obj[lang] || obj.en || obj.tr || "";
       }
       return obj ?? "";
     }
@@ -2173,15 +2518,15 @@
 
     function render(){
       const lang = getLang();
-      const T = UI_TEXT[lang];
+      const T = uiCopy(lang);
 
       if(!project){
         document.body.innerHTML = `
           <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;text-align:center;padding:2rem;">
-            <h1 style="font-size:2rem;margin-bottom:1rem;background:linear-gradient(135deg,#667eea,#764ba2,#f093fb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+            <h1 style="font-family:Merriweather,Georgia,'Times New Roman',serif;font-size:2rem;margin-bottom:1rem;color:#1f2328;">
               ${escapeHtml(T.notFoundTitle)}
             </h1>
-            <p style="color:#666;max-width:700px;line-height:1.7;">
+            <p style="color:#5f6670;max-width:700px;line-height:1.7;">
               ${escapeHtml(T.notFoundDesc)}
             </p>
             <a href="index.html" class="back-btn" style="margin-top:1.8rem;">${escapeHtml(T.goHome)}</a>
