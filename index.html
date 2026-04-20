@@ -722,6 +722,7 @@
     </div>
   </footer>
 
+  <script src="home-translations.js"></script>
   <script>
     const SUPPORTED_LANGS = ["en", "tr", "de", "fr", "nl", "da", "sv", "fi"];
     const STORAGE_KEY = "portfolioLanguageV2";
@@ -1153,8 +1154,18 @@
       return tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
     }
 
-    function renderResearch(copy) {
-      researchGrid.innerHTML = copy.research.map((item) => `
+    function contentFor(lang) {
+      const translated = window.HOME_I18N && window.HOME_I18N[lang] ? window.HOME_I18N[lang] : null;
+      return {
+        research: translated && translated.research ? translated.research : (COPY.en.research || []),
+        aiProjects: translated && translated.aiProjects ? translated.aiProjects : (COPY.en.aiProjects || []),
+        engineeringProjects: translated && translated.engineeringProjects ? translated.engineeringProjects : (COPY.en.engineeringProjects || []),
+        skills: translated && translated.skills ? translated.skills : (COPY.en.skills || [])
+      };
+    }
+
+    function renderResearch(items, copy) {
+      researchGrid.innerHTML = items.map((item) => `
         <article class="research-card clickable-card" data-project-id="${item.id}" tabindex="0" role="link" aria-label="${escapeHtml(item.title)}">
           <img src="${item.cover}" alt="${escapeHtml(item.title)}" loading="lazy" style="${item.coverPosition ? `object-position:${item.coverPosition};` : ""}" />
           <div class="card-body">
@@ -1191,8 +1202,8 @@
       `).join("");
     }
 
-    function renderSkills(copy) {
-      skillsGrid.innerHTML = copy.skills.map((group) => `
+    function renderSkills(items) {
+      skillsGrid.innerHTML = items.map((group) => `
         <section class="skill-column">
           <h3>${escapeHtml(group.title)}</h3>
           <ul class="skill-list">
@@ -1204,11 +1215,12 @@
 
     function render(lang) {
       const copy = copyFor(lang);
+      const content = contentFor(lang);
       setTextContent(copy);
-      renderResearch(copy);
-      renderProjectGrid(projectsGrid, copy.aiProjects || [], copy);
-      renderProjectGrid(engineeringGrid, copy.engineeringProjects || [], copy);
-      renderSkills(copy);
+      renderResearch(content.research, copy);
+      renderProjectGrid(projectsGrid, content.aiProjects, copy);
+      renderProjectGrid(engineeringGrid, content.engineeringProjects, copy);
+      renderSkills(content.skills);
     }
 
     function escapeHtml(value) {

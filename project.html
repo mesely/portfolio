@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Proje Detayı</title>
+  <script src="project-translations.js"></script>
   <script>
     window.MathJax = {
       tex: {
@@ -2421,7 +2422,7 @@
     }
 
     // ============ UI ============
-    const project = resolveProject();
+    const baseProject = resolveProject();
 
     const titleEl = document.getElementById("project-title");
     const companyEl = document.getElementById("company");
@@ -2606,9 +2607,16 @@
       return el;
     }
 
+    function localizedProjectFor(base, lang){
+      if(!base) return null;
+      if(!window.PROJECT_I18N || !window.PROJECT_I18N[lang]) return base;
+      return window.PROJECT_I18N[lang][base.id] || base;
+    }
+
     function render(){
       const lang = getLang();
       const T = uiCopy(lang);
+      const project = localizedProjectFor(baseProject, lang);
 
       if(!project){
         document.body.innerHTML = `
@@ -2667,7 +2675,7 @@
         <div class="sublead">${escapeHtml(T.highlightsSub)}</div>
       `;
 
-      const resp = (project.responsibilities && project.responsibilities[lang]) ? project.responsibilities[lang] : [];
+      const resp = pickArray(project.responsibilities);
       const kpis = (project.kpis || []);
 
       const bulletsWrap = document.createElement("div");
