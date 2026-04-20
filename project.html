@@ -694,62 +694,51 @@
         period: "Nis 2026 – Devam Ediyor",
         location: "Remote",
         description: {
-          tr: "Dengesiz çok etiketli sınıflandırma problemleri için prediction market mantığını evrimsel seçimle birleştiren scikit-learn uyumlu bir Python kütüphanesi geliştirdim. BEME'nin güncel halinde fit/predict API'si, auto-bounty mekanizması, hibrit agent motorları, AutoBEME yönlendiricisi ve HTML dokümantasyon sayfası yer alıyor.",
-          en: "Built a scikit-learn compatible Python library that combines prediction-market dynamics with evolutionary selection for imbalanced multi-label classification. The current BEME release includes a fit/predict API, auto-bounty pricing, hybrid agent engines, an AutoBEME router, and a dedicated HTML documentation site."
+          tr: "AutoBEME, sınıflandırıcıları sanal sermayeye sahip piyasa ajanları gibi modelleyen bir ensemble framework’ü. Her ajan örnek başına olasılık üretir; market fiyatı sermaye ağırlıklı logit ortalamasıyla çıkarılır; ajan sermayesi ground truth, market konsensüsü, güven katsayısı, class-imbalance bounty’si ve FutureValue çarpanı üzerinden güncellenir.",
+          en: "AutoBEME is an ensemble framework that treats classifiers as market agents with virtual capital. Each agent produces probabilities, the market price is computed through capital-weighted logit averaging, and agent capital is updated from ground truth, consensus error, confidence, class-imbalance bounty, and a FutureValue multiplier."
         },
         tech: [
           "Python",
           "scikit-learn",
           "Multi-label Classification",
           "Prediction Markets",
-          "Open Source",
-          "HTML Docs"
+          "Mathematical Modeling",
+          "Classifier Chains"
         ],
         overview: {
           title: { tr: "Özet", en: "Summary" },
           text: {
-            tr: "Bu projede hedefim, özellikle class imbalance görülen çok etiketli görevlerde klasik ensemble yaklaşımına farklı bir bakış getirmekti. Her agent'in bir piyasa oyuncusu gibi davrandığı, başarıya göre sermaye topladığı ve zayıf agent'lerin güçlü olanlardan kopyalanarak yenilendiği bir öğrenme sistemi kurdum. Son sürümde bu çekirdeği daha erişilebilir hale getirmek için tek satırlık eğitim akışı, otomatik bounty hesaplama, farklı market template'leri ve kullanıcı hedeflerine göre mod seçebilen AutoBEME katmanı ekledim.",
-            en: "The goal of this project was to rethink ensembles for multi-label tasks with heavy class imbalance. I designed a learning system where each agent behaves like a market participant, accumulates capital when it outperforms consensus, and is replaced by stronger clones when it consistently underperforms. In the latest version, I made the core system easier to use with a one-line training flow, automatic bounty computation, multiple market templates, and an AutoBEME layer that picks market behavior based on the user's objective."
+            tr: "LaTeX paper’daki temel akış şu: eğitim verisi çok etiketli bir dizi olarak alınır; N ajan farklı bootstrap alt kümelerinde eğitilir; nadir sınıflar için Auto-Bounty katsayısı hesaplanır; her örnekte ajan olasılıkları sermaye ağırlıklı logit uzayında birleşerek market fiyatını üretir. Ardından P&L formülü ajanı, yalnızca doğru tahmin ettiği için değil, marketten ne kadar iyi ayrıştığı için ödüllendirir. Belirli aralıklarla en güçlü ajanlar zayıf ajanlara kopyalanır ve piyasa zamanla başarılı stratejilere evrilir.",
+            en: "The paper’s core flow is: the multi-label dataset is streamed into a market; N agents are trained on different bootstrap subsets; rare classes receive an Auto-Bounty multiplier; each sample is priced by combining agent probabilities in capital-weighted logit space; and the P&L formula rewards agents not merely for being correct, but for being correctly different from market consensus. Periodically, strong agents are cloned into weak ones, so the market evolves toward strategies that keep earning capital."
           }
         },
         responsibilities: {
           tr: [
-            "Prediction market fiyatlama, bounty tabanlı ödül mekanizması ve evrimsel yeniden dengeleme mantığını Python paket yapısına taşıdım.",
-            "Scikit-learn uyumlu fit/predict akışı, AutoBEME yönlendiricisi, hibrit LR/SVM agent desteği ve template-method tabanlı genişletilebilir market sınıfları ekledim.",
-            "Kurulumu, quick start kullanımını ve mimariyi anlatan dokümantasyon sayfasını hazırlayarak projeyi portfolyo ve dış kullanım için sunuma hazır hale getirdim."
+            "Market fiyatını P_c = sigmoid((1/T) * Σ w_i logit(p_i,c)) şeklinde tanımlayıp ajan oylarını sermaye ağırlıklı ve temperature kontrollü hale getirdim.",
+            "Class imbalance için beta_c = 1 + ln(max_k n_k / n_c) Auto-Bounty katsayısını ekledim; nadir sınıfları doğru yakalayan ajanların daha fazla sermaye kazanmasını sağladım.",
+            "Unified P&L formülünü B_i,c * (1 + Gamma_i,c) * Phi_i olarak kurdum; doğru yönde, özgüvenli ve marketten ayrışan ajanları ödüllendirdim.",
+            "Vanguard, Sovereign ve Apocalypse modlarını farklı tau, temperature, leverage ve model aileleriyle tanımladım; Apocalypse tarafında Classifier Chain + asimetrik ceza ağırlığı kullandım."
           ],
           en: [
-            "Implemented the prediction-market pricing loop, bounty-based reward mechanism, and evolutionary rebalancing inside a reusable Python package.",
-            "Added a scikit-learn style fit/predict workflow, AutoBEME router, hybrid LR/SVM agent support, and template-method based market variants for extensibility.",
-            "Created a documentation site covering installation, quick start usage, and architecture so the project is ready for portfolio presentation and external use."
+            "Defined the market price as P_c = sigmoid((1/T) * Σ w_i logit(p_i,c)), making votes capital-weighted and temperature-controlled.",
+            "Added the Auto-Bounty coefficient beta_c = 1 + ln(max_k n_k / n_c), so agents that correctly detect rare classes earn more capital.",
+            "Built the Unified P&L update as B_i,c * (1 + Gamma_i,c) * Phi_i, rewarding confident agents that are correctly positioned against market consensus.",
+            "Configured Vanguard, Sovereign, and Apocalypse modes with different tau, temperature, leverage, and model families; Apocalypse uses Classifier Chains with asymmetric class penalties."
           ]
         },
         kpis: [
-          { label: { tr: "Sürüm", en: "Version" }, value: "v1.0.0" },
-          { label: { tr: "API", en: "API" }, value: "fit / predict" },
-          { label: { tr: "Motorlar", en: "Engines" }, value: "LR / SVM / Hybrid" },
-          { label: { tr: "Ek Katman", en: "Extra Layer" }, value: "AutoBEME" }
+          { label: { tr: "Market Fiyatı", en: "Market Price" }, value: "capital-weighted logit" },
+          { label: { tr: "Auto-Bounty", en: "Auto-Bounty" }, value: "1 + ln(max n / n_c)" },
+          { label: { tr: "P&L", en: "P&L" }, value: "Base * Confidence * FutureValue" },
+          { label: { tr: "En İyi F1", en: "Best F1" }, value: "0.9035 / 0.8636" }
         ],
         images: [
           {
-            title: { tr: "Dokümantasyon ve Ürün Yüzeyi", en: "Documentation and Product Surface" },
+            src: "images/beme2.png",
+            title: { tr: "Quick Start: Matematiği Tek API’ye İndirme", en: "Quick Start: Compressing the Math into One API" },
             desc: {
-              tr: "Projenin güncel halini sadece kod seviyesinde bırakmayıp, dışarıdan bakıldığında ne yaptığı hemen anlaşılacak bir dokümantasyon yüzeyi oluşturdum. Açılış ekranında kurulum, versiyon bilgisi, scikit-learn uyumluluğu ve çok etiketli kullanım odağı net şekilde gösteriliyor.",
-              en: "I turned the project into something presentation-ready, not just code. The landing surface makes the package's purpose clear at a glance by highlighting installation, versioning, scikit-learn compatibility, and the multi-label classification focus."
-            }
-          },
-          {
-            title: { tr: "Quick Start ve Kullanım Akışı", en: "Quick Start and Usage Flow" },
-            desc: {
-              tr: "Tek satırlık fit akışı ve daha ayrıntılı örnek kullanım senaryosu ile kütüphanenin nasıl devreye alınacağını basit tuttum. Böylece proje araştırma demosu olmaktan çıkıp doğrudan kullanılabilir bir ML aracı hissi veriyor.",
-              en: "The quick start section keeps adoption simple with a one-line fit flow and a fuller example. That makes BEME feel less like a research demo and more like a practical ML tool that can be picked up quickly."
-            }
-          },
-          {
-            title: { tr: "Mimari ve Öğrenme Mekanizması", en: "Architecture and Learning Mechanism" },
-            desc: {
-              tr: "Bu görünüm, agent tahminlerinden market price keşfine; oradan bounty ile P&L güncellemesine ve periyodik evrimsel yeniden dengelemeye uzanan çekirdek akışı özetliyor. Portfolyoda özellikle bu kısmı öne çıkarmak istedim çünkü projeyi klasik ensemble'lardan ayıran temel fikir burada yatıyor.",
-              en: "This view summarizes the core loop from agent predictions to market price discovery, then into bounty-weighted P&L updates and periodic evolutionary rebalancing. I wanted this part to stand out in the portfolio because it captures what makes BEME different from a conventional ensemble."
+              tr: "Portfolyoda görsel olarak Quick Start’ı öne çıkarıyorum çünkü projenin asıl değeri, karmaşık market simülasyonunu scikit-learn uyumlu fit/predict API’sine indirgemesi. Bu tek çağrının altında ajan bootstrap’i, Auto-Bounty, temperature-scaled pricing, Unified P&L, mode-specific threshold ve evrimsel rebalance akışı çalışıyor.",
+              en: "The portfolio uses the Quick Start as the main visual because the key product idea is compressing a complex market simulation into a scikit-learn compatible fit/predict API. Under that one call, the system runs agent bootstrapping, Auto-Bounty, temperature-scaled pricing, Unified P&L, mode-specific thresholding, and evolutionary rebalancing."
             }
           }
         ]
@@ -1651,7 +1640,7 @@
         const section = document.createElement("div");
         section.className = "image-section";
 
-        const src = imagePath(project.id, index + 1);
+        const src = img.src || imagePath(project.id, index + 1);
         const imgTitle = pick(img.title) || (lang==="tr" ? "Detay" : "Detail");
         const imgDesc = pick(img.desc) || "";
         const alt = `${title} - ${imgTitle}`;
