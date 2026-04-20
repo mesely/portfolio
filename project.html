@@ -1016,8 +1016,8 @@
 
     <div class="meta-row">
       <div class="company-badge" id="company"></div>
-      <div class="meta-chip" id="periodChip">📅 —</div>
-      <div class="meta-chip" id="locChip">📍 —</div>
+      <div class="meta-chip" id="periodChip">—</div>
+      <div class="meta-chip" id="locChip">—</div>
     </div>
 
     <p class="description" id="description"></p>
@@ -1058,7 +1058,7 @@
     }
 
     function uiCopy(lang){
-      return lang === "tr" ? UI_TEXT.tr : UI_TEXT.en;
+      return UI_TEXT[lang] || UI_TEXT.en;
     }
 
     const UI_TEXT = {
@@ -1091,6 +1091,96 @@
         imgMissing: "Image not found",
         close: "Close",
         pageTitleSuffix: "— Project Details",
+      },
+      de: {
+        languageLabel: "Sprache",
+        back: "Zurück",
+        crumbPrefix: "Projekte / ",
+        notFoundTitle: "Projekt nicht gefunden",
+        notFoundDesc: "Projektdetails konnten nicht geladen werden. Bitte öffne ein Projekt erneut von der Startseite.",
+        goHome: "Zur Startseite",
+        overviewTitle: "Zusammenfassung",
+        overviewSub: "Forschungsrahmen, Umfang und Zielsetzung.",
+        highlightsTitle: "Beiträge",
+        highlightsSub: "Direkte technische Verantwortung und messbare Ergebnisse.",
+        imgMissing: "Bild nicht gefunden",
+        close: "Schließen",
+        pageTitleSuffix: "— Projektdetails",
+      },
+      fr: {
+        languageLabel: "Langue",
+        back: "Retour",
+        crumbPrefix: "Projets / ",
+        notFoundTitle: "Projet introuvable",
+        notFoundDesc: "Les détails du projet n'ont pas pu être chargés. Veuillez rouvrir un projet depuis la page d'accueil.",
+        goHome: "Retour à l'accueil",
+        overviewTitle: "Résumé",
+        overviewSub: "Cadre de recherche, portée et objectif.",
+        highlightsTitle: "Contributions",
+        highlightsSub: "Responsabilités techniques directes et résultats mesurables.",
+        imgMissing: "Image introuvable",
+        close: "Fermer",
+        pageTitleSuffix: "— Détails du projet",
+      },
+      nl: {
+        languageLabel: "Taal",
+        back: "Terug",
+        crumbPrefix: "Projecten / ",
+        notFoundTitle: "Project niet gevonden",
+        notFoundDesc: "Projectdetails konden niet worden geladen. Open het project opnieuw vanaf de homepagina.",
+        goHome: "Naar home",
+        overviewTitle: "Samenvatting",
+        overviewSub: "Onderzoekskader, scope en doel.",
+        highlightsTitle: "Bijdragen",
+        highlightsSub: "Directe technische verantwoordelijkheden en meetbare resultaten.",
+        imgMissing: "Afbeelding niet gevonden",
+        close: "Sluiten",
+        pageTitleSuffix: "— Projectdetails",
+      },
+      da: {
+        languageLabel: "Sprog",
+        back: "Tilbage",
+        crumbPrefix: "Projekter / ",
+        notFoundTitle: "Projekt ikke fundet",
+        notFoundDesc: "Projektdetaljer kunne ikke indlæses. Åbn projektet igen fra forsiden.",
+        goHome: "Gå til forsiden",
+        overviewTitle: "Resumé",
+        overviewSub: "Forskningsramme, omfang og mål.",
+        highlightsTitle: "Bidrag",
+        highlightsSub: "Direkte teknisk ansvar og målbare resultater.",
+        imgMissing: "Billede ikke fundet",
+        close: "Luk",
+        pageTitleSuffix: "— Projektdetaljer",
+      },
+      sv: {
+        languageLabel: "Språk",
+        back: "Tillbaka",
+        crumbPrefix: "Projekt / ",
+        notFoundTitle: "Projektet hittades inte",
+        notFoundDesc: "Projektinformationen kunde inte laddas. Öppna projektet igen från startsidan.",
+        goHome: "Till startsidan",
+        overviewTitle: "Sammanfattning",
+        overviewSub: "Forskningsram, omfattning och mål.",
+        highlightsTitle: "Bidrag",
+        highlightsSub: "Direkta tekniska ansvar och mätbara resultat.",
+        imgMissing: "Bild hittades inte",
+        close: "Stäng",
+        pageTitleSuffix: "— Projektdetaljer",
+      },
+      fi: {
+        languageLabel: "Kieli",
+        back: "Takaisin",
+        crumbPrefix: "Projektit / ",
+        notFoundTitle: "Projektia ei löytynyt",
+        notFoundDesc: "Projektin tietoja ei voitu ladata. Avaa projekti uudelleen etusivulta.",
+        goHome: "Etusivulle",
+        overviewTitle: "Yhteenveto",
+        overviewSub: "Tutkimuskehys, laajuus ja tavoite.",
+        highlightsTitle: "Panokset",
+        highlightsSub: "Suorat tekniset vastuut ja mitattavat tulokset.",
+        imgMissing: "Kuvaa ei löytynyt",
+        close: "Sulje",
+        pageTitleSuffix: "— Projektin tiedot",
       }
     };
 
@@ -1120,8 +1210,8 @@
           tr: "Sabancı Üniversitesi · CS310 Takım Projesi",
           en: "Sabancı University · CS310 Team Project"
         },
-        period: "Spring 2026",
-        location: "İstanbul, Türkiye",
+        period: { tr: "Bahar 2026", en: "Spring 2026" },
+        location: { tr: "İstanbul, Türkiye", en: "Istanbul, Turkey" },
         description: {
           tr: "Flutter ile geliştirilen çok ekranlı mobil/web deneyimini, Node.js tabanlı 6 mikroservis, MongoDB veri katmanı ve API gateway ile birleştiren akıllı tarif ve yemek planlama ürünü geliştirdik. Chef AI, malzeme özelleştirme, alışveriş listesi ve adım adım pişirme akışlarını tek bir ürün yolculuğunda topladık.",
           en: "Built a smart recipe and meal-planning product that combines a multi-screen Flutter mobile/web experience with six Node.js microservices, a MongoDB-backed data layer, and an API gateway. The product brings Chef AI, ingredient customization, grocery planning, and step-by-step cooking into a single user journey."
@@ -1209,8 +1299,8 @@
           tr: "Açık Kaynak / Kişisel Proje",
           en: "Open-source / Personal Project"
         },
-        period: "Nis 2026 – Devam Ediyor",
-        location: "Remote",
+        period: { tr: "Nis 2026 – Devam Ediyor", en: "Apr 2026 – Present" },
+        location: { tr: "Uzaktan", en: "Remote" },
         description: {
           tr: "AutoBEME, sınıflandırıcıları sanal sermayeye sahip piyasa ajanları gibi modelleyen araştırma odaklı bir ensemble framework’ü. Sistem; bootstrap ajan çeşitliliği, Auto-Bounty sınıf ağırlığı, temperature-scaled logit market fiyatlaması, unified P&L sermaye güncellemesi ve evrimsel yeniden dengeleme akışını tek bir scikit-learn uyumlu API altında toplar.",
           en: "AutoBEME is a research-driven ensemble framework that models classifiers as market agents with virtual capital. It combines bootstrap agent diversity, Auto-Bounty class weighting, temperature-scaled logit market pricing, unified P&L capital updates, and evolutionary rebalancing behind a single scikit-learn compatible API."
@@ -1606,8 +1696,8 @@
         icon: "🎯",
         title: { tr: "Sosyal Medya Öneri Sistemi", en: "Social Media Recommender System" },
         company: { tr: "Baykar", en: "Baykar" },
-        period: "Ağu – Eyl 2025",
-        location: "İstanbul, Türkiye",
+        period: { tr: "Ağu – Eyl 2025", en: "Aug – Sep 2025" },
+        location: { tr: "İstanbul, Türkiye", en: "Istanbul, Turkey" },
         description: {
           tr: "Instagram, Twitter ve Next Sosyal verileri üzerinde gerçek + sentetik etkileşimleri kullanarak; retrieval için Two-Tower ve re-ranking için Wide & Deep modelleriyle kişiselleştirilmiş öneri sistemi geliştirdim.",
           en: "Built a personalized recommender using real + synthetic interactions across Instagram, Twitter, and Next Sosyal; Two-Tower for retrieval and Wide & Deep for re-ranking."
@@ -1657,8 +1747,8 @@
         icon: "💬",
         title: { tr: "SAP Envanter AI Asistanı", en: "SAP Inventory AI Assistant" },
         company: { tr: "BMC", en: "BMC" },
-        period: "Tem – Ağu 2025",
-        location: "İzmir, Türkiye",
+        period: { tr: "Tem – Ağu 2025", en: "Jul – Aug 2025" },
+        location: { tr: "İzmir, Türkiye", en: "Izmir, Turkey" },
         description: {
           tr: "NestJS (backend), Next.js (frontend) ve OpenAI API (RAG) ile gerçek zamanlı SAP envanter verilerini getiren AI destekli chatbot geliştirdim; ABAP ile envanter yönetim modülleri tasarladım.",
           en: "Built an AI chatbot that retrieves real-time SAP inventory data using NestJS + Next.js + OpenAI (RAG). Designed inventory modules in ABAP."
@@ -1708,8 +1798,8 @@
         icon: "💰",
         title: { tr: "Finansal İçgörüler AI Chatbot", en: "Financial Insights AI Chatbot" },
         company: { tr: "Intertech", en: "Intertech" },
-        period: "Haz – Ağu 2024",
-        location: "İstanbul, Türkiye",
+        period: { tr: "Haz – Ağu 2024", en: "Jun – Aug 2024" },
+        location: { tr: "İstanbul, Türkiye", en: "Istanbul, Turkey" },
         description: {
           tr: "RAG mimarisiyle SQL + Next.js + Node.js entegre finansal içgörü chatbotu geliştirdim. Python scraping ile bültenleri otomatikleştirip Azure Blob Storage’a aktardım.",
           en: "Built a RAG-based financial insights chatbot using SQL + Next.js + Node.js. Automated daily bulletins via Python scraping and stored them on Azure Blob Storage."
@@ -1759,8 +1849,8 @@
         icon: "🗣️",
         title: { tr: "Niyet Tespiti & Slot Doldurma", en: "Intent Detection & Slot Filling" },
         company: { tr: "Araştırma Projesi", en: "Research Project" },
-        period: "Eyl 2024 – Oca 2025",
-        location: "Sabancı Üniversitesi",
+        period: { tr: "Eyl 2024 – Oca 2025", en: "Sep 2024 – Jan 2025" },
+        location: { tr: "Sabancı Üniversitesi", en: "Sabanci University" },
         description: {
           tr: "SNIPS veri setinde Slot-Gated BiLSTM’i yeniden ürettim ve değerlendirdim. Niyet tespiti için %97, slot doldurma için %79 doğruluk elde ettim. FastText ve Bayesian arama ile ML/DL modellerini kıyasladım.",
           en: "Reproduced and evaluated Slot-Gated BiLSTM on SNIPS. Achieved 97% intent accuracy and 79% slot accuracy. Compared ML/DL models with FastText and Bayesian hyperparameter search."
@@ -1810,8 +1900,8 @@
         icon: "📊",
         title: { tr: "Instagram Influencer Sınıflandırması & Beğeni Tahmini", en: "Instagram Influencer Classification & Like Prediction" },
         company: { tr: "Kişisel Proje", en: "Personal Project" },
-        period: "Eyl 2024 – Oca 2025",
-        location: "İstanbul, Türkiye",
+        period: { tr: "Eyl 2024 – Oca 2025", en: "Sep 2024 – Jan 2025" },
+        location: { tr: "İstanbul, Türkiye", en: "Istanbul, Turkey" },
         description: {
           tr: "%86.7 F1 skoru elde eden stacking sınıflandırıcı (Random Forest + Logistic Regression) geliştirdim. Gürültülü verilerde SMOTE ve alan odaklı ön işleme uyguladım; RF Regressor ile beğeni tahmini yaptım.",
           en: "Built a stacking classifier (Random Forest + Logistic Regression) achieving 86.7 F1. Used SMOTE and domain-specific preprocessing; predicted likes with RF Regressor."
@@ -1868,8 +1958,8 @@
         icon: "🥽",
         title: { tr: "EchoSpaceAR – AR Tabanlı Ses Farkındalığı", en: "EchoSpaceAR — AR-based Sound Awareness" },
         company: { tr: "Proje (HCI)", en: "HCI Project" },
-        period: "Eyl 2025 – Oca 2026",
-        location: "Sabancı Üniversitesi",
+        period: { tr: "Eyl 2025 – Oca 2026", en: "Sep 2025 – Jan 2026" },
+        location: { tr: "Sabancı Üniversitesi", en: "Sabanci University" },
         description: {
           tr: "Unity’de AR arayüz entegrasyonu ve C# scriptleriyle gerçek zamanlı cue/HUD akışı geliştirdim. Stereo sesten YamNet ile çevresel ses sınıflandırması, Whisper ile speech-to-text çıkarımı yaptım ve AutoBEME tabanlı ensemble deneyleriyle sınıflandırma tarafını güçlendirdim.",
           en: "Built a real-time AR cue/HUD flow in Unity with C# scripts. Performed environmental sound classification with YAMNet, speech-to-text with Whisper, and strengthened the classification stack with AutoBEME-based ensemble experiments."
@@ -1921,8 +2011,8 @@
         icon: "🏛️",
         title: { tr: "PoliEcoTRNetworSci – TBMM Politik Ekonomi Ağ Analizi", en: "PoliEcoTRNetworSci — TBMM Political Economy Network Analysis" },
         company: { tr: "Akademik Araştırma Projesi", en: "Academic Research Project" },
-        period: "Oca 2026 – Devam ediyor / Jan 2026 – Present",
-        location: "Sabancı Üniversitesi, İstanbul / Sabancı University, Istanbul",
+        period: { tr: "Oca 2026 – Devam ediyor", en: "Jan 2026 – Present" },
+        location: { tr: "Sabancı Üniversitesi, İstanbul", en: "Sabanci University, Istanbul" },
         description: {
           tr: "TBMM konuşmalarından yönlü ve işaretli parti ağları, kavram ağları ve aylık makro paneller üreten bir siyasi ekonomi araştırma pipeline’ı geliştirdim. NetworkX tabanlı ağ üretimini, hipotez testlerini, ekonomi verileriyle eşleştirmeyi ve AutoBEME destekli insan etiketli model doğrulama akışını tek bir yeniden üretilebilir çalışma setinde birleştirdim.",
           en: "Built a political economy research pipeline that turns TBMM speeches into signed directed inter-party networks, concept networks, and monthly macro panels. The stack combines NetworkX-based graph construction, hypothesis testing, macro-data integration, and AutoBEME-supported human-annotated model validation in one reproducible workflow."
@@ -1989,8 +2079,8 @@
         icon: "🎵",
         title: { tr: "Music Emotion Recognition on DEAM – Segment CNN & Attention Pooling", en: "Music Emotion Recognition on DEAM — Segment CNN & Attention Pooling" },
         company: { tr: "Deep Learning Projesi", en: "Deep Learning Project" },
-        period: "Eyl 2025 – Oca 2026",
-        location: "Sabancı Üniversitesi",
+        period: { tr: "Eyl 2025 – Oca 2026", en: "Sep 2025 – Jan 2026" },
+        location: { tr: "Sabancı Üniversitesi", en: "Sabanci University" },
         description: {
           tr: "DEAM üzerinde valence/arousal regresyonu için log-mel spectrogram, 5 sn segmentasyon (50% overlap) ve train-only global z-normalization pipeline’ı kurdum. Attention pooling + attention-head ensemble ile testte MSE=0.0114, Pearson=0.721, CCC=0.689 elde ettim.",
           en: "For valence/arousal regression on DEAM, built a pipeline with log-mel spectrograms, 5s segmentation (50% overlap), and train-only global z-normalization. Improved song-level prediction using attention pooling + attention-head ensemble (MSE=0.0114, Pearson=0.721, CCC=0.689)."
@@ -2116,8 +2206,8 @@
         icon: "🎵",
         title: { tr: "Music Emotion Recognition on DEAM – Segment CNN & Attention Pooling", en: "Music Emotion Recognition on DEAM — Segment CNN & Attention Pooling" },
         company: { tr: "Deep Learning Projesi", en: "Deep Learning Project" },
-        period: "Eyl 2025 – Oca 2026",
-        location: "Sabancı Üniversitesi",
+        period: { tr: "Eyl 2025 – Oca 2026", en: "Sep 2025 – Jan 2026" },
+        location: { tr: "Sabancı Üniversitesi", en: "Sabanci University" },
         description: {
           tr: "DEAM üzerinde valence/arousal regresyonu için log-mel spectrogram, 5 sn segmentasyon (50% overlap) ve train-only global z-normalization pipeline’ı kurdum. Attention pooling + attention-head ensemble ile testte MSE=0.0114, Pearson=0.721, CCC=0.689 elde ettim.",
           en: "For valence/arousal regression on DEAM, built a pipeline with log-mel spectrograms, 5s segmentation (50% overlap), and train-only global z-normalization. Improved song-level prediction using attention pooling + attention-head ensemble (MSE=0.0114, Pearson=0.721, CCC=0.689)."
@@ -2167,8 +2257,8 @@
         icon: "🕸️",
         title: { tr: "TBMM Siyasi-Ekonomik Ağ Analizi", en: "TBMM Political-Economy Network Analysis" },
         company: { tr: "Sabancı Üniversitesi Araştırma Projesi", en: "Sabanci University Research Project" },
-        period: "2025 – Present",
-        location: "Istanbul, Turkey",
+        period: { tr: "2025 – Devam ediyor", en: "2025 – Present" },
+        location: { tr: "İstanbul, Türkiye", en: "Istanbul, Turkey" },
         description: {
           tr: "2002-2026 arasındaki 1.33M+ TBMM konuşmasını temizleyip siyasi parti/speaker onarımları, çok katmanlı ağlar, dönem bazlı dashboard'lar ve kelime alanı analizleri üreten bir araştırma altyapısı geliştiriyorum.",
           en: "Building a research pipeline over 1.33M+ TBMM speeches (2002-2026), combining party/speaker repair, multilayer networks, term-level dashboards, and lexical field analysis."
@@ -2238,8 +2328,8 @@
         icon: "🛍️",
         title: { tr: "SneakPeek – E-ticaret Projesi", en: "SneakPeek — E-commerce Project" },
         company: { tr: "Kişisel Proje", en: "Personal Project" },
-        period: "Mar 2025 – Haz 2025",
-        location: "İstanbul, Türkiye",
+        period: { tr: "Mar 2025 – Haz 2025", en: "Mar 2025 – Jun 2025" },
+        location: { tr: "İstanbul, Türkiye", en: "Istanbul, Turkey" },
         description: {
           tr: "NestJS + Next.js ile mikroservis mimarisinde e-ticaret geliştirdim. OpenAI GPT API ile ayakkabı önerici entegre ettim; JWT auth, Kafka messaging ve Docker ile konteynerleştirilmiş dağıtım uyguladım.",
           en: "Built a microservices e-commerce app with NestJS + Next.js. Integrated a GPT-based shoe recommender, JWT auth, Kafka messaging, and Dockerized deployment."
@@ -2548,8 +2638,8 @@
       descEl.textContent = description;
 
       crumbTitle.textContent = title;
-      periodChip.textContent = `📅 ${pick(project.period) || "—"}`;
-      locChip.textContent = `📍 ${pick(project.location) || "—"}`;
+      periodChip.textContent = pick(project.period) || "—";
+      locChip.textContent = pick(project.location) || "—";
 
       // Tech tags
       techEl.innerHTML = "";

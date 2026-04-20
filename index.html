@@ -305,6 +305,7 @@
     .engineering-card {
       display: flex;
       flex-direction: column;
+      cursor: pointer;
     }
 
     .research-card img {
@@ -387,6 +388,11 @@
     }
 
     .engineering-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .research-card:hover {
       transform: translateY(-3px);
       border-color: var(--accent);
     }
@@ -649,7 +655,7 @@
         <div class="section-header">
           <div>
             <p class="section-kicker" data-i18n="projectsKicker">Selected Applied Work</p>
-            <h2 data-i18n="projectsTitle">Other AI / NLP / Data Science Projects</h2>
+            <h2 data-i18n="projectsTitle">AI / NLP / Data Science Projects</h2>
           </div>
           <p class="section-lead" data-i18n="projectsLead">
             Additional applied AI, NLP, and data science work spanning retrieval, ranking, multimodal modeling, and production-facing ML systems.
@@ -674,12 +680,6 @@
 
         <div class="skills-grid" id="skillsGrid"></div>
 
-        <div class="contact-band" id="contact">
-          <div>
-            <p class="section-kicker" data-i18n="contactKicker">Get in touch</p>
-          </div>
-          <a class="btn" href="mailto:selman.yilmaz@sabanciuniv.edu" data-i18n="contactButton">Email Mehmet Selman</a>
-        </div>
       </div>
     </section>
 
@@ -696,6 +696,17 @@
         </div>
 
         <div class="engineering-grid" id="engineeringGrid"></div>
+      </div>
+    </section>
+
+    <section class="section soft" id="contact">
+      <div class="section-inner">
+        <div class="contact-band">
+          <div>
+            <p class="section-kicker" data-i18n="contactKicker">Get in touch</p>
+          </div>
+          <a class="btn" href="mailto:selman.yilmaz@sabanciuniv.edu" data-i18n="contactButton">Email Mehmet Selman</a>
+        </div>
       </div>
     </section>
   </main>
@@ -737,7 +748,7 @@
         researchTitle: "Research & Upcoming Publications",
         researchLead: "Ongoing research targeted for publication, positioned around NLP, AI, network science, and computational social science.",
         projectsKicker: "Selected Applied Work",
-        projectsTitle: "Other AI / NLP / Data Science Projects",
+        projectsTitle: "AI / NLP / Data Science Projects",
         projectsLead: "Additional applied AI, NLP, and data science work spanning retrieval, ranking, multimodal modeling, and production-facing ML systems.",
         engineeringKicker: "Software Systems",
         engineeringTitle: "Other Engineering Projects",
@@ -792,14 +803,6 @@
             tags: ["Recommender Systems", "PyTorch", "Ranking"]
           },
           {
-            id: "bmc",
-            cover: "images/bmc1.png",
-            title: "Knowledge-Grounded Enterprise Question Answering",
-            org: "BMC",
-            description: "Enterprise assistant combining inventory knowledge, retrieval, and structured backend integration.",
-            tags: ["Information Retrieval", "NestJS", "SAP"]
-          },
-          {
             id: "intertech",
             cover: "images/intertech1.png",
             title: "Financial Text Intelligence and Retrieval Platform",
@@ -841,6 +844,14 @@
           }
         ],
         engineeringProjects: [
+          {
+            id: "bmc",
+            cover: "images/bmc1.png",
+            title: "Knowledge-Grounded Enterprise Question Answering",
+            org: "BMC",
+            description: "Enterprise assistant combining inventory knowledge, retrieval, and structured backend integration.",
+            tags: ["Information Retrieval", "NestJS", "SAP"]
+          },
           {
             id: "chefinpocket",
             cover: "images/chefinpocket1.png",
@@ -885,7 +896,7 @@
         researchTitle: "Araştırmalar ve Yaklaşan Yayınlar",
         researchLead: "NLP, AI, ağ bilimi ve hesaplamalı sosyal bilimler ekseninde yayına hedeflenen devam eden araştırmalar.",
         projectsKicker: "Uygulamalı Çalışmalar",
-        projectsTitle: "Diğer AI / NLP / Veri Bilimi Projeleri",
+        projectsTitle: "AI / NLP / Veri Bilimi Projeleri",
         projectsLead: "Retrieval, ranking, çok kipli modelleme ve üretime yakın ML sistemleri boyunca seçilmiş uygulamalı çalışmalar.",
         engineeringKicker: "Yazılım Sistemleri",
         engineeringTitle: "Diğer Mühendislik Projeleri",
@@ -1144,7 +1155,7 @@
 
     function renderResearch(copy) {
       researchGrid.innerHTML = copy.research.map((item) => `
-        <article class="research-card">
+        <article class="research-card clickable-card" data-project-id="${item.id}" tabindex="0" role="link" aria-label="${escapeHtml(item.title)}">
           <img src="${item.cover}" alt="${escapeHtml(item.title)}" loading="lazy" style="${item.coverPosition ? `object-position:${item.coverPosition};` : ""}" />
           <div class="card-body">
             <span class="status">${escapeHtml(copy.statusLabel)} ${escapeHtml(item.status)}</span>
@@ -1165,7 +1176,7 @@
 
     function renderProjectGrid(target, items, copy) {
       target.innerHTML = items.map((item) => `
-        <article class="engineering-card">
+        <article class="engineering-card clickable-card" data-project-id="${item.id}" tabindex="0" role="link" aria-label="${escapeHtml(item.title)}">
           <img src="${item.cover}" alt="${escapeHtml(item.title)}" loading="lazy" />
           <div class="card-body">
             <h3>${escapeHtml(item.title)}</h3>
@@ -1213,6 +1224,19 @@
       const link = event.target.closest("[data-project-id]");
       if (!link) return;
       localStorage.setItem("currentProjectId", link.getAttribute("data-project-id"));
+      if (link.classList.contains("clickable-card")) {
+        window.location.href = "project.html";
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const card = event.target.closest(".clickable-card");
+      if (!card) return;
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        localStorage.setItem("currentProjectId", card.getAttribute("data-project-id"));
+        window.location.href = "project.html";
+      }
     });
 
     languageSelect.addEventListener("change", (event) => setLanguage(event.target.value));
