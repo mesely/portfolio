@@ -22,6 +22,13 @@
       const a = document.createElement('a'); a.href = project.url; a.target = '_blank'; a.rel = 'noopener';
       a.className = 'source-link'; a.textContent = tr ? 'Kaynak / referans ↗' : 'Source / reference ↗'; contentEl.appendChild(a);
     }
+    if (['polieco','tbmm'].includes(project.id)) {
+      const related = document.createElement('a');
+      related.href = `project.html?project=${project.id === 'polieco' ? 'tbmm' : 'polieco'}&lang=${lang}`;
+      related.className = 'source-link related-case';
+      related.textContent = project.id === 'polieco' ? (tr ? 'TBMM veri derlemi ve model değerlendirmesi ↗' : 'TBMM corpus & model evaluation ↗') : (tr ? 'Politik ekonomi ağları ↗' : 'Political-economy networks ↗');
+      contentEl.appendChild(related);
+    }
     const gallery = document.createElement('section'); gallery.className = project.id === 'atcha' ? 'case-gallery phone-gallery' : 'case-gallery';
     (project.images || []).forEach((item,index) => {
       const src = item.src || imagePath(project.id,index+1), caption = choose(item.title);
