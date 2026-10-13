@@ -6,7 +6,7 @@
   <title>Mehmet Selman Yılmaz | Academic Portfolio</title>
   <meta
     name="description"
-    content="Academic portfolio of Mehmet Selman Yılmaz, B.Sc. Computer Science Senior at Sabancı University, focused on NLP, AI, Network Science, and Computational Social Science."
+    content="Academic portfolio of Mehmet Selman Yılmaz, Computer Science and Engineering graduate of Sabancı University, focused on NLP, AI, Network Science, and Computational Social Science."
   />
 
   <style>
@@ -660,9 +660,11 @@
       }
     }
   </style>
+<link rel="stylesheet" href="portfolio-style.css" />
 </head>
 
 <body>
+<a class="skip-link" href="#home">Skip to main content</a>
   <header class="site-header">
     <a class="wordmark" href="#home" aria-label="Mehmet Selman Yılmaz home">MSY</a>
 
@@ -671,7 +673,8 @@
         <li><a href="#research" data-i18n="navResearch">Research</a></li>
         <li><a href="#projects" data-i18n="navProjects">Projects</a></li>
         <li><a href="#engineering" data-i18n="navEngineering">Engineering</a></li>
-        <li><a href="#skills" data-i18n="navSkills">Skills</a></li>
+        <li><a href="#experience" data-i18n="navExperience">Experience</a></li>
+<li><a href="#skills" data-i18n="navSkills">Skills</a></li>
         <li><a href="#contact" data-i18n="navContact">Contact</a></li>
       </ul>
     </nav>
@@ -696,9 +699,9 @@
       <div>
         <p class="eyebrow" data-i18n="heroEyebrow">Academic Portfolio</p>
         <h1>Mehmet Selman Yılmaz</h1>
-        <p class="subtitle" data-i18n="heroSubtitle">B.Sc. Computer Science Senior @ Sabancı University</p>
+        <p class="subtitle" data-i18n="heroSubtitle">B.Sc. Computer Science and Engineering · Sabancı University</p>
         <p class="metric-line" data-i18n="heroMetric">
-          CGPA 3.58 | Researcher in NLP, Network Science &amp; Computational Social Science.
+          CGPA 3.44 | Researcher in NLP, Network Science &amp; Computational Social Science.
         </p>
         <p class="hero-summary" data-i18n="heroSummary">
           I build research-oriented AI systems for low-resource NLP, political text analysis, and human-centered assistive interfaces, with a focus on rigorous evaluation and deployable software.
@@ -706,7 +709,8 @@
 
         <div class="quick-links" aria-label="Quick links">
           <a class="btn" href="public/SelmanYilmaz_CV_2026.pdf" download data-i18n="cvButton">Download CV</a>
-          <a class="btn secondary" href="public/SelmanYilmaz_Transcript_2026.pdf" download data-i18n="transcriptButton">Download Transcript</a>
+          <a class="btn secondary" href="public/SelmanYilmaz_Portfolio_2026.pdf" download data-i18n="portfolioButton">Download Portfolio</a>
+<a class="btn secondary" href="public/SelmanYilmaz_Transcript_2026.pdf" download data-i18n="transcriptButton">Download Transcript</a>
           <a class="btn secondary" href="https://www.linkedin.com/in/mehmet-selman-y%C4%B1lmaz-76b34017b/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn secondary" href="https://github.com/mesely" target="_blank" rel="noopener">GitHub</a>
           <a class="btn secondary" href="mailto:selman.yilmaz@sabanciuniv.edu">Email</a>
@@ -724,7 +728,8 @@
       </aside>
     </section>
 
-    <section class="section soft" id="research">
+    <section class="section soft" id="recent"><div class="section-inner"><div class="section-header"><div><p class="section-kicker" data-i18n="recentKicker">2026 · Selected work</p><h2 data-i18n="recentTitle">Recent work</h2></div><p class="section-lead" data-i18n="recentLead">Graph reasoning, academic advising and a shared mobile experience.</p></div><div class="engineering-grid recent-grid" id="recentGrid"></div></div></section>
+<section class="section soft" id="research">
       <div class="section-inner">
         <div class="section-header">
           <div>
@@ -756,22 +761,7 @@
       </div>
     </section>
 
-    <section class="section soft" id="skills">
-      <div class="section-inner">
-        <div class="section-header">
-          <div>
-            <p class="section-kicker" data-i18n="skillsKicker">Technical Profile</p>
-            <h2 data-i18n="skillsTitle">Technical Skills</h2>
-          </div>
-          <p class="section-lead" data-i18n="skillsLead">
-            Research tooling and production development experience across Python, modern web stacks, and applied machine learning.
-          </p>
-        </div>
 
-        <div class="skills-grid" id="skillsGrid"></div>
-
-      </div>
-    </section>
 
     <section class="section" id="engineering">
       <div class="section-inner">
@@ -789,7 +779,24 @@
       </div>
     </section>
 
-    <section class="section soft" id="contact">
+    <section class="section" id="experience"><div class="section-inner"><div class="section-header"><h2 data-i18n="experienceTitle">Experience</h2><p>Research, applied machine learning and software development.</p></div><div class="experience-list" id="experienceGrid"></div></div></section>
+<section class="section soft" id="skills">
+      <div class="section-inner">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker" data-i18n="skillsKicker">Technical Profile</p>
+            <h2 data-i18n="skillsTitle">Technical Skills</h2>
+          </div>
+          <p class="section-lead" data-i18n="skillsLead">
+            Research tooling and production development experience across Python, modern web stacks, and applied machine learning.
+          </p>
+        </div>
+
+        <div class="skills-grid" id="skillsGrid"></div>
+
+      </div>
+    </section>
+<section class="section soft" id="contact">
       <div class="section-inner">
         <div class="contact-band">
           <div>
@@ -813,6 +820,7 @@
   </footer>
 
   <script src="home-translations.js"></script>
+<script src="portfolio-current.js"></script>
   <script>
     const SUPPORTED_LANGS = ["en", "tr", "de", "fr", "nl", "da", "sv", "fi"];
     const STORAGE_KEY = "portfolioLanguageV2";
@@ -826,8 +834,8 @@
         navContact: "Contact",
         languageLabel: "Language",
         heroEyebrow: "Academic Portfolio",
-        heroSubtitle: "B.Sc. Computer Science Senior @ Sabancı University",
-        heroMetric: "CGPA 3.58 | Researcher in NLP, Network Science & Computational Social Science.",
+        heroSubtitle: "B.Sc. Computer Science and Engineering · Sabancı University",
+        heroMetric: "CGPA 3.44 | Researcher in NLP, Network Science & Computational Social Science.",
         heroSummary: "I build research-oriented AI systems for low-resource NLP, political text analysis, and human-centered assistive interfaces, with a focus on rigorous evaluation and deployable software.",
         cvButton: "Download CV",
         transcriptButton: "Download Transcript",
@@ -984,7 +992,7 @@
         languageLabel: "Dil",
         heroEyebrow: "Akademik Portfolyo",
         heroSubtitle: "B.Sc. Bilgisayar Bilimleri Son Sınıf @ Sabancı Üniversitesi",
-        heroMetric: "CGPA 3.58 | NLP, Ağ Bilimi ve Hesaplamalı Sosyal Bilimler araştırmacısı.",
+        heroMetric: "CGPA 3.44 | NLP, Ağ Bilimi ve Hesaplamalı Sosyal Bilimler araştırmacısı.",
         heroSummary: "Düşük kaynaklı NLP, politik metin analizi ve insan odaklı erişilebilirlik arayüzleri için araştırma odaklı AI sistemleri geliştiriyorum.",
         cvButton: "CV İndir",
         transcriptButton: "Transkript İndir",
@@ -1031,7 +1039,7 @@
         languageLabel: "Sprache",
         heroEyebrow: "Akademisches Portfolio",
         heroSubtitle: "B.Sc. Informatik, Abschlussjahr @ Sabancı University",
-        heroMetric: "CGPA 3.58 | Forschung in NLP, Netzwerkwissenschaft und Computational Social Science.",
+        heroMetric: "CGPA 3.44 | Forschung in NLP, Netzwerkwissenschaft und Computational Social Science.",
         heroSummary: "Forschungsorientierte KI-Systeme für ressourcenarmes NLP, politische Textanalyse und barriereorientierte Assistenzschnittstellen.",
         cvButton: "Akademischen CV herunterladen",
         transcriptButton: "Transkript herunterladen",
@@ -1066,7 +1074,7 @@
         languageLabel: "Langue",
         heroEyebrow: "Portfolio académique",
         heroSubtitle: "B.Sc. Informatique, dernière année @ Sabancı University",
-        heroMetric: "CGPA 3.58 | Recherche en NLP, science des réseaux et sciences sociales computationnelles.",
+        heroMetric: "CGPA 3.44 | Recherche en NLP, science des réseaux et sciences sociales computationnelles.",
         heroSummary: "Je développe des systèmes d'IA orientés recherche pour le NLP à faibles ressources, l'analyse politique et les interfaces d'assistance accessibles.",
         cvButton: "Télécharger le CV académique",
         transcriptButton: "Télécharger le relevé de notes",
@@ -1101,7 +1109,7 @@
         languageLabel: "Taal",
         heroEyebrow: "Academisch portfolio",
         heroSubtitle: "B.Sc. Computer Science laatstejaars @ Sabancı University",
-        heroMetric: "CGPA 3.58 | Onderzoeker in NLP, netwerkwetenschap en computationele sociale wetenschap.",
+        heroMetric: "CGPA 3.44 | Onderzoeker in NLP, netwerkwetenschap en computationele sociale wetenschap.",
         heroSummary: "Ik bouw onderzoeksgerichte AI-systemen voor low-resource NLP, politieke tekstanalyse en mensgerichte assistieve interfaces.",
         cvButton: "Academisch CV downloaden",
         transcriptButton: "Transcript downloaden",
@@ -1136,7 +1144,7 @@
         languageLabel: "Sprog",
         heroEyebrow: "Akademisk portfolio",
         heroSubtitle: "B.Sc. Computer Science, sidste år @ Sabancı University",
-        heroMetric: "CGPA 3.58 | Forsker i NLP, netværksvidenskab og computational social science.",
+        heroMetric: "CGPA 3.44 | Forsker i NLP, netværksvidenskab og computational social science.",
         heroSummary: "Jeg bygger forskningsorienterede AI-systemer til low-resource NLP, politisk tekstanalyse og menneskecentrerede assistive interfaces.",
         cvButton: "Download akademisk CV",
         transcriptButton: "Download karakterudskrift",
@@ -1171,7 +1179,7 @@
         languageLabel: "Språk",
         heroEyebrow: "Akademisk portfolio",
         heroSubtitle: "B.Sc. Computer Science, sista året @ Sabancı University",
-        heroMetric: "CGPA 3.58 | Forskare inom NLP, nätverksvetenskap och computational social science.",
+        heroMetric: "CGPA 3.44 | Forskare inom NLP, nätverksvetenskap och computational social science.",
         heroSummary: "Jag bygger forskningsorienterade AI-system för low-resource NLP, politisk textanalys och människocentrerade assistiva gränssnitt.",
         cvButton: "Ladda ner akademiskt CV",
         transcriptButton: "Ladda ner betygsutdrag",
@@ -1206,7 +1214,7 @@
         languageLabel: "Kieli",
         heroEyebrow: "Akateeminen portfolio",
         heroSubtitle: "B.Sc. Computer Science, viimeinen vuosi @ Sabancı University",
-        heroMetric: "CGPA 3.58 | Tutkimus NLP:ssä, verkostotieteessä ja laskennallisissa yhteiskuntatieteissä.",
+        heroMetric: "CGPA 3.44 | Tutkimus NLP:ssä, verkostotieteessä ja laskennallisissa yhteiskuntatieteissä.",
         heroSummary: "Rakennan tutkimuslähtöisiä AI-järjestelmiä low-resource NLP:hen, poliittiseen tekstianalyysiin ja ihmiskeskeisiin esteettömyysratkaisuihin.",
         cvButton: "Lataa akateeminen CV",
         transcriptButton: "Lataa opintorekisteriote",
@@ -1390,5 +1398,6 @@
 
     setLanguage(getInitialLang());
   </script>
+<script src="site-enhancements.js"></script>
 </body>
 </html>
